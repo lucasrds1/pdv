@@ -1,0 +1,6 @@
+.footer{
+    z-index: 999;
+    float: right;
+    font-size: 10px;
+    color: gray;
+}
