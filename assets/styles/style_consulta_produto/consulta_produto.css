@@ -1,0 +1,156 @@
+body{
+    font-family: "arial";
+}
+.container_consulta{
+    width: 82%;
+    float: right;
+}
+.cabecalho h1{
+    padding: 11px;
+    text-align: center;
+    margin-left: 100px;
+}
+.consulta{
+    width: 100%;
+    height: 100vh;
+    float: right;
+}
+fieldset{
+    width: 90%;margin: auto;
+}
+.container_eNota{
+    height: 30%;
+    /*background-color: beige;*/
+    display: flex;
+    flex-wrap:wrap;
+    padding: 10px;
+}
+.eNota{
+    width: 65%;
+    margin-left: 50px;
+    background-color: rgb(236, 236, 236);
+    padding: 10px;border-radius: 5px;
+}
+.nNota{
+    padding: 1px;
+    float: left;
+    width: 20%;
+    text-align: center;
+    margin-left: 50px;
+}
+.formNota{
+    float: left;
+    margin-left: 10px;
+}
+input{
+    border: 0;
+    padding: 3px;
+    border-radius: 2px;
+    outline: 0;
+}
+.formNota .pointer{
+    cursor: pointer;
+    background-color: rgb(174, 174, 174);
+}
+.formNota .pointer:hover{
+    background-color: rgb(170, 168, 168);
+}
+.formNota .pointer:active{
+    background-color: gray;color: white;
+}
+.container_dados_nota{
+    height: 30%;
+    display: flex;
+    flex-wrap:wrap;
+}
+.dados_nota{
+    border-radius: 5px;
+    width: 80%;
+    margin: auto;
+    background-color: rgb(236, 236, 236);
+    margin-left: 60px;
+    height: 100%;
+    line-height: 40px;
+}
+.dados_nota li{list-style: none;}
+.aviso_notaVazia{
+    text-align: center;
+    margin-top: 10px;
+    padding: 5px;
+    color: red;
+}
+.consulta_opcoes a{
+    text-decoration: none;
+    color: white;
+}
+.consulta_opcoes{
+    width: 25%;
+    height: 54px;
+    display: flex;
+    text-align: center;
+    margin: auto;
+}
+.consulta_opcoes .consulta_excluir{
+    width: 50px;
+    padding: 7px;
+    background-color: red;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.consulta_editar_submit{
+    width: 80px;
+    padding: 7px;
+    background-color: rgb(69, 205, 242);
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+.consulta_opcoes .consulta_excluir a{
+    text-decoration: none;
+    color: white;
+}
+.consulta_opcoes .consulta_editar{
+    width: 50px;
+    padding: 7px;
+    background-color: rgb(69, 205, 242);
+    cursor: pointer;
+}
+.consulta_opcoes .consulta_editar{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+.consulta_excluir:hover{
+    background-color: brown;
+}
+.consulta_excluir:active{
+    background-color: rgb(103, 11, 11);
+}
+.consulta_editar:hover{
+    background-color: rgb(60, 183, 217);
+}
+.consulta_editar:active{
+    background-color: rgb(25, 114, 139);;
+}
+.consulta_editar_submit:hover{
+    background-color: rgb(60, 183, 217);
+}
+.consulta_editar_submit:active{
+    background-color: rgb(25, 114, 139);;
+}
+.excluirItem{
+    padding: 2px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+    margin-left: 10px;
+}
+.excluirItem:hover{
+    background-color: brown;
+}
+.excluirItem:active{
+    background-color: rgb(103, 11, 11);
+}
+
