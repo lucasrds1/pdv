@@ -60,7 +60,7 @@
                     $itens = $produtos->consultar_itensNota($eNota);
                 }else{
                     $itens = false;
-                    echo 'digite notinha valida';
+                    echo 'digite nota valida';
                 }
                 if($itens == true):
                     foreach($itens as $tudo):
@@ -79,7 +79,6 @@
                         <li>VALOR UNITÁRIO: 
                             <input type="text" value='<?php echo $tudo['vr_unit'] ?>' name="vr_unit_nota" style="margin-left: 65px" disabled>
                         </li>
-                        <hr>
                 </fieldset>
                 <?php endforeach;endif;?>
                 <br>

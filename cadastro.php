@@ -46,7 +46,7 @@ if(isset($_SESSION['id'])){
             $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_SPECIAL_CHARS);
 
             if($nome != ''  && $senha !== ''){
-                if(strlen($nome) > 3 && strlen($senha) > 4){
+                if(strlen($nome) > 3 && strlen($senha) > 3){
                 $dados = $logar->cadastrarUser($nome, $senha);
                 if($dados !== false){
                     echo 'Cadastrado com sucesso!';

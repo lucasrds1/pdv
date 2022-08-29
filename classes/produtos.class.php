@@ -12,7 +12,7 @@ class Produtos{
             return true;
         } catch (PDOException $e) {
             echo $e->getMessage();
-            return false;
+            header("Location: error.php");
         }
     }
 
@@ -24,9 +24,13 @@ class Produtos{
         } 
        }
 
-   public function getAll_nota(){
-    $sql = "SELECT * FROM nota";
+   public function getAll_nota($limite=''){
+
+    $sql = "SELECT * FROM nota ORDER BY dataVenda desc ";
+    if($limite > 0){$sql .= "LIMIT $limite";}
     $sql = $this->pdo->query($sql);
+    //$sql->bindValue(':limite', $limite);
+    $sql->execute();
     if($sql->rowCount() > 0){
         return $sql->fetchAll();
     }
@@ -57,7 +61,7 @@ class Produtos{
         }
     }
 
-    public function cadastrar_produto($eNota, $dataVenda, $formaPagamento, $observacao, $quantidade, $descricao, $vr_unit){
+    public function cadastrar_produto($eNota, $dataVenda, $formaPagamento, $observacao, $item, $quantidade, $descricao, $vr_unit){
         //1 passo = verificar se existe no sistema
         //2 passo = se nao existir, adiciona
         if($this->verificar_nota($eNota) == false){
@@ -69,10 +73,11 @@ class Produtos{
             $sql->bindValue(':observacao', $observacao);
             //$sql->execute(); 
             if($sql->execute()){
-                //criar função para esse insert
-                $sql = "INSERT INTO itens_nota (eNota, quantidade, descricao, vr_unit) VALUES (:eNota, :quantidade, :descricao, :vr_unit)";
+                //criar função para outro insert
+                $sql = "INSERT INTO itens_nota (eNota, item, quantidade, descricao, vr_unit) VALUES (:eNota, :item, :quantidade, :descricao, :vr_unit)";
                 $sql = $this->pdo->prepare($sql);
                 $sql->bindValue(':eNota', $eNota);
+                $sql->bindValue(':item', $item);
                 $sql->bindValue(':quantidade', $quantidade);
                 $sql->bindValue(':descricao', $descricao);
                 $sql->bindValue(':vr_unit', $vr_unit);

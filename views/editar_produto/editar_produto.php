@@ -67,7 +67,7 @@
                     foreach($itens as $tudo):
                 ?>
 
-                <fieldset>
+                <fieldset style="border-color: white;">
                     
                     <legend>Produtos</legend>
                     <input type="hidden" name="item" value="<?php echo $tudo['item']?>">
@@ -80,17 +80,17 @@
                         <li>VALOR UNITÁRIO: 
                             <input type="text" value='<?php echo $tudo['vr_unit'] ?>' name="vr_unit_nota" style="margin-left: 65px" >
                         </li>
-                        <hr>
                 </fieldset>
                 <?php endforeach;endif;?>
                 <br>
+                
 <?php if($produtos->verificar_nota($eNota) == true): ?>
                 <!-- COMEÇO DIV OPÇÕES DA CONSULTA -->
+                <div class="adicionar_produto">
+                    <a class="excluir_item" href='../../controller/adicionar_produto/adicionar_produto.php?consulta_nota=<?php echo $eNota?>'>+Adicionar Produto</a>
+                </div>
     <div class="consulta_opcoes">
         <input class="consulta_editar_submit" type="submit" value="Editar">
-    </div>
-    <div class="adicionar_produto">
-        <a class="excluir_item" href='../../controller/adicionar_produto/adicionar_produto.php?consulta_nota=<?php echo $eNota?>'>+Adicionar Produto</a>
     </div>
 
 <!-- FINAL DIV OPÇÕES -->

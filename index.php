@@ -3,7 +3,7 @@ require 'header_index.php';
 ?>
 <div class="container_consulta"> 
     <div class="cabecalho" style="margin-right: 110px">
-        <h1>TESTE PARA NWSOFT - INICIO</h1>
+        <h1>VENDAS - INICIO</h1>
     </div>
     <hr><br>
 
@@ -26,8 +26,15 @@ require 'header_index.php';
     ?>
     <br><hr width="50%" style="float: left; margin-left: 20px"><br>
     <div class="registros_vendas">
-        <h1 style="font-size: 20px; margin-left: 30px; color:gray">VENDAS REGISTRADAS:</h1><BR>
-    <table border="1" width="80%" style="margin: auto">
+        <h1 style="font-size: 20px; margin-left: 30px; color:gray">ÚLTIMAS VENDAS REGISTRADAS:</h1>
+    <div class="limite">
+        <form method="GET">
+            <span style="padding: 10px">LIMITE:</span>
+        <input type="number" class="input_digitavel" name="limite" placeholder="Digite um limite" value="5">
+        <input type="submit">
+        <span style="font-size: 8px;color: gray">Digite 0 ou nada para mostrar todos os registros</span>
+    </div>
+    <table border="" width="80%" style="margin: auto;">
     <tr>
         <th>Nota</th>
         <th>Data da Venda</th>
@@ -36,12 +43,14 @@ require 'header_index.php';
         <th>Consultar</th>
     </tr>
         <?php
-        $lista = $produtos->getAll_nota();
+        echo '<div style="margin-left:30px"><p style="font-size:10px">Número de registros no banco:  '.count($produtos->getAll_nota()).'</p></div>';
+        $limite = filter_input(INPUT_GET, 'limite');
+        $lista = $produtos->getAll_nota($limite);
         $lista2 = $produtos->getAll_itensNota();
 
         foreach ($lista as $dados):
         ?>
-    <tr>
+    <tr >
         <th><?php echo $dados['eNota']?></th>
         <th><?php echo $dados['dataVenda']?></th>
         <th><?php echo $dados['formaPagamento']?></th>

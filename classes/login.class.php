@@ -11,7 +11,7 @@ class Login{
             return true;
         } catch (PDOException $e) {
             echo $e->getMessage();
-            return false;
+            header("Location: error.php");
         }
     }
     public function entrar($nome, $senha){

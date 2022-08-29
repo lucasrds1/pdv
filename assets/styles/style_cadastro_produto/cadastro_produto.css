@@ -9,12 +9,27 @@
 }
 
 .adicionar_produto{
-    text-align: center;
     width: 87%;
     height: 100%;
     line-height: 60px;
 }
-.adicionar_produto a{
+.adicionar_produto .excluir_item{
+    padding: 10px;
+    background-color: rgb(111, 111, 255);
+    color: white;
+    border: 0;
+    border-radius: 2px;
+    outline: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+.adicionar_produto .excluir_item:hover{
+    background-color: rgb(60, 60, 251);
+}
+.adicionar_produto .excluir_item:active{
+    background-color: rgb(36, 36, 255);
+}
+.adicionar_produto #botao{
     padding: 10px;
     background-color: rgb(111, 111, 255);
     color: white;
@@ -24,11 +39,26 @@
     cursor: pointer;
     text-decoration: none;
 }
-.adicionar_produto a:hover{
+.adicionar_produto #botao:hover{
     background-color: rgb(60, 60, 251);
 }
-.adicionar_produto a:active{
+.adicionar_produto #botao:active{
     background-color: rgb(36, 36, 255);
+}
+.removerItem {
+    background-color: red;
+    color: white;
+    border: 0;
+    border-radius: 1px;
+    outline: 0;
+    cursor: pointer;
+    padding: 5px;
+}
+.removerItem:hover{
+    background-color: brown;
+}
+.removerItem:active{
+    background-color: rgb(103, 11, 11);
 }
 .red button{
     background-color: red;
@@ -44,6 +74,7 @@
     color: white;
     cursor: pointer;
     padding: 15px;
+    margin: auto;
 }
 .cadastro_submit:hover{
     background-color: rgb(7, 140, 5);
@@ -56,4 +87,13 @@
     text-align: center;
     margin-top: 10px;
     padding: 5px;
+}
+.limite form{
+    text-align: center;
+    width: 50%;
+
+}
+.limite .input_digitavel{
+    background-color: rgb(211, 211, 211);
+    width: 10%;
 }
