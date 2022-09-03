@@ -18,7 +18,7 @@ require 'header_index.php';
         }
     ?>
 
-    <h2 style="margin-left: 30px">SEJA BEM-VINDO VENDEDOR: <?php echo $nome?>
+    <h2 style="margin-left: 30px">SEJA BEM-VINDO VENDEDOR: <?php echo $nome?>.
     </h2>
     <?php
     $status = $produtos->__construct();
