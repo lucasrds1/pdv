@@ -16,18 +16,15 @@ class Produtos{
         }
     }
 
-    public function getAll_itensNota(){
-        $sql = "SELECT * FROM itens_nota";
+    public function getAll(){
+        $sql = "SELECT * FROM nota NATURAL JOIN itens_nota";
         $sql = $this->pdo->query($sql);
         if($sql->rowCount() > 0){
             return $sql->fetchAll();
         } 
        }
-
-   public function getAll_nota($limite=''){
-
-    $sql = "SELECT * FROM nota ORDER BY dataVenda desc ";
-    if($limite > 0){$sql .= "LIMIT $limite";}
+   public function getAll_nota_hoje(){
+    $sql = "SELECT * FROM nota WHERE dataVenda = CURDATE()";
     $sql = $this->pdo->query($sql);
     //$sql->bindValue(':limite', $limite);
     $sql->execute();
@@ -61,32 +58,46 @@ class Produtos{
         }
     }
 
-    public function cadastrar_produto($eNota, $dataVenda, $formaPagamento, $observacao, $item, $quantidade, $descricao, $vr_unit){
+    public function cadastrar_produto($eNota, $dataVenda, $formaPagamento, $observacao, $item){
         //1 passo = verificar se existe no sistema
         //2 passo = se nao existir, adiciona
         if($this->verificar_nota($eNota) == false){
-            $sql = "INSERT INTO nota  (eNota, dataVenda, formaPagamento, observacao) VALUES (:eNota, :dataVenda, :formaPagamento, :observacao)";
+            $item+1;
+            $sql = "INSERT INTO nota  (eNota, dataVenda, formaPagamento, observacao, qntd_produtos) VALUES (:eNota, :dataVenda, :formaPagamento, :observacao, :item)";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(':eNota', $eNota);
             $sql->bindValue(':dataVenda', $dataVenda);
             $sql->bindValue(':formaPagamento', $formaPagamento);
             $sql->bindValue(':observacao', $observacao);
-            //$sql->execute(); 
-            if($sql->execute()){
-                //criar função para outro insert
-                $sql = "INSERT INTO itens_nota (eNota, item, quantidade, descricao, vr_unit) VALUES (:eNota, :item, :quantidade, :descricao, :vr_unit)";
-                $sql = $this->pdo->prepare($sql);
-                $sql->bindValue(':eNota', $eNota);
-                $sql->bindValue(':item', $item);
-                $sql->bindValue(':quantidade', $quantidade);
-                $sql->bindValue(':descricao', $descricao);
-                $sql->bindValue(':vr_unit', $vr_unit);
-                $sql->execute();
-                echo '<div class="cadRealizado">cadastro realizado!</div>';
-            }
+            $sql->bindValue(':item', $item);
+            $sql->execute(); 
+            // if($sql->execute()){
+            //     //criar função para outro insert
+            //     $sql = "INSERT INTO itens_nota (eNota, item, quantidade, descricao, vr_unit) VALUES (:eNota, :item, :quantidade, :descricao, :vr_unit)";
+            //     $sql = $this->pdo->prepare($sql);
+            //     $sql->bindValue(':eNota', $eNota);
+            //     $sql->bindValue(':item', $item);
+            //     $sql->bindValue(':quantidade', $quantidade);
+            //     $sql->bindValue(':descricao', $descricao);
+            //     $sql->bindValue(':vr_unit', $vr_unit);
+            //     $sql->execute();
+            //     echo '<div class="cadRealizado">cadastro realizado!</div>';
+            // }
             
         }else{
             echo '<div class="aviso_notaVazia">essa nota ja existe</div>';
+        }
+    }
+    public function cadastrar_itens($eNota, $quantidade, $descricao, $valor){
+        $sql = "INSERT INTO itens_nota (eNota, quantidade, descricao, vr_unit) VALUES (:eNota, :quantidade, :descricao, :valor)";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':eNota', $eNota);
+        //$sql->bindValue(':item', $item);
+        $sql->bindValue(':quantidade', $quantidade);
+        $sql->bindValue(':descricao', $descricao);
+        $sql->bindValue(':vr_unit', $valor);
+        if($sql->execute()){
+            echo '<div class="cadRealizado">cadastro realizado!</div>';
         }
     }
 

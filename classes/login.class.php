@@ -14,6 +14,14 @@ class Login{
             header("Location: error.php");
         }
     }
+    public function verificar($sessao){
+        if(isset($sessao)){
+            return $sessao;
+        }else{
+            header("Location: ../../login.php");
+        }
+        return $id;
+    }
     public function entrar($nome, $senha){
         //$senha = password_hash($senha, PASSWORD_DEFAULT);
         $senha = md5($senha);

@@ -5,11 +5,12 @@ require 'classes/produtos.class.php';
 $produtos = new Produtos();
 $logar = new Login();
 
-if(isset($_SESSION['id'])){
-    $id = $_SESSION['id'];
-}else{
-    header("Location: login.php");
-}
+$sessao = $_SESSION['id'];
+$logar->verificar($sessao);
+$id = $sessao;
+
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Sao_Paulo');
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ if(isset($_SESSION['id'])){
         if($dados !== false){
             $nome = $dados['nome'];    
         }else{
-            echo 'nome não encontrado';
+            $nome = 'Sem nome';
         }
     }
     ?>
@@ -41,7 +42,7 @@ if(isset($_SESSION['id'])){
     <div class="container_menu">
         <!-- <a href="../../index.php"><h1>MENU</h1></a> -->
         <div class="menu">
-            <div class="oi_login"><span>Olá, <?php echo $nome;?>, como vai?</span>
+            <div class="oi_login"><span>Olá, <?=$nome?>, como vai?</span>
                 <a href="deslogar.php" class="des">Deslogar</a>
         </div>
         <div class="menu_botoes">

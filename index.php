@@ -1,5 +1,7 @@
 <?php
 require 'header_index.php';
+//<input type='reset'  class='dt-button btn_yellow' value='".TRANS('voltar')."' name='cancelar' onClick=\"redirect('".$_SERVER['PHP_SELF']."')\"></span>";
+//<input type='reset'  class='dt-button btn_yellow' value='".TRANS('voltar')."' name='cancelar' onClick=\"javascript:history.back()\"></TD>
 ?>
 <div class="container_consulta"> 
     <div class="cabecalho" style="margin-right: 110px">
@@ -22,17 +24,17 @@ require 'header_index.php';
     </h2>
     <?php
     $status = $produtos->__construct();
-    if($status == true){echo '<h3 style="color: green;margin-left: 30px">Pronto para operar<h3>';}
+    echo ($status == true) ? '<h3 style="color: green;margin-left: 30px">Pronto para operar<h3>' : '<h3 style="color: red;margin-left: 30px">Indisponível para operar<h3>';
     ?>
     <br><hr width="50%" style="float: left; margin-left: 20px"><br>
     <div class="registros_vendas">
-        <h1 style="font-size: 20px; margin-left: 30px; color:gray">ÚLTIMAS VENDAS REGISTRADAS:</h1>
+        <h1 style="font-size: 20px; margin-left: 30px; color:gray">VENDAS DE HOJE REGISTRADAS:</h1>
     <div class="limite">
-        <form method="GET">
+        <!-- <form method="POST">
             <span style="padding: 10px">LIMITE:</span>
-        <input type="number" class="input_digitavel" name="limite" placeholder="Digite um limite" value="5">
+        <input type="number" class="input_digitavel" name="limite" placeholder="Digite um limite" value="">
         <input type="submit">
-        <span style="font-size: 8px;color: gray">Digite 0 ou nada para mostrar todos os registros</span>
+        <span style="font-size: 8px;color: gray">Digite 0 ou nada para mostrar todos os registros</span> -->
     </div>
     <table border="" width="80%" style="margin: auto;">
     <tr>
@@ -40,25 +42,34 @@ require 'header_index.php';
         <th>Data da Venda</th>
         <th>Forma de Pagamento</th>
         <th>Observação</th>
-        <th>Consultar</th>
+        <th>Quantidade de produtos</th>
     </tr>
         <?php
-        echo '<div style="margin-left:30px"><p style="font-size:10px">Número de registros no banco:  '.count($produtos->getAll_nota()).'</p></div>';
-        $limite = filter_input(INPUT_GET, 'limite');
-        $lista = $produtos->getAll_nota($limite);
-        $lista2 = $produtos->getAll_itensNota();
+        $lista = $produtos->getAll_nota_hoje();
+        if($lista > 0){
+            $d = count($lista);
+            echo '<div style="margin-left:30px"><p style="font-size:10px">• Número de registros no banco: '.$d.'</p></div>';
+        }else{
+            echo '<div style="margin-left:30px"><p style="font-size:10px">• Nenhum registro no banco</p></div>';
+        }
+        //$limite = filter_input(INPUT_POST, 'limite');
+        
 
-        foreach ($lista as $dados):
+        // if(isset($limite)):
+        if($lista > 0):
+            foreach ($lista as $dados):
         ?>
     <tr >
         <th><?php echo $dados['eNota']?></th>
-        <th><?php echo $dados['dataVenda']?></th>
+        <th><?php echo strftime("%A - %d/%m/%Y", strtotime($dados['dataVenda']))?></th>
         <th><?php echo $dados['formaPagamento']?></th>
         <th><?php echo $dados['observacao']?></th>
+        <th><?php echo $dados['qntd_produtos']?></th>
         <th><?php echo '<a href="controller/consulta_produto/consulta_produto.php?consulta_nota='.$dados['eNota'].'">Consultar</a> '?></th>
     </tr>
     <?php
-    endforeach;
+            endforeach;
+        endif;
     ?>
     </table>
     </div>

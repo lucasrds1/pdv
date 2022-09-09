@@ -5,11 +5,12 @@ require '../../classes/login.class.php';
 $logar = new Login();
 $produtos = new Produtos();
 
-if(isset($_SESSION['id'])){
-    $id = $_SESSION['id'];
-}else{
-    header("Location: ../../login.php");
-}
+$sessao = $_SESSION['id'];
+$logar->verificar($sessao);
+$id = $sessao;
+
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Sao_Paulo');
 ?>
 
 <!DOCTYPE html>
@@ -57,3 +58,4 @@ if(isset($_SESSION['id'])){
         echo '<div style="color:gray;font-size:10px;margin-left: 35px">Criado por Lucas Penha Rodrigues</div>';
     ?>
 </aside>
+<div class="container_consulta">

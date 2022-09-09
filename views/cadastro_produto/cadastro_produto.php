@@ -1,8 +1,7 @@
-<div class="container_cd_produto">
+<!-- <div class="container_cd_produto">
 </div>
-<div class="container_consulta">
     <div class="consulta">
-        <form method="POST">
+        <form method="POST" action="cadastrar_produto_submit.php">
             <fieldset>
                 <legend>Cadastrar</legend>
                     <div class="container_eNota">
@@ -55,4 +54,26 @@
                     <div class="consulta_opcoes">
                         <input type="submit" class="cadastro_submit" value="CADASTRAR" >
                     </div>
-        </ul>
+        </ul> -->
+        <div style="width:100%;background-color:gray" >
+        <form method="POST">
+        <input type="text" name="eNota[]" value="<?php ?>" placeholder="Digite 6 números..." required>
+        <input type="date" name="data_venda[]" style="margin-left: 72px;width: 170px">
+        <input type="text" name="forma_pagamento[]"  style="margin-left: 10px" required>
+        <input type="text"  name="observacao_nota[]" style="margin-left: 88px" >
+        <div style="background-color: green" id="campo">
+        <input type="hidden" name="item[]" value="1"> 
+        produto 1<br>
+        quantidade
+        <input type="number"  name="quantidade_nota[]" style="margin-left: 95px" required>
+        descricao
+        <input type="text"  name="descricao_nota[]" style="margin-left: 105px" required>
+        valor
+        <input type="number"  name="vr_unit_nota[]" placeholder="R$" style="margin-left: 65px" required>
+        
+      <br>  
+</div>
+<a href="#" onClick="adicionarProduto()">adicionar</a>
+<input type="submit" class="cadastro_submit" value="CADASTRAR" >
+        </form>
+</div>
