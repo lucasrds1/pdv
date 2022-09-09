@@ -56,24 +56,52 @@
                     </div>
         </ul> -->
         <div style="width:100%;background-color:gray" >
+        <form method="GET">
+            NOTA:
+        <button type="button" onClick="gerarNota()">Gerar Nota</button>
+        <input type="number" name="consulta_nota" id="eNota" placeholder="Digite 6 números..." >
+        <input type="submit">
+        <br><hr>
+
+        <?php
+        $eNota = filter_input(INPUT_GET, 'consulta_nota', FILTER_VALIDATE_INT);
+        if($eNota !== '' && strlen($eNota) < 7){
+            $eNota = addslashes(trim($eNota));
+            $info = $produtos->verificar_nota($eNota);
+        }else{
+            $info = true;
+            echo '<div class="aviso_notaVazia">digite uma nota válida</div>';
+        }
+
+        if(!empty($_GET['consulta_nota']))
+        if($info == false){
+        ?>
+        </form>
         <form method="POST">
-        <input type="text" name="eNota[]" value="<?php ?>" placeholder="Digite 6 números..." required>
+        <input type="number" name="eNota[]" value="<?php echo $_GET['consulta_nota']?>" disabled>
         <input type="date" name="data_venda[]" style="margin-left: 72px;width: 170px">
-        <input type="text" name="forma_pagamento[]"  style="margin-left: 10px" required>
+        <input type="text" name="forma_pagamento[]"  style="margin-left: 10px" >
         <input type="text"  name="observacao_nota[]" style="margin-left: 88px" >
         <div style="background-color: green" id="campo">
         <input type="hidden" name="item[]" value="1"> 
         produto 1<br>
         quantidade
-        <input type="number"  name="quantidade_nota[]" style="margin-left: 95px" required>
+        <input type="number"  name="quantidade_nota[]" style="margin-left: 95px" >
         descricao
-        <input type="text"  name="descricao_nota[]" style="margin-left: 105px" required>
+        <input type="text"  name="descricao_nota[]" style="margin-left: 105px" >
         valor
-        <input type="number"  name="vr_unit_nota[]" placeholder="R$" style="margin-left: 65px" required>
+        <input type="number"  name="vr_unit_nota[]" placeholder="R$" style="margin-left: 65px" >
         
       <br>  
 </div>
 <a href="#" onClick="adicionarProduto()">adicionar</a>
-<input type="submit" class="cadastro_submit" value="CADASTRAR" >
+<input type="submit" name="submit" class="cadastro_submit" value="CADASTRAR" >
         </form>
 </div>
+
+    <?php
+    }else{
+        echo '<div class="aviso_notaVazia">essa nota ja existe</div>';
+    }
+    ?>
+<script src="../../assets/js/script.js"></script>

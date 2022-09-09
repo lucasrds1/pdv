@@ -8,22 +8,13 @@ require '../../views/partials/header/header.php';
 <hr>
 <?php
 require '../../views/cadastro_produto/cadastro_produto.php';
+//primeiro cadastro a nota no formulario get -> depois eu pego a nota no outro formulario post que gerar pelo $_GET e o input disabled
 ?>
         <?php
-        // $eNota = filter_input(INPUT_POST, 'eNota', FILTER_VALIDATE_INT);
-        // $dataVenda = filter_input(INPUT_POST, 'data_venda');
-        // $formaPagamento = filter_input(INPUT_POST, 'forma_pagamento', FILTER_SANITIZE_SPECIAL_CHARS);
-        // $observacao = filter_input(INPUT_POST, 'observacao_nota', FILTER_SANITIZE_SPECIAL_CHARS);
-        // $item = filter_input(INPUT_POST, 'item');
-        // $quantidade = filter_input(INPUT_POST, 'quantidade_nota', FILTER_VALIDATE_INT);
-        // $descricao = filter_input(INPUT_POST, 'descricao_nota', FILTER_SANITIZE_SPECIAL_CHARS);
-        // $vr_unit = filter_input(INPUT_POST, 'vr_unit_nota');
         $dados = filter_input_array(INPUT_POST);
-        var_dump($dados);
-        if(isset($dados)){
-
+        if($dados > 1){
+            if(!empty($dados)){
             foreach($dados['eNota'] as $chave => $eNota){    
-            //$eNota = $dados['eNota'];
                 $dataVenda = $dados['data_venda'][$chave];
                 $formaPagamento = $dados['forma_pagamento'][$chave];
                 $observacao = $dados['observacao_nota'][$chave];
@@ -33,16 +24,12 @@ require '../../views/cadastro_produto/cadastro_produto.php';
                     $produtos->cadastrar_produto($eNota, $dataVenda, $formaPagamento, $observacao, $item);
                 }
             }
-            
-            echo "Nota:". $eNota;
-            echo "<br>data da venda:". $dataVenda;
-            echo "<br>forma pgm:". $formaPagamento;
-            echo "<br>obs:". $observacao;
-            echo "<hr>";
-
+            // echo "Nota:". $eNota;
+            // echo "<br>data da venda:". $dataVenda;
+            // echo "<br>forma pgm:". $formaPagamento;
+            // echo "<br>obs:". $observacao;
+            // echo "<hr>";
             foreach($dados['quantidade_nota'] as $chave => $quantidade){      
-               // $quantidade = $dados['quantidade_nota'][$chave];
-             //   $eNota = $dados['eNota'][$chave];
                 $descricao = $dados['descricao_nota'][$chave];
                 $valor = $dados['vr_unit_nota'][$chave];
                 
@@ -51,17 +38,16 @@ require '../../views/cadastro_produto/cadastro_produto.php';
                 echo "Valor:". $valor."<br>";
                 echo "<hr>";
 
+                if($eNota && $quantidade && $descricao && $valor){
                 $produtos->cadastrar_itens($eNota, $quantidade, $descricao, $valor);
-                // $query = "INSERT INTO itens_nota (quantidade, descricao, vr_unit) VALUE (:quantidade_nota, :descricao_nota, :vr_unit_nota)";
-                // $sql = $pdo->prepare($query);
-                
+                }else{
+                    echo '<div class="aviso_notaVazia">Preencha todos os campos</div>';
+                }
             }
-        }else{
-            echo 'error';
+            }else{
+            echo '<div class="aviso_notaVazia">Preencha todos os campos</div>';
+            }
         }
-        // if($eNota && $dataVenda && $formaPagamento && $item && $quantidade && $descricao && $vr_unit){
-        //     $produtos->cadastrar_produto($eNota, $dataVenda, $formaPagamento, $observacao, $item, $quantidade, $descricao, $vr_unit);
-        // }
         ?>
     </div>
 </div>

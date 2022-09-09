@@ -46,6 +46,14 @@ class Produtos{
     }
     }
 
+    // public function get_nota($eNota1){
+    //     if($this->verificar_nota($eNota1) == false){
+    //         return false;
+    //     }else{
+    //         return true;
+    //     }
+    // }
+
     public function consultar_itensNota($eNota){
         if($eNota != null){
             $sql = "SELECT * FROM itens_nota WHERE eNota = :eNota";
@@ -95,7 +103,7 @@ class Produtos{
         //$sql->bindValue(':item', $item);
         $sql->bindValue(':quantidade', $quantidade);
         $sql->bindValue(':descricao', $descricao);
-        $sql->bindValue(':vr_unit', $valor);
+        $sql->bindValue(':valor', $valor);
         if($sql->execute()){
             echo '<div class="cadRealizado">cadastro realizado!</div>';
         }

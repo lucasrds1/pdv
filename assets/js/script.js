@@ -13,6 +13,8 @@ function removerProduto(idCampo){
     console.log(document.querySelector('#campo'+idCampo))
     document.querySelector('#campo'+idCampo).remove();
 }
-function mostrarBotao(){
-    document.querySelector('#botao').style.display = "block";
+function gerarNota(){
+    let nota = 0
+    nota = Math.floor(Math.random() * (999999 - 100000) + 100000)
+    document.querySelector('#eNota').value = nota
 }

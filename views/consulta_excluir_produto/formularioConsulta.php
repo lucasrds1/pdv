@@ -1,12 +1,9 @@
 <!-- CONTAINER DA PAGINA -->
-<div class="container_consulta">
 
 
 <!-- COMEÇO DO FORMULÁRIO -->
 <div class="consulta">
     <form method="GET">
-        <fieldset>
-            <legend>Consultar</legend>
             <!-- CONTAINER NOTA -->
                 <div class="container_eNota">
                     <div class="eNota">
@@ -103,7 +100,6 @@
 <!-- FINAL IF VERIFICAÇÃO DE NOTA -->
 <!-- FINAL CONTAINER DADOS NOTAS -->
 </div>
-        </fieldset>
     </form>
 <!-- FINAL DO FORMULÁRIO -->
 </div>
