@@ -23,10 +23,13 @@ if(isset($_SESSION['id'])){
     <link href="../../assets/styles/style_login_cadastro/style_login_cadastro.css" rel="stylesheet">
 </head>
 <body style="">
+    <div class="nome_sistema">
+        <img width="50" src="assets/imagens/logo_sistema/lrlogo.jpg" title="LRSolution - Desenvolvimento de sistemas">
+    </div>
     <div class="container">
         <div class="container_form">
             <div class="cabecalho_form">
-                <h1>Cadastro - Tela de Vendas</h1><hr width="60%">
+                <h1>Cadastro da empresa</h1><hr width="60%">
             </div><br>
             <div class="form">
                 <form method="POST">
@@ -62,6 +65,6 @@ if(isset($_SESSION['id'])){
             <span><a href="login.php">Fazer Login</a></span>
         </div>
     </div>
-    <div style="color:gray;font-size:11px;margin-right: 10px;bottom:0;right:0;position:absolute">Criado por Lucas Penha Rodrigues</div>
+    <div style="color:gray;font-size:11px;margin-right: 10px;bottom:0;right:0;position:absolute">Criado por LRSolution - Desenvolvimento de sistemas</div>
 </body>
 </html>

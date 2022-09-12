@@ -56,7 +56,7 @@ if(isset($_SESSION['id'])){
                 }
             }
             ?><br>
-            <span><a href="cadastro.php">Cadastre-se</a></span>
+            <span><a href="cadastro_empresa.php">Cadastre-se</a></span>
         </div>
     </div>
     <div style="color:gray;font-size:11px;margin-right: 10px;bottom:0;right:0;position:absolute">Criado por Lucas Penha Rodrigues</div>
