@@ -36,20 +36,34 @@ if(isset($_SESSION['id'])){
                     <label>
                         Nome
                     </label>
-                    <input type="text" class="input" name="nome" placeholder="Digite um nome de usuário..." required><br>
+                    <input type="text" class="input" name="nomeEmpresa" placeholder="Digite o nome da empresa..." required><br>
+                    <label>
+                        Email
+                    </label>
+                    <input type="email" class="input" name="emailEmpresa" placeholder="Digite o email da empresa..." required><br>
+                    <label>
+                        CNPJ
+                    </label>
+                    <input type="number" maxlength="14" class="input" name="cnpjEmpresa" id="cnpj" placeholder="Digite o email da empresa..." required><br>
                     <label>
                         Senha
                     </label>
-                    <input type="password" class="input" name="senha" placeholder="Digite uma senha..." required><br>
+                    <input type="password" class="input" name="senhaEmpresa" placeholder="Digite uma senha..." required><br>
                     <input type="submit" class="submit">
                 </form>
             </div>
             <?php
-            $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-            $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_SPECIAL_CHARS);
+            $nome = filter_input(INPUT_POST, 'nomeEmpresa', FILTER_SANITIZE_SPECIAL_CHARS);
+            $senha = filter_input(INPUT_POST, 'senhaEmpresa', FILTER_SANITIZE_SPECIAL_CHARS);
+            $email = filter_input(INPUT_POST, 'emailEmpresa', FILTER_VALIDATE_EMAIL);
+            $cnpj = filter_input(INPUT_POST, 'cnpjEmpresa');
 
-            if($nome != ''  && $senha !== ''){
-                if(strlen($nome) > 3 && strlen($senha) > 3){
+            if($nome && $email && $senha && $cnpj){
+                echo $nome, $email, $senha, $cnpj;exit;
+            }
+            if($nome != ''  && $senha !== '' && $email !== '' && $cnpj !== ''){
+                if(strlen($nome) > 3 && strlen($senha) > 3 && $email && strlen($cnpj) == 13){
+                echo $nome, $email, $senha, $cnpj;exit;
                 $dados = $logar->cadastrarUser($nome, $senha);
                 if($dados !== false){
                     echo 'Cadastrado com sucesso!';
@@ -68,3 +82,6 @@ if(isset($_SESSION['id'])){
     <div style="color:gray;font-size:11px;margin-right: 10px;bottom:0;right:0;position:absolute">Criado por LRSolution - Desenvolvimento de sistemas</div>
 </body>
 </html>
+<script>
+    
+</script>
