@@ -1,0 +1,12 @@
+.sucesso{
+    color: green;
+    text-align: center;
+}
+.erro{
+    color: red;
+    text-align: center;
+}
+.desc_input{
+    font-size: 10px;
+    color: gray;
+}

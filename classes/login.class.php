@@ -47,14 +47,26 @@ class Login{
             return false;
         }
     }
-    public function cadastrarUser($nome, $senha){
-        $nome = addslashes(ucwords(trim($nome)));
-        $senha = addslashes(trim(md5($senha)));
-        $sql = "INSERT INTO usuarios (nome, senha) VALUES (:nome, :senha)";
-        $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(':nome', $nome);
-        $sql->bindValue(':senha', $senha);
-        $sql->execute();
-        header("Location: index.php");
+    public function cadastrarUser($nome, $email, $senha, $cnpj){
+        if($nome && $senha && $email){
+            $cod_empresa = rand(100000, 999999);
+            if(!empty($cod_empresa))
+            $sql = "INSERT INTO usuarios (cod_empresa, nome, email, senha, cnpj) VALUES (cod_empresa, :nome, :email ,:senha, :cnpj)";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(':cod_empresa', $cod_empresa);
+            $sql->bindValue(':nome', $nome);
+            $sql->bindValue(':email', $email);
+            $sql->bindValue(':senha', $senha);
+            $sql->bindValue(':cnpj', $cnpj);
+            $sql->execute();
+            return true;
+        }
     }
+}
+function valCad($nome, $email, $senha, $cnpj){
+    $nome = addslashes(ucwords(trim($nome)));
+    $email = addslashes(trim($email));
+    $senha = addslashes(trim(md5($senha)));
+    $cnpj = addslashes(trim($cnpj));
+    return true;
 }
