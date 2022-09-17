@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 15-Set-2022 às 02:12
+-- Tempo de geração: 17-Set-2022 às 04:56
 -- Versão do servidor: 5.7.36
 -- versão do PHP: 7.4.26
 
@@ -34,16 +34,17 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `email_empresa` varchar(50) NOT NULL,
   `senha_empresa` varchar(100) NOT NULL,
   `nome_empresa` varchar(100) NOT NULL,
-  `cnpj` varchar(14) NOT NULL,
+  `cnpj` varchar(14) DEFAULT NULL,
   PRIMARY KEY (`id_empresa`,`cod_empresa`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `empresa`
 --
 
 INSERT INTO `empresa` (`id_empresa`, `cod_empresa`, `email_empresa`, `senha_empresa`, `nome_empresa`, `cnpj`) VALUES
-(1, 123456, 'empresa@gmail.com', 'teste', 'empresa', '12345678901234');
+(1, 123456, 'empresa@gmail.com', 'teste', 'empresa', '12345678901234'),
+(3, 266367, 'LRSolution', '1234456789', 'LRSolution', NULL);
 
 -- --------------------------------------------------------
 
@@ -142,7 +143,10 @@ DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `cod_empresa` varchar(6) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
   `nome` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `data_nascimento` DATE NOT NULL,
+  `email` varchar(100) NOT NULL,
   `senha` varchar(100) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
@@ -151,14 +155,14 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `cod_empresa`, `nome`, `senha`) VALUES
-(5, '', 'Larisse', '6562c5c1f33db6e05a082a88cddab5ea'),
-(4, '', 'Lucas', '81dc9bdb52d04dc20036dbd8313ed055'),
-(6, '', 'Penha', '01cfcd4f6b8770febfb40cb906715822'),
-(7, '', 'Isabelle', 'a53c8cd09fb02ba13e56ba08309e70dc'),
-(8, '', 'Lucas Penha', '698dc19d489c4e4db73e28a713eab07b'),
-(9, '', 'Silva Rodrigues', 'aa1bf4646de67fd9086cf6c79007026c'),
-(10, '', 'Jucelino', '827ccb0eea8a706c4c34a16891f84e7b');
+INSERT INTO `usuarios` (`id`, `cod_empresa`, `cpf`, `nome`, `email`, `senha`) VALUES
+(5, '', '', 'Larisse', '', '6562c5c1f33db6e05a082a88cddab5ea'),
+(4, '', '', 'Lucas', '', '81dc9bdb52d04dc20036dbd8313ed055'),
+(6, '', '', 'Penha', '', '01cfcd4f6b8770febfb40cb906715822'),
+(7, '', '', 'Isabelle', '', 'a53c8cd09fb02ba13e56ba08309e70dc'),
+(8, '', '', 'Lucas Penha', '', '698dc19d489c4e4db73e28a713eab07b'),
+(9, '', '', 'Silva Rodrigues', '', 'aa1bf4646de67fd9086cf6c79007026c'),
+(10, '', '', 'Jucelino', '', '827ccb0eea8a706c4c34a16891f84e7b');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -47,17 +47,20 @@ class Login{
             return false;
         }
     }
-    public function cadastrarUser($nome, $email, $senha, $cnpj){
+    public function cadastrarEmp($nome, $email, $senha, $cnpj){
         if($nome && $senha && $email){
             $cod_empresa = rand(100000, 999999);
-            if(!empty($cod_empresa))
-            $sql = "INSERT INTO usuarios (cod_empresa, nome, email, senha, cnpj) VALUES (cod_empresa, :nome, :email ,:senha, :cnpj)";
+            echo $cod_empresa;
+            if($cnpj == ''){
+                $cnpj = null;
+            }
+            $sql = "INSERT INTO empresa (cod_empresa, email_empresa, senha_empresa, nome_empresa, cnpj) VALUES (:cod_empresa, :email_empresa ,:senha_empresa,:nome_empresa, :cnpj)";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(':cod_empresa', $cod_empresa);
-            $sql->bindValue(':nome', $nome);
-            $sql->bindValue(':email', $email);
-            $sql->bindValue(':senha', $senha);
-            $sql->bindValue(':cnpj', $cnpj);
+            $sql->bindValue(':nome_empresa', $nome);
+            $sql->bindValue(':email_empresa', $email);
+            $sql->bindValue(':senha_empresa', $senha);
+            $sql->bindValue(':cnpj', $cnpj); 
             $sql->execute();
             return true;
         }
