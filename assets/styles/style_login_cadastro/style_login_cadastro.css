@@ -2,6 +2,7 @@ body{
     margin: 0;
     box-sizing: border-box;
     font-family: arial;
+    
 }
 .container{
     width: 90%;
@@ -18,7 +19,6 @@ body{
     padding: 10px;
     align-items: center;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px gray;
     color: rgb(58, 58, 58);
 }
 .cabecalho_form h1{
@@ -55,8 +55,8 @@ form .submit{
     background-color: rgb(145, 145, 145);
 }
 .form .input:focus{
-    background-color:rgb(255, 234, 234);
-
+    /* background-color:rgb(255, 234, 234); */
+    box-shadow: 0px 1px 1px;
 }
 hr{
     border-color: black;

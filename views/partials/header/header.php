@@ -1,5 +1,4 @@
 <?php
-session_start();
 require '../../classes/produtos.class.php';
 require '../../classes/login.class.php';
 $logar = new Login();
@@ -24,6 +23,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <link href="../../assets/styles/style_header_footer/footer.css" rel="stylesheet">
     <link href="../../assets/styles/style_cadastro_produto/cadastro_produto.css" rel="stylesheet">
     <link href="../../assets/styles/style_consulta_produto/consulta_produto.css" rel="stylesheet">
+    <link href="../../assets/styles/style_botoes_avisos.css" rel="stylesheet">
 </head>
 <body>
         <?php

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'classes/produtos.class.php';
 require 'classes/login.class.php';
 $logar = new Login();
@@ -8,8 +7,11 @@ $produtos = new Produtos();
 if(isset($_SESSION['id'])){
     $id = $_SESSION['id'];
     header("Location: index.php");
+}else{}
+if(isset($_SESSION['codEmpresa'])){
+    header("Location: views/cadastro_funcionario/cadastro_funcionario.php");
 }else{
-
+    $cod_empresa = rand(100000, 999999);
 }
 
 ?>
@@ -36,6 +38,7 @@ if(isset($_SESSION['id'])){
             <div class="form">
                 <span class="desc_input">Campo não obrigatório * </span>
                 <form method="POST" onSubmit='return valida()'>
+                    <input type="hidden" name="cod_empresa" value="<?=$cod_empresa?>">
                     <label>
                         Nome
                     </label>
@@ -45,44 +48,60 @@ if(isset($_SESSION['id'])){
                     </label>
                     <input type="email" class="input" name="emailEmpresa" placeholder="Digite o email da empresa..." ><br>
                     <label>
-                        Senha
-                    </label>
-                    <input type="password" class="input" name="senhaEmpresa" placeholder="Digite uma senha..." ><br>
-                    <label>
                         CNPJ*
                     </label>
-                    <input type="number" maxlength="14" class="input" name="cnpjEmpresa" id="cnpj" placeholder="Digite o CNPJ da empresa..." ><br>
-                    <!-- <div class="cabecalho_form">
-                    <h1>Cadastro do administrador</h1><hr width="60%">
-                    </div><br> -->
+                    <input type="number" class="input" name="cnpjEmpresa" id="cnpj" placeholder="Digite o CNPJ da empresa..." ><br>
+                    <label style="font-size: 13px;padding-top:11px">
+                        Número*
+                    </label>
+                    <input type="number" class="input" name="numeroEmpresa" id="numeroEmpresa" placeholder="85 98888 1111" ><br>
                     <input type="submit" name="submit" value="Cadastrar" class="submit">
                 </form>
             </div>
             <?php
+            $codEmpresa = filter_input(INPUT_POST, 'cod_empresa', FILTER_VALIDATE_INT);
             $nome = filter_input(INPUT_POST, 'nomeEmpresa', FILTER_SANITIZE_SPECIAL_CHARS);
-            $senha = filter_input(INPUT_POST, 'senhaEmpresa', FILTER_SANITIZE_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'emailEmpresa', FILTER_VALIDATE_EMAIL);
-            $cnpj = filter_input(INPUT_POST, 'cnpjEmpresa');
+            $cnpj = filter_input(INPUT_POST, 'cnpjEmpresa', FILTER_SANITIZE_SPECIAL_CHARS);
+            $numeroemp = filter_input(INPUT_POST, 'numeroEmpresa', FILTER_SANITIZE_SPECIAL_CHARS);
             $submit = filter_input(INPUT_POST, 'submit');
+            $insert = false;
+            $dados = '';
             if($submit == 'Cadastrar'){
-            if($nome != ''  && $senha !== '' && $email !== '' && isset($cnpj) ){
-                $verifica = valCad($nome, $email, $senha, $cnpj);
+            if(isset($codEmpresa) && $nome != ''  && $email !== ''){
+                $verifica = valCadEmpresa($nome, $email, $cnpj, $numeroemp);
                 if($verifica == true){
-                    if(strlen($nome) > 3 && strlen($senha) > 7 && $email){
-                        $dados = $logar->cadastrarEmp($nome, $nome ,$senha, $cnpj);
-                        if($dados !== false){
-                            echo '<p class="sucesso">Empresa cadastrada com sucesso!</p>';
-                            echo '<script>window.location.href = "http://crud-vendas/views/cadastro_funcionario.php/cadastro_funcionario.php";</script>'; 
-                        }else{
-                            echo '<p class="erro">Ocorreu um erro ao cadastrar!</p>';
-                        }
+                    if(strlen($nome) > 3 && !empty($email)){
                         if($cnpj){
-                            if(strlen($cnpj) !== 13){
+                            if(strlen($cnpj) !== 14 && is_numeric($cnpj)){
                                 echo '<p class="erro">O cnpj deve ter pelo menos 14 caracteres</p>';
+                                $insert = false;
+                            }else{
+                                $insert = true;
+                            }
+                        }else{
+                            $insert = true;
+                        }
+                        if($numeroemp){
+                            if(strlen($numeroemp) !== 11 && is_numeric($numeroemp)){
+                                echo '<p class="erro">O número deve possuir DDD e ter 11 caracteres</p>';
+                                $insert = false;
                             }
                         }
+                        if($insert == true){
+                            $dados = $logar->cadastrarEmp($codEmpresa, $nome, $email, $cnpj, $numeroemp);
+                            if($dados == true){
+                                $_SESSION['msg_cad_empresa'] = '<p class="sucesso">Empresa cadastrada com sucesso!</p>';
+                                $_SESSION['codEmpresa'] = $codEmpresa;
+                                header("Location: views/cadastro_funcionario/cadastro_funcionario.php");
+                            }else{
+                                echo '<p class="erro">Alguns campos já existem no sistema</p>';
+                            }
                         }else{
-                            echo '<p class="erro">O nome e a senha devem ser maiores do que 3 caracteres!</p>';
+                            $insert = false;
+                        }
+                    }else{
+                        echo '<p class="erro">O nome e a senha devem ser maiores do que 3 caracteres!</p>';
                     }
                 }
             }elseif($submit){

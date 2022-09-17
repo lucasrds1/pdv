@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'classes/login.class.php';
 require 'classes/produtos.class.php';
 $produtos = new Produtos();

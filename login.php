@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'classes/produtos.class.php';
 require 'classes/login.class.php';
 $logar = new Login();
