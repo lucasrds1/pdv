@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 17-Set-2022 às 21:32
+-- Tempo de geração: 18-Set-2022 às 22:49
 -- Versão do servidor: 5.7.36
 -- versão do PHP: 7.4.26
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `numero_empresa` varchar(13) DEFAULT NULL,
   `cnpj` varchar(14) DEFAULT NULL,
   PRIMARY KEY (`id_empresa`,`cod_empresa`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `empresa`
@@ -45,7 +45,11 @@ CREATE TABLE IF NOT EXISTS `empresa` (
 INSERT INTO `empresa` (`id_empresa`, `cod_empresa`, `email_empresa`, `nome_empresa`, `numero_empresa`, `cnpj`) VALUES
 (1, 123456, 'empresa@gmail.com', 'empresa', NULL, '12345678901234'),
 (13, 112966, 'emrer@gfgf.com', 'empresa', NULL, NULL),
-(23, 199001, 'lpsolution@outlook.com', 'LPSolution', '85987734479', NULL);
+(25, 189794, 'lpsolution@outlook.com', 'LPSolution', '85987734479', NULL),
+(26, 627840, 'polishop@outlook.com', 'polishop', NULL, '12345678901222'),
+(27, 400399, 'lucas@dsds.com.br', 'lucas enterprise', NULL, NULL),
+(28, 855239, 'empresa1@dfdf.cdd', 'empresa1', NULL, NULL),
+(29, 497506, 'isa@hotmail.com', 'isabelle empresa', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -147,25 +151,29 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `cpf` varchar(11) NOT NULL,
   `nome` varchar(50) CHARACTER SET latin1 NOT NULL,
   `data_nascimento` date NOT NULL,
-  `numero_empresa` varchar(13) DEFAULT NULL,
+  `numero_celular` varchar(13) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `permissoes` text DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `permissoes` text,
+  PRIMARY KEY (`id`, `cod_empresa`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `cod_empresa`, `cpf`, `nome`, `data_nascimento`, `numero_empresa`, `email`, `senha`) VALUES
-(5, '', '', 'Larisse', '0000-00-00', NULL, '', '6562c5c1f33db6e05a082a88cddab5ea'),
-(4, '', '', 'Lucas', '0000-00-00', NULL, '', '81dc9bdb52d04dc20036dbd8313ed055'),
-(6, '', '', 'Penha', '0000-00-00', NULL, '', '01cfcd4f6b8770febfb40cb906715822'),
-(7, '', '', 'Isabelle', '0000-00-00', NULL, '', 'a53c8cd09fb02ba13e56ba08309e70dc'),
-(8, '', '', 'Lucas Penha', '0000-00-00', NULL, '', '698dc19d489c4e4db73e28a713eab07b'),
-(9, '', '', 'Silva Rodrigues', '0000-00-00', NULL, '', 'aa1bf4646de67fd9086cf6c79007026c'),
-(10, '', '', 'Jucelino', '0000-00-00', NULL, '', '827ccb0eea8a706c4c34a16891f84e7b');
+INSERT INTO `usuarios` (`id`, `cod_empresa`, `cpf`, `nome`, `data_nascimento`, `numero_celular`, `email`, `senha`, `permissoes`) VALUES
+(5, '', '', 'Larisse', '0000-00-00', NULL, '', '6562c5c1f33db6e05a082a88cddab5ea', NULL),
+(4, '', '', 'Lucas', '0000-00-00', NULL, '', '81dc9bdb52d04dc20036dbd8313ed055', NULL),
+(6, '', '', 'Penha', '0000-00-00', NULL, '', '01cfcd4f6b8770febfb40cb906715822', NULL),
+(7, '', '', 'Isabelle', '0000-00-00', NULL, '', 'a53c8cd09fb02ba13e56ba08309e70dc', NULL),
+(8, '', '', 'Lucas Penha', '0000-00-00', NULL, '', '698dc19d489c4e4db73e28a713eab07b', NULL),
+(9, '', '', 'Silva Rodrigues', '0000-00-00', NULL, '', 'aa1bf4646de67fd9086cf6c79007026c', NULL),
+(10, '', '', 'Jucelino', '0000-00-00', NULL, '', '827ccb0eea8a706c4c34a16891f84e7b', NULL),
+(11, '189794', '08912089331', 'lucas penha rodriguees', '2003-08-12', '85987734479', 'lucasrds17@outlook.com', '01101100', 'ADMIN'),
+(16, '400399', '12345678901', 'luciano serra rodrigues', '1971-05-28', '85987734479', 'luciano@gmail.com', '12345678', NULL),
+(17, '855239', '08912089332', 'lucas penha rodriguees', '2003-08-12', '85987734479', 'lucas@htotmaicom.com', '01101100', 'ADMIN'),
+(14, '627840', '06694223390', 'isabelle penha rodrigues', '1996-05-08', '85987991830', 'isabelle@outlook.com', '08051996', 'ADMIN');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -15,8 +15,6 @@ class Login{
             header("Location: error.php");
         }
     }
-    public function codEmpresa(){
-    }
     public function verificar($sessao){
         if(isset($sessao)){
             return $sessao;
@@ -120,11 +118,77 @@ class Login{
             }
         }
     }
+    public function cadUsuario($codEmpresa, $nome, $email, $senha, $dataNasc, $cpf, $numero, $permissao){
+        if($this->valCodEmpresa($codEmpresa) == true){
+            if($this->valEmailUsuario($email) == false){ 
+            if($this->valCpf($cpf) == false){
+                $sql = "INSERT INTO usuarios 
+                        (cod_empresa, cpf, nome, data_nascimento, numero_celular, email, senha, permissoes)
+                        VALUES (:codEmpresa, :cpf, :nome, :dataNasc, :numero, :email, :senha, :permissoes)";
+                $sql = $this->pdo->prepare($sql);
+                $sql->bindValue(':codEmpresa', $codEmpresa);
+                $sql->bindValue(':cpf', $cpf);
+                $sql->bindValue(':nome', $nome);
+                $sql->bindValue(':dataNasc', $dataNasc);
+                $sql->bindValue(':numero', $numero);
+                $sql->bindValue(':email', $email);
+                $sql->bindValue(':senha', $senha);
+                $sql->bindValue(':permissoes', $permissao);
+                if($sql->execute()){
+                    return true;
+                }else{
+                    //echo '<p class="erro">Ocorreu um erro ao cadastrar!</p>';
+                    return false;
+                }  
+            }else{
+                echo '<p class="erro">Cpf já existe!</p>';
+                return false;
+            }
+            }else{
+                echo '<p class="erro">Email já existe!</p>';
+                return false;
+            }
+    }else{
+        echo '<p class="erro">Código da empresa inexistente, por favor contate o administrador!</p>';
+        return false;
+    }
+    }
+    public function valEmailUsuario($email){
+        $sql = "SELECT * FROM usuarios WHERE email = :email";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':email', $email);
+        $sql->execute();
+        if($sql->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function valCpf($cpf){
+        $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':cpf', $cpf);
+        $sql->execute();
+        if($sql->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 function valCadEmpresa($nome, $email, $cnpj, $numeroemp){
-    $nome = addslashes(ucwords(trim($nome)));
+    $nome = addslashes(ucwords($nome));
     $email = addslashes(trim($email));
     $cnpj = addslashes(trim($cnpj));
     $numeroemp = addslashes(trim($numeroemp));
+    return true;
+}
+function valCadUsuario($nome, $email, $senha, $dataNasc, $cpf, $numero){
+    $nome = addslashes(ucwords(trim($nome)));
+    $email = addslashes(trim($email));
+    $senha = addslashes(trim(md5($senha)));
+    $dataNasc = trim($dataNasc);
+    $cpf = addslashes(trim($cpf));
+    $numero = addslashes(trim($numero));
     return true;
 }

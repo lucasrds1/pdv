@@ -1,0 +1,30 @@
+body{
+    font-family: arial;
+    background-color: rgb(236, 241, 252);
+}
+.container{
+    width: 60%;
+    margin: auto;
+}
+.formulario{
+    width: 70%;
+    margin: auto;
+    border: 1px solid rgb(173, 173, 173);
+    padding: 40px;
+    background-color: white;
+}
+.formulario form label{
+    font-size: 16px;
+    display: flex;
+    margin-bottom: 8px;
+}
+.formulario form input{
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid rgb(161, 191, 250);
+}
+
+/* .formulario form input .submit{
+    background-color: red;
+} */

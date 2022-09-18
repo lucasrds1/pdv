@@ -10,7 +10,10 @@ if(isset($_SESSION['id'])){
     $id = $_SESSION['id'];
     header("Location: index.php");
 }
-echo $_SESSION['codEmpresa'];
-
+$codEmpresa = $_SESSION['codEmpresa'];
+if($logar->valCodEmpresa($codEmpresa) == false){
+    header("Location: ../../index.php");
+    session_destroy();
+}
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');

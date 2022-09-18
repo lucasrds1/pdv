@@ -73,7 +73,7 @@ if(isset($_SESSION['codEmpresa'])){
                 if($verifica == true){
                     if(strlen($nome) > 3 && !empty($email)){
                         if($cnpj){
-                            if(strlen($cnpj) !== 14 && is_numeric($cnpj)){
+                            if(strlen($cnpj) !== 14 && !is_numeric($cnpj)){
                                 echo '<p class="erro">O cnpj deve ter pelo menos 14 caracteres</p>';
                                 $insert = false;
                             }else{
@@ -91,7 +91,7 @@ if(isset($_SESSION['codEmpresa'])){
                         if($insert == true){
                             $dados = $logar->cadastrarEmp($codEmpresa, $nome, $email, $cnpj, $numeroemp);
                             if($dados == true){
-                                $_SESSION['msg_cad_empresa'] = '<p class="sucesso">Empresa cadastrada com sucesso!</p>';
+                                $_SESSION['msg_cad_empresa'] = '<h1 class="sucesso">Empresa cadastrada com sucesso!</h1>';
                                 $_SESSION['codEmpresa'] = $codEmpresa;
                                 header("Location: views/cadastro_funcionario/cadastro_funcionario.php");
                             }else{
