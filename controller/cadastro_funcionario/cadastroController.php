@@ -13,8 +13,6 @@ if($submit == 'Cadastrar'){
     //if($nome != '' && $cpf && $email && $senha && $dataNasc && $numero){
     if(!empty($codEmpresa)){
     if(!empty($nome && $senha && $email && $dataNasc && $numero && $cpf)){
-        $verifica = valCadUsuario($nome, $email, $senha, $dataNasc, $cpf, $numero);
-        if($verifica == true){
             if(strlen($cpf) == 11 && is_numeric($cpf)){
                 $insert = true;
             }else{
@@ -45,7 +43,6 @@ if($submit == 'Cadastrar'){
                     }
                 }
             }
-        }
     }else{
         echo '<p class="erro">Preencha todos os campos!</p>';
     }

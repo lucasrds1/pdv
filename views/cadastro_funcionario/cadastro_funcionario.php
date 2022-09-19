@@ -15,7 +15,7 @@ require '../../controller/cadastro_funcionario/permissoes_cadFunController.php';
 <body>
 <div class="container">
     <div class="formulario">
-        <h1 align="center">Cadastro de <?php echo isset($cadAdmin) ? 'Administrador' : 'Usuário'; ?></h1><hr width="60%" style="border-color: rgb(236, 241, 252);"><br><br>
+        <h1 align="center">Cadastro de <?php echo !empty($cadAdmin) ? 'Administrador' : 'Usuário'; ?></h1><hr width="60%" style="border-color: rgb(236, 241, 252);"><br><br>
         <form method="POST">
             <input type="hidden" name="codEmpresa" value="<?php echo $codEmpresa;?>">
             <p>

@@ -33,6 +33,7 @@ class Login{
         $sql->execute();
         if($sql->rowCount() > 0){
             return $sql->fetch();
+            //pegar cod emrpessa
         }else{
             return false;
         }
@@ -119,6 +120,13 @@ class Login{
         }
     }
     public function cadUsuario($codEmpresa, $nome, $email, $senha, $dataNasc, $cpf, $numero, $permissao){
+        $nome = valCadNome($nome);
+        $email = valCadEmail($email);
+        $senha = valCadSenha($senha);
+        $dataNasc = valCadData($dataNasc);
+        $cpf = valCadCpf($cpf);
+        $numero = valCadNum($numero);
+        
         if($this->valCodEmpresa($codEmpresa) == true){
             if($this->valEmailUsuario($email) == false){ 
             if($this->valCpf($cpf) == false){
@@ -183,12 +191,28 @@ function valCadEmpresa($nome, $email, $cnpj, $numeroemp){
     $numeroemp = addslashes(trim($numeroemp));
     return true;
 }
-function valCadUsuario($nome, $email, $senha, $dataNasc, $cpf, $numero){
+function valCadNome($nome){
     $nome = addslashes(ucwords(trim($nome)));
-    $email = addslashes(trim($email));
-    $senha = addslashes(trim(md5($senha)));
-    $dataNasc = trim($dataNasc);
-    $cpf = addslashes(trim($cpf));
-    $numero = addslashes(trim($numero));
-    return true;
+    return $nome;
 }
+function valCadEmail($email){
+    $email = addslashes(trim($email));
+    return $email;
+}
+function valCadCpf($cpf){
+    $cpf = addslashes(trim($cpf));
+    return $cpf;
+}
+function valCadNum($numero){
+    $numero = addslashes(trim($numero));
+    return $numero;
+}
+function valCadSenha($senha){
+    $senha = addslashes(trim(md5($senha)));
+    return $senha;
+}
+function valCadData($dataNasc){
+    $dataNasc = trim($dataNasc);
+    return $dataNasc;
+}
+

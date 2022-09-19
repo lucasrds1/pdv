@@ -3,14 +3,11 @@ require 'classes/produtos.class.php';
 require 'classes/login.class.php';
 $logar = new Login();
 $produtos = new Produtos();
-
+echo isset($_SESSION['msgCadUser']) ? $_SESSION['msgCadUser'] : '';
 if(isset($_SESSION['id'])){
     $id = $_SESSION['id'];
     header("Location: index.php");
-}else{
-
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
