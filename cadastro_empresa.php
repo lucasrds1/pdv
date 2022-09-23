@@ -4,11 +4,11 @@ require 'classes/login.class.php';
 $logar = new Login();
 $produtos = new Produtos();
 
-if(isset($_SESSION['id'])){
+if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
     $id = $_SESSION['id'];
     header("Location: index.php");
 }else{}
-if(isset($_SESSION['codEmpresa'])){
+if(isset($_SESSION['msg_cad_empresa'])){
     header("Location: views/cadastro_funcionario/cadastro_funcionario.php");
 }else{
     $cod_empresa = rand(100000, 999999);
@@ -36,23 +36,23 @@ if(isset($_SESSION['codEmpresa'])){
                 <h1>Cadastro da empresa</h1><hr width="60%">
             </div><br>
             <div class="form">
-                <span class="desc_input">Campo não obrigatório * </span>
+                <span class="desc_input">Campo obrigatório * </span>
                 <form method="POST" onSubmit='return valida()'>
                     <input type="hidden" name="cod_empresa" value="<?=$cod_empresa?>">
                     <label>
-                        Nome
+                        Nome*
                     </label>
                     <input type="text" class="input" name="nomeEmpresa" placeholder="Digite o nome da empresa..." ><br>
                     <label>
-                        Email
+                        Email*
                     </label>
                     <input type="email" class="input" name="emailEmpresa" placeholder="Digite o email da empresa..." ><br>
                     <label>
-                        CNPJ*
+                        CNPJ
                     </label>
                     <input type="number" class="input" name="cnpjEmpresa" id="cnpj" placeholder="Digite o CNPJ da empresa..." ><br>
-                    <label style="font-size: 13px;padding-top:11px">
-                        Número*
+                    <label>
+                        Número
                     </label>
                     <input type="number" class="input" name="numeroEmpresa" id="numeroEmpresa" placeholder="85 98888 1111" ><br>
                     <input type="submit" name="submit" value="Cadastrar" class="submit">

@@ -40,7 +40,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <div class="container_menu">
         <!-- <a href="../../index.php"><h1>MENU</h1></a> -->
         <div class="menu">
-            <div class="oi_login"><span>Olá, <?php echo $nome?>, como vai?</span>
+            <div class="oi_login"><span><?php echo $nome?></span><br>
                 <a href="../../deslogar.php" class="des">Deslogar</a>
         </div>
         <div class="menu_botoes">

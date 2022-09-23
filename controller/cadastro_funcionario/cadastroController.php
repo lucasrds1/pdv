@@ -39,6 +39,7 @@ if($submit == 'Cadastrar'){
                 if($dados == true){
                     if($cadAdmin == 1){
                         session_destroy();
+                        $_SESSION['msgCadUser'] = '<h1 class="sucesso">Usuário cadastrado com sucesso!</h1>';
                         header("Location: ../../login.php");
                     }
                 }

@@ -49,6 +49,28 @@ class Login{
             return false;
         }
     }
+    public function getNomeEmpresabycod($codEmpresa){
+        $sql = "SELECT nome_empresa FROM empresa WHERE cod_empresa = :codEmpresa";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':codEmpresa', $codEmpresa);
+        $sql->execute();
+        if($sql->rowCount() > 0){
+            return $sql->fetch();
+        }else{
+            return false;
+        }
+    }
+    public function getPermissaoById($id){
+        $sql = "SELECT permissoes FROM usuarios WHERE id = :id";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+        if($sql->rowCount() > 0){
+            return $sql->fetch();
+        }else{
+            return false;
+        }
+    }
     public function cadastrarEmp($codEmpresa, $nome, $email, $cnpj, $numeroemp){
         if($codEmpresa && $nome && $email){
             

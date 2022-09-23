@@ -7,20 +7,30 @@ require 'header_index.php';
     <div class="cabecalho" style="margin-right: 110px">
         <h1>VENDAS - INICIO</h1>
     </div>
-    <hr><br>
-
+    <hr>
     <?php
-       if(isset($id)){
+       if(isset($id) && isset($_SESSION['codEmpresa'])){
             $dados = $logar->getNomeById($id);
-            if($dados !== false){
-                $nome = $dados['nome'];    
+            $nomeEmpresaCod = $logar->getNomeEmpresabycod($_SESSION['codEmpresa']);
+            $permissao = $logar->getPermissaoById($id);
+            if($dados !== false && $nomeEmpresaCod !== false){
+                $nome = $dados['nome'];
+                $nomeEmpresa = $nomeEmpresaCod['nome_empresa'];
             }else{
                 echo 'nome não encontrado';
             }
         }
     ?>
+    <h2 style="margin-left: 20px;font-size:35px;text-decoration:underline"><?php echo $nomeEmpresa?>
 
     <h2 style="margin-left: 30px">SEJA BEM-VINDO VENDEDOR: <?php echo $nome?>.
+    <h2 style="margin-left: 30px; color: red">
+    <?php 
+    if($permissao['permissoes'] == 'ADMIN'){
+        echo 'ADMINISTRADOR';
+    }
+    ?>
+    </h2>
     </h2>
     <?php
     $status = $produtos->__construct();

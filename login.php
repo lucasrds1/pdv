@@ -4,7 +4,7 @@ require 'classes/login.class.php';
 $logar = new Login();
 $produtos = new Produtos();
 echo isset($_SESSION['msgCadUser']) ? $_SESSION['msgCadUser'] : '';
-if(isset($_SESSION['id'])){
+if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
     $id = $_SESSION['id'];
     header("Location: index.php");
 }
@@ -45,6 +45,8 @@ if(isset($_SESSION['id'])){
                 $dados = $logar->entrar($nome, $senha);
                 if($dados !== false){
                     $_SESSION['id'] = $dados['id'];
+                    $_SESSION['codEmpresa'] = $dados['cod_empresa'];
+                    setcookie("login", 'login', time()+86400);
                     echo 'Logado com sucesso!';
                     header("Location: index.php");
                 }else{

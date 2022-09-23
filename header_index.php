@@ -4,9 +4,8 @@ require 'classes/produtos.class.php';
 $produtos = new Produtos();
 $logar = new Login();
 
-$sessao = $_SESSION['id'];
-$logar->verificar($sessao);
-$id = $sessao;
+$logar->verificar($_SESSION['id']);
+$id = $_SESSION['id'];
 
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
@@ -42,7 +41,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <div class="container_menu">
         <!-- <a href="../../index.php"><h1>MENU</h1></a> -->
         <div class="menu">
-            <div class="oi_login"><span>Olá, <?=$nome?>, como vai?</span>
+            <div class="oi_login"><span><?=$nome?></span><br>
                 <a href="deslogar.php" class="des">Deslogar</a>
         </div>
         <div class="menu_botoes">
@@ -57,6 +56,6 @@ date_default_timezone_set('America/Sao_Paulo');
     </div>
     <br>
     <?php
-        echo '<div style="color:gray;font-size:10px;margin-left: 35px">Criado por Lucas Penha Rodrigues</div>';
+        echo '<div style="color:gray;font-size:10px;padding:5px;text-align: center">Criado por LPSolution - Desenvolvimento de sistemas</div>';
     ?>
 </aside>
