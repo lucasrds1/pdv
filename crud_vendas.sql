@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 18-Set-2022 às 22:49
+-- Tempo de geração: 23-Set-2022 às 19:29
 -- Versão do servidor: 5.7.36
 -- versão do PHP: 7.4.26
 
@@ -24,6 +24,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `clientes`
+--
+
+DROP TABLE IF EXISTS `clientes`;
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `id_cliente` int(20) NOT NULL AUTO_INCREMENT,
+  `cod_empresa` int(6) NOT NULL,
+  `nome_cliente` varchar(100) NOT NULL,
+  `numero_cliente` varchar(13) DEFAULT NULL,
+  `endereco_cliente` varchar(100) DEFAULT NULL,
+  `cpf_cliente` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`id_cliente`,`cod_empresa`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `empresa`
 --
 
@@ -36,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `numero_empresa` varchar(13) DEFAULT NULL,
   `cnpj` varchar(14) DEFAULT NULL,
   PRIMARY KEY (`id_empresa`,`cod_empresa`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `empresa`
@@ -45,11 +62,12 @@ CREATE TABLE IF NOT EXISTS `empresa` (
 INSERT INTO `empresa` (`id_empresa`, `cod_empresa`, `email_empresa`, `nome_empresa`, `numero_empresa`, `cnpj`) VALUES
 (1, 123456, 'empresa@gmail.com', 'empresa', NULL, '12345678901234'),
 (13, 112966, 'emrer@gfgf.com', 'empresa', NULL, NULL),
-(25, 189794, 'lpsolution@outlook.com', 'LPSolution', '85987734479', NULL),
+(33, 867164, 'lpsolution@outlook.com', 'LPSolution', '85987734479', NULL),
 (26, 627840, 'polishop@outlook.com', 'polishop', NULL, '12345678901222'),
 (27, 400399, 'lucas@dsds.com.br', 'lucas enterprise', NULL, NULL),
 (28, 855239, 'empresa1@dfdf.cdd', 'empresa1', NULL, NULL),
-(29, 497506, 'isa@hotmail.com', 'isabelle empresa', NULL, NULL);
+(29, 497506, 'isa@hotmail.com', 'isabelle empresa', NULL, NULL),
+(32, 124246, 'empresa2@dfd.com', 'empresa2', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -155,8 +173,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `email` varchar(100) NOT NULL,
   `senha` varchar(100) CHARACTER SET latin1 NOT NULL,
   `permissoes` text,
-  PRIMARY KEY (`id`, `cod_empresa`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `usuarios`
@@ -170,9 +188,9 @@ INSERT INTO `usuarios` (`id`, `cod_empresa`, `cpf`, `nome`, `data_nascimento`, `
 (8, '', '', 'Lucas Penha', '0000-00-00', NULL, '', '698dc19d489c4e4db73e28a713eab07b', NULL),
 (9, '', '', 'Silva Rodrigues', '0000-00-00', NULL, '', 'aa1bf4646de67fd9086cf6c79007026c', NULL),
 (10, '', '', 'Jucelino', '0000-00-00', NULL, '', '827ccb0eea8a706c4c34a16891f84e7b', NULL),
-(11, '189794', '08912089331', 'lucas penha rodriguees', '2003-08-12', '85987734479', 'lucasrds17@outlook.com', '01101100', 'ADMIN'),
+(19, '867164', '08912089331', 'Lucas Penha Rodrigues', '2003-08-12', '85987734479', 'lucasrds17@outlook.com', '1ce9f12efd36b0fe0623c4f81ef24202', 'ADMIN'),
 (16, '400399', '12345678901', 'luciano serra rodrigues', '1971-05-28', '85987734479', 'luciano@gmail.com', '12345678', NULL),
-(17, '855239', '08912089332', 'lucas penha rodriguees', '2003-08-12', '85987734479', 'lucas@htotmaicom.com', '01101100', 'ADMIN'),
+(18, '124246', '01912089331', 'Luciano Serra Rodrigues', '2003-08-12', '85987734479', 'lucasrds@outlook.com', '1ce9f12efd36b0fe0623c4f81ef24202', 'ADMIN'),
 (14, '627840', '06694223390', 'isabelle penha rodrigues', '1996-05-08', '85987991830', 'isabelle@outlook.com', '08051996', 'ADMIN');
 COMMIT;
 
