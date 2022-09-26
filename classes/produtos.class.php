@@ -3,10 +3,10 @@ class Produtos{
     private $pdo;
 
     public function __construct(){
-        $dbname = "crud_vendas";
+        $dbname = "crud-vendas";
         $host = "localhost";
         $user = "root";
-        $password = "";
+        $password = "Sve2022@";
         try {
             $this->pdo = new PDO("mysql:dbname=$dbname;host=$host", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
             return true;

@@ -53,9 +53,7 @@ aside {
     padding: 20px;
     text-decoration: none;
     list-style: none;
-    padding: 0;
-    padding-top: 10px;
-    
+    padding: 0;    
 }
 .menu_botoes li{
     text-decoration: none;
@@ -83,4 +81,24 @@ aside {
 
 .footer{
     padding: 0;
+}
+.dropdown{
+    box-shadow: 0px 1px 0px 0px gray;
+    width: 80%;
+    margin-left: 10px;
+    display: none;
+    color: white;
+    padding: 5px;
+}
+.dropdown ul a li{
+    line-height: 30px;
+    margin: auto;
+    color: white;
+    text-decoration: none;
+    margin-left: 8px;
+}
+.img_dropdown{
+    width: 15px;
+    padding: 5px;
+    position: absolute;
 }
