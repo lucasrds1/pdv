@@ -1,5 +1,5 @@
 <?php
-require 'classes/produtos.class.php';
+require 'classes/classes.php';
 require 'classes/login.class.php';
 $logar = new Login();
 $produtos = new Produtos();

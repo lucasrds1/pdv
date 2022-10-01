@@ -1,7 +1,7 @@
 <?php
+require "server.php";
 class Produtos{
     private $pdo;
-
     public function __construct(){
         $dbname = "crud-vendas";
         $host = "localhost";
@@ -15,14 +15,13 @@ class Produtos{
             header("Location: error.php");
         }
     }
-
     public function getAll(){
         $sql = "SELECT * FROM nota NATURAL JOIN itens_nota";
         $sql = $this->pdo->query($sql);
         if($sql->rowCount() > 0){
             return $sql->fetchAll();
         } 
-       }
+    }
    public function getAll_nota_hoje(){
     $sql = "SELECT * FROM nota WHERE dataVenda = CURDATE()";
     $sql = $this->pdo->query($sql);
@@ -161,6 +160,57 @@ class Produtos{
             $sql->bindValue(':eNota', $eNota);
             $sql->bindValue(':item', $item);
             $sql->execute();
+        }
+    }
+}
+class Clientes{
+    private $pdo;
+    public function __construct(){
+        $dbname = "crud-vendas";
+        $host = "localhost";
+        $user = "root";
+        $password = "Sve2022@";
+        try {
+            $this->pdo = new PDO("mysql:dbname=$dbname;host=$host", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            header("Location: error.php");
+        }
+    }
+    public function cadCliente($codEmpresa, $nomeCliente, $numeroCliente, $enderecoCliente, $cpfCliente, $id){
+        if($numeroCliente == '' && $enderecoCliente == '' && $cpfCliente == ''){
+            $numeroCliente = null;
+            $enderecoCliente = null;
+            $cpfCliente = null;
+        }
+        $sql = "INSERT INTO clientes
+        (cod_empresa, nome_cliente, numero_cliente, endereco_cliente, cpf_cliente, dta_ins_cli, usr_cli_id) 
+        VALUES (:codEmpresa, :nomeCliente, :numeroCliente, :enderecoCliente, :cpfCliente, SYSDATE(), (SELECT nome FROM usuarios WHERE id = :id))";
+        //var_dump($sql);exit;
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':codEmpresa', $codEmpresa);
+        $sql->bindValue(':nomeCliente', $nomeCliente);
+        $sql->bindValue(':numeroCliente', $numeroCliente);
+        $sql->bindValue(':enderecoCliente', $enderecoCliente); 
+        $sql->bindValue(':cpfCliente', $cpfCliente); 
+        $sql->bindValue(':id', $id); 
+        if($sql->execute()){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    public function getAllCli($codEmpresa){
+        if(isset($codEmpresa)){
+            $sql = "SELECT * FROM clientes
+            WHERE cod_empresa = :codEmpresa";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(':codEmpresa', $codEmpresa);
+            if($sql->execute()){
+                return $sql->fetchAll();
+            }
         }
     }
 }

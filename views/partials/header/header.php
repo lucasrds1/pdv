@@ -1,5 +1,5 @@
 <?php
-require '../../classes/produtos.class.php';
+require '../../classes/classes.php';
 require '../../classes/login.class.php';
 $logar = new Login();
 $produtos = new Produtos();
@@ -25,6 +25,8 @@ date_default_timezone_set('America/Sao_Paulo');
     <link href="../../assets/styles/style_consulta_produto/consulta_produto.css" rel="stylesheet">
     <link href="../../assets/styles/style_cadastro_cliente/cadastro_cliente.css" rel="stylesheet">
     <link href="../../assets/styles/style_botoes_avisos.css" rel="stylesheet">
+    <link href="../../assets/styles/jquery.dataTables.min.css" rel="stylesheet">
+
 </head>
 <body>
         <?php
@@ -55,8 +57,8 @@ date_default_timezone_set('America/Sao_Paulo');
                 </li>
                 <li id="btn" onclick="dropdown(2)">CLIENTES<img src="../../assets/imagens/submenu2.png" class="img_dropdown" id="img_dropdown2"></li>
                 <div class="dropdown" id="dropdown2">
-                        <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Cadastrar cliente</li></a>
-                        <a href="../../controller/consulta_nota/consulta_nota.php"><li>Pesquisar cliente</li></a>
+                        <a href="../../views/clientes/cadastro_cliente.php"><li>Cadastrar cliente</li></a>
+                        <a href="../../views/clientes/consulta_cliente.php"><li>Pesquisar cliente</li></a>
                 </div>
                 </li>
                 <li id="btn" onclick="dropdown(3)">PRODUTOS<img src="../../assets/imagens/submenu2.png" class="img_dropdown" id="img_dropdown3"></li>
