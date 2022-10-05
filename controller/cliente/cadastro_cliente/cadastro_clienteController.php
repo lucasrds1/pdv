@@ -2,7 +2,7 @@
 $nomeCliente = filter_input(INPUT_POST, 'nome_cliente', FILTER_SANITIZE_SPECIAL_CHARS);
 $numeroCliente = filter_input(INPUT_POST, 'numero_cliente', FILTER_VALIDATE_INT);
 $enderecoCliente = filter_input(INPUT_POST, 'endereco_cliente', FILTER_SANITIZE_SPECIAL_CHARS);
-$cpfCliente = filter_input(INPUT_POST, 'cpf_cliente', FILTER_SANITIZE_SPECIAL_CHARS);
+$cpfCliente = filter_input(INPUT_POST, 'cpf_cliente', FILTER_SANITIZE_NUMBER_INT);
 $submit = filter_input(INPUT_POST, 'submit');
 $insert = false;
 if($submit == 'Cadastrar'){
@@ -26,8 +26,6 @@ if($submit == 'Cadastrar'){
             if(strlen($numeroCliente) !== 11 && is_numeric($numeroCliente)){
                 echo '<p class="erro">O número deve possuir DDD e ter 11 caracteres</p>';
                 $insert = false;
-            }else{
-                $insert = true;
             }
         }
         if($insert == true && isset($_SESSION['codEmpresa']) && isset($_SESSION['id'])){

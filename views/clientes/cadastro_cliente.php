@@ -12,11 +12,11 @@ require '../../views/partials/header/header.php';
         <span class="desc_input">Campos obrigatórios* </span>
         <p>
         <label><b>Nome:*</b></label>
-        <input type="text" name="nome_cliente" placeholder="Digite o nome completo...">
+        <input type="text" minlength="4" name="nome_cliente" placeholder="Digite o nome completo...">
         </p>
         <p>
         <label><b>Número de celular:</b></label>
-        <input type="number" name="numero_cliente" placeholder="85 9 8899-1100">
+        <input type="text" name="numero_cliente" maxlength="11" placeholder="Digite o número completo com DDD sem espaços ou caracteres especiais">
         </p>
         <p>
         <label><b>Endereço</b></label>
@@ -24,7 +24,7 @@ require '../../views/partials/header/header.php';
         </p>
         <p>
         <label><b>CPF</b></label>
-        <input type="number" name="cpf_cliente" placeholder="Digite o cpf...">
+        <input type="text" maxlength="11" name="cpf_cliente"  placeholder="Digite o cpf sem espaços ou caracteres especiais...">
         </p><br>
         <div style="text-align:center">
             <input type="submit" name="submit" style="border:0;cursor:pointer; background-color: rgb(85, 85, 253);color: white; width:30%;" value="Cadastrar">

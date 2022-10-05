@@ -35,18 +35,17 @@ function dropdown(n){
     }
 }
 function dropdown1(n){
-    console.log(n)
     var menu = document.querySelector("#dropdown"+n);
     var img = document.querySelector("#img_dropdown"+n);
     if(menu.style.display == 'block'){
         menu.style.display = 'none';
         img.src = '../../assets/imagens/submenu2.png'
-        img.style.width = '25px'
+        img.style.width = '15px'
 
     }else{
         menu.style.display = 'block';
         img.src = '../../assets/imagens/submenu3.png';
-        img.style.width = '28px'
+        img.style.width = '18px'
 
     }
 }

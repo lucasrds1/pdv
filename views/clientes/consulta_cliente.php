@@ -1,8 +1,8 @@
 <?php
 require '../../views/partials/header/header.php';
 ?>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../../assets/datatables/bootstrap/css/bootstrap.min.css">
+         <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../assets/datatables/bootstrap/css/bootstrap.min.css">
     <!-- CSS personalizado --> 
     <link rel="stylesheet" href="../../assets/datatables/main.css">  
       
@@ -17,14 +17,14 @@ require '../../views/partials/header/header.php';
 
 <div class="container_cadastro">
 <div class="cabecalho_index">
-       <span>CONSULTA DE CLIENTES</span>
+       <span>CLIENTES</span>
 </div>
 <div class="form_consulta">
 <div class="container">
     <div class="row">
-            <div class="col-lg-12">
-                <div class="table-responsive">        
-                    <table id="tabela_consulta" style="font-size:13px" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <div class="col-lg-12">
+    <div class="table-responsive">        
+    <table id="tabela_consulta" style="font-size:13px" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>Ações</th>
@@ -59,7 +59,8 @@ foreach($dados as $dado){
     </tbody>
 
 </table>
-</div>
+</div></div></div></div></div>
+   
     <!-- jQuery, Popper.js, Bootstrap JS -->
     <script src="../../assets/datatables/jquery/jquery-3.3.1.min.js"></script>
     <script src="../../assets/datatables/popper/popper.min.js"></script>

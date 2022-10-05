@@ -183,7 +183,14 @@ class Clientes{
             $numeroCliente = null;
             $enderecoCliente = null;
             $cpfCliente = null;
+        }else{
+            $numeroCliente = addslashes(trim($numeroCliente));
+            $enderecoCliente = addslashes(ucwords($enderecoCliente));
+            $cpfCliente = addslashes(trim($cpfCliente));
         }
+        $nomeCliente = addslashes(trim(ucwords($nomeCliente)));
+        
+
         $sql = "INSERT INTO clientes
         (cod_empresa, nome_cliente, numero_cliente, endereco_cliente, cpf_cliente, dta_ins_cli, usr_cli_id) 
         VALUES (:codEmpresa, :nomeCliente, :numeroCliente, :enderecoCliente, :cpfCliente, SYSDATE(), (SELECT nome FROM usuarios WHERE id = :id))";
