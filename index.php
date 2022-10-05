@@ -4,10 +4,9 @@ require 'header_index.php';
 //<input type='reset'  class='dt-button btn_yellow' value='".TRANS('voltar')."' name='cancelar' onClick=\"javascript:history.back()\"></TD>
 ?>
 <div class="container_consulta"> 
-    <div class="cabecalho" style="margin-right: 110px">
-        <h1>VENDAS - INICIO</h1>
+    <div class="cabecalho_index">
+       <span>INÍCIO</span>
     </div>
-    <hr>
     <?php
        if(isset($id) && isset($_SESSION['codEmpresa'])){
             $dados = $logar->getNomeById($id);

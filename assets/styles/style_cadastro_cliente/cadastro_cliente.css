@@ -5,8 +5,9 @@
 .formulario{
     width: 50%;
     margin: auto;
-    padding: 40px;
+    padding: 20px;
     background-color: white;
+    margin-top: 8px;
 }
 .formulario form label{
     font-size: 16px;

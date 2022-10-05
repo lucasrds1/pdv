@@ -2,11 +2,10 @@
 require '../../views/partials/header/header.php';
 ?>
 <div class="container_cadastro">
-<div class="cabecalho">
-    <h1>CADASTRAR CLIENTE</h1>
+<div class="cabecalho_index">
+       <span>CADASTRO DE CLIENTES</span>
 </div>
-<hr>
-<div class="form_cadastro">
+<div>
     <div class="formulario">
     <form method="POST">
         <h1 align="center">Formulário de cadastro</h1>
