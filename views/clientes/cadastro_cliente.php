@@ -5,6 +5,9 @@ require '../../views/partials/header/header.php';
 <div class="cabecalho_index">
        <span>CADASTRO DE CLIENTES</span>
 </div>
+<br>
+<button class="botao_consultar" onclick="location.href= 'consulta_cliente.php' ">CONSULTAR CLIENTE</button>
+
 <div>
     <div class="formulario">
     <form method="POST">
@@ -27,7 +30,7 @@ require '../../views/partials/header/header.php';
         <input type="text" maxlength="11" name="cpf_cliente"  placeholder="Digite o cpf sem espaços ou caracteres especiais...">
         </p><br>
         <div style="text-align:center">
-            <input type="submit" name="submit" style="border:0;cursor:pointer; background-color: rgb(85, 85, 253);color: white; width:30%;" value="Cadastrar">
+            <input type="submit" name="submit" class="botao_cadastrar" style="width:30%" value="Cadastrar">
         </div>
     </form>
     <?php

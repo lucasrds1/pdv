@@ -13,3 +13,55 @@
 .vazioTabela{
     color:gray;
 }
+.botao_adicionar{
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(32, 151, 32);
+    color: white;
+    margin-left: 28px;
+    font-size: 12px;
+}
+.botao_adicionar:hover{
+    background-color: green;
+}
+.botao_voltar{
+    outline: 0;
+    border: 0;
+    box-shadow: 0px 0px 0px 1px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(253, 235, 74);
+    color: black;
+    width: 80px;
+    margin-left: 28px;
+    font-size: 12px;
+
+}
+.botao_consultar{
+    outline: 0;
+    border: 0;
+    box-shadow: 0px 0px 0px 1px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(119, 95, 250);
+    color: white;
+    margin-left: 28px;
+    font-size: 12px;
+}
+.botao_consultar:hover{
+    background-color: rgb(39, 39, 252);
+}
+.botao_voltar:hover{
+    background-color: rgb(248, 226, 26);
+}
+.botao_cadastrar{
+    border:0;
+    cursor:pointer;
+    background-color: rgb(32, 151, 32);
+    color: white;
+}
+.botao_cadastrar:hover{
+    background-color: green;
+}

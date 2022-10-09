@@ -5,8 +5,8 @@ $logar = new Login();
 $produtos = new Produtos();
 
 $sessao = $_SESSION['id'];
-$logar->verificar($sessao);
-$id = $sessao;
+$logar->verificar($_SESSION['id']);
+$id = $_SESSION['id'];
 
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
@@ -42,7 +42,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <aside>
     <div class="container_menu">
         <!-- <a href="../../index.php"><h1>MENU</h1></a> -->
-        <div class="menu">
+        <div class="menu_header">
             <div class="oi_login"><span><?=$nome?></span><br>
                 <a href="../../deslogar.php" class="des">Deslogar</a>
         </div>
@@ -55,11 +55,7 @@ date_default_timezone_set('America/Sao_Paulo');
                         <a href="../../controller/consulta_nota/consulta_nota.php"><li>Pesquisar venda</li></a>
                 </div>
                 </li>
-                <li id="btn" onclick="dropdown(2)">CLIENTES<img src="../../assets/imagens/submenu2.png" style="width:15px;padding:5px;position: absolute;" id="img_dropdown2"></li>
-                <div class="dropdown" id="dropdown2">
-                        <a href="../../views/clientes/cadastro_cliente.php"><li>Cadastrar cliente</li></a>
-                        <a href="../../views/clientes/consulta_cliente.php"><li>Pesquisar cliente</li></a>
-                </div>
+                <a href="../../views/clientes/consulta_cliente.php"><li>CLIENTES</li></a>
                 </li>
                 <li id="btn" onclick="dropdown(3)">PRODUTOS<img src="../../assets/imagens/submenu2.png" style="width:15px;padding:5px;position: absolute;" id="img_dropdown3"></li>
                 <div class="dropdown" id="dropdown3">
@@ -77,7 +73,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 $permissao = $logar->getPermissaoById($_SESSION['id']);
                 if($permissao['permissoes'] == 'ADMIN'){
                 ?>
-                <li id="btn" onclick="dropdown1(5)">EMPRESA<img src="../../assets/imagens/submenu2.png" style="width:15px;padding:5px;position: absolute;" id="img_dropdown5"></li>
+                <li id="btn" onclick="dropdown(5)">EMPRESA<img src="../../assets/imagens/submenu2.png" style="width:15px;padding:5px;position: absolute;" id="img_dropdown5"></li>
                 <div class="dropdown" id="dropdown5">
                         <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Sua empresa</li></a>
                         <a href="../../controller/consulta_nota/consulta_nota.php"><li>Cadastrar funcionário</li></a>
@@ -92,9 +88,6 @@ date_default_timezone_set('America/Sao_Paulo');
         </div>
     </div>
     <br>
-    <?php
-        echo '<div style="color:gray;font-size:10px;padding:5px;text-align: center">Criado por LPSolution - Desenvolvimento de sistemas</div>';
-    ?>
 </aside>
 <div class="container_consulta">
 <script src="../../assets/js/script.js"></script>

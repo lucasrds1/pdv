@@ -1,5 +1,5 @@
 <?php
-require '../../views/partials/header/header.php';
+require '../../views/partials/header/header_dt.php';
 ?>
          <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../../assets/datatables/bootstrap/css/bootstrap.min.css">
@@ -19,6 +19,9 @@ require '../../views/partials/header/header.php';
 <div class="cabecalho_index">
        <span>CLIENTES</span>
 </div>
+<br>
+<button class="botao_adicionar" onclick="location.href= 'cadastro_cliente.php' ">ADICIONAR CLIENTE</button>
+<hr>
 <div class="form_consulta">
 <div class="container">
     <div class="row">
@@ -27,7 +30,7 @@ require '../../views/partials/header/header.php';
     <table id="tabela_consulta" style="font-size:13px" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
-            <th>Ações</th>
+            <th class="not-export-col">Ações</th>
             <th>Nome</th>
             <th>Numero</th>    
             <th>Endereço</th>
@@ -45,7 +48,10 @@ foreach($dados as $dado){
 ?>
 
         <tr>
-            <td></td>
+            <td class="not-export-col">
+                <a href="edita_cliente.php?action=editar&id_cli=<?=$dado['id_cliente']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
+                <img src="../../assets/imagens/excluir.png" width="25px" title="Excluir">
+            </td>
             <td><?=$dado['nome_cliente']?></td>
             <td><?=$dado['numero_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['numero_cliente']?></td>
             <td><?=$dado['endereco_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['endereco_cliente']?></td>
@@ -102,19 +108,28 @@ $(document).ready(function() {
 				extend:    'excelHtml5',
 				text:      '<i class="fas fa-file-excel">&nbsp;Excel</i> ',
 				titleAttr: 'Exportar para Excel',
-				className: 'btn btn-success'
+				className: 'btn btn-success',
+                exportOptions: {
+                    columns: [1,2,3,4,5,6]
+                }
 			},
 			{
 				extend:    'pdfHtml5',
 				text:      '<i class="fas fa-file-pdf">&nbsp;PDF</i> ',
 				titleAttr: 'Exportar para PDF',
-				className: 'btn btn-danger'
+				className: 'btn btn-danger',
+                exportOptions: {
+                    columns: [1,2,3,4,5,6]
+                }
 			},
 			{
 				extend:    'print',
 				text:      '<i class="fa fa-print">&nbsp;Imprimir</i> ',
 				titleAttr: 'Imprimir',
-				className: 'btn btn-info'
+				className: 'btn btn-info',
+                exportOptions: {
+                    columns: [1,2,3,4,5,6]
+                }
 			},
 		]	        
     });     

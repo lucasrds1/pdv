@@ -6,7 +6,7 @@ class Login{
         $dbname = "crud-vendas";
         $host = "localhost";
         $user = "root";
-        $password = "Sve2022@";
+        $password = "";
         try {
             $this->pdo = new PDO("mysql:dbname=$dbname;host=$host", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
             return true;

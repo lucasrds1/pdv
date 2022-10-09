@@ -4,12 +4,10 @@ body{
 aside {
     position:fixed;
     width: 100%;
-    
 }
 
 .container_menu{
     position:fixed;
-    width: 100%;
     background-color: black;
     height: 100vh;
     width: 18%;
@@ -32,19 +30,19 @@ aside {
 .oi_login{
     text-align: center;
 }
-.menu{
+.menu_header{
     line-height: 25px;
 }
-.menu .des{
+.menu_header .des{
     background-color: white;
     text-decoration: none;
     color: black;
     padding: 10px;
 }
-.menu .des:hover{
+.menu_header .des:hover{
     background-color: darkgray;
 }
-.menu .des:active{
+.menu_header .des:active{
     background-color: gray;
 }
 .menu_botoes ul{
@@ -72,10 +70,10 @@ aside {
     box-shadow: 0px 0px 1px;
 }
 
-.menu li:hover{
+.menu_header li:hover{
     background-color:rgb(53, 53, 53)
 }
-.menu li:active{
+.menu_header li:active{
     background-color: rgb(89, 89, 89);
 }
 
