@@ -197,21 +197,30 @@ class Clientes{
         $nomeCliente = addslashes(trim(ucwords($nomeCliente)));
         
     //if($submit == 'Cadastrar'){
-        if($this->valCpfCliente($codEmpresa, $cpfCliente) == false){
             if($submit == 'Cadastrar'){
-                $sql = "INSERT INTO clientes
-                (cod_empresa, nome_cliente, numero_cliente, endereco_cliente, cpf_cliente, dta_ins_cli, usr_cli_id) 
-                VALUES (:codEmpresa, :nomeCliente, :numeroCliente, :enderecoCliente, :cpfCliente, SYSDATE(), (SELECT nome FROM usuarios WHERE id = :id))"; 
-            }elseif($submit == 'Editar' && $idCliente !== ''){
+                if($this->valCpfCliente($codEmpresa, $cpfCliente, $submit) == false){
+                    $sql = "INSERT INTO clientes
+                    (cod_empresa, nome_cliente, numero_cliente, endereco_cliente, cpf_cliente, dta_ins_cli, usr_cli_id) 
+                    VALUES (:codEmpresa, :nomeCliente, :numeroCliente, :enderecoCliente, :cpfCliente, CURRENT_TIMESTAMP, (SELECT nome FROM usuarios WHERE id = :id))";     
+                }else{
+                    echo '<p class="erro">Cpf já existe no sistema!</p>';
+                    return false;
+                }
+                 }elseif($submit == 'Editar' && $idCliente !== ''){
+                    if($this->valCpfCliente($codEmpresa, $cpfCliente, $submit, $idCliente) == false){ 
                 $sql = "UPDATE clientes SET 
                         nome_cliente = :nomeCliente,
                         numero_cliente = :numeroCliente, 
                         endereco_cliente = :enderecoCliente, 
                         cpf_cliente = :cpfCliente,
-                        dta_ins_cli = SYSDATE(), 
+                        dta_ins_cli = CURRENT_TIMESTAMP, 
                         usr_cli_id = (SELECT nome FROM usuarios WHERE id = :id) 
                         WHERE cod_empresa = :codEmpresa AND id_cliente = :idCliente";
+            }else{
+                echo '<p class="erro">Cpf já existe no sistema!</p>';
+                return false;
             }
+        }
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(':codEmpresa', $codEmpresa);
             $sql->bindValue(':nomeCliente', $nomeCliente);
@@ -221,15 +230,25 @@ class Clientes{
             $sql->bindValue(':id', $id); 
             $submit == 'Editar' ? $sql->bindValue(':idCliente', $idCliente) : '';
             if($sql->execute()){
-                return true;
+            echo "<script>location.href= 'consulta_cliente.php'</script>";
+            $_SESSION['aviso_edicao'] = '<h4 class="sucesso"><img src="../../assets/imagens/sucesso.png" width="40px" style="padding:5px">Cliente <b>editado</b> com sucesso!</h4>';
+                //return true;
             }else{
                 return false;
-            }
-        }else{
-            echo '<p class="erro">Cpf já existe no sistema!</p>';
-            return false;
         }
    // }
+    }
+    public function excluirCli($codEmpresa, $idCliente){
+        $sql = "DELETE FROM clientes WHERE cod_empresa = :codEmpresa AND id_cliente = :idCliente";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':codEmpresa', $codEmpresa);
+        $sql->bindValue(':idCliente', $idCliente);
+        if($sql->execute()){
+            echo "<script>location.href= 'consulta_cliente.php'</script>";
+            $_SESSION['aviso_edicao'] = '<h4 class="sucesso"><img src="../../assets/imagens/sucesso.png" width="40px" style="padding:5px">Cliente <b>excluído</b> com sucesso!</h4>';
+        }else{
+            return false;
+        }
     }
     public function getAllCli($codEmpresa){
         if(isset($codEmpresa)){
@@ -252,20 +271,35 @@ class Clientes{
             return $sql->fetchAll();
         }
     }
-    public function valCpfCliente($codEmpresa, $cpfCliente){
+    public function valCpfCliente($codEmpresa, $cpfCliente, $submit, $idCliente = ''){
         if($cpfCliente == null){
             return false;
         }else{
-            $sql = "SELECT cpf_cliente FROM clientes WHERE cod_empresa = :codEmpresa AND cpf_cliente = :cpfCliente";
-            $sql = $this->pdo->prepare($sql);
-            $sql->bindValue(':codEmpresa', $codEmpresa);
-            $sql->bindValue(':cpfCliente', $cpfCliente);
-            $sql->execute();
-            if($sql->rowCount() > 0){
-                return true;
-            }else{
-                return false;
+            if($submit == 'Cadastrar'){
+                $sql = "SELECT cpf_cliente FROM clientes WHERE cod_empresa = :codEmpresa AND cpf_cliente = :cpfCliente";
+                $sql = $this->pdo->prepare($sql);
+                $sql->bindValue(':codEmpresa', $codEmpresa);
+                $sql->bindValue(':cpfCliente', $cpfCliente);
+                $sql->execute();
+                if($sql->rowCount() > 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }elseif($submit == 'Editar'){
+                $sql = "SELECT cpf_cliente FROM clientes WHERE cod_empresa = :codEmpresa AND cpf_cliente = :cpfCliente AND id_cliente <> :idCliente";
+                $sql = $this->pdo->prepare($sql);
+                $sql->bindValue(':codEmpresa', $codEmpresa);
+                $sql->bindValue(':cpfCliente', $cpfCliente);
+                $sql->bindValue(':idCliente', $idCliente);
+                $sql->execute();
+                if($sql->rowCount() > 0){
+                    return true;
+                }else{
+                    return false;
+                }
             }
+            
         }
     }
 }

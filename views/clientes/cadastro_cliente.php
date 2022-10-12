@@ -34,7 +34,7 @@ require '../../views/partials/header/header.php';
         </div>
     </form>
     <?php
-    require "../../controller/cliente/cadastro_cliente/cadastro_clienteController.php";
+    require "../../controller/cliente/cadastro_cliente/cadastro_edit_clienteController.php";
     ?>
     </div>
 </div>

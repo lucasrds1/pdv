@@ -1,5 +1,6 @@
 <?php
-$idCliente = $_GET['id_cli'];
+isset($_GET['id_cli']) ? $idCliente = $_GET['id_cli'] : $idCliente = null;
+isset($_POST['checkcpf']) ? $checkcpf = $_POST['checkcpf'] : $checkcpf = null;
 $nomeCliente = filter_input(INPUT_POST, 'nome_cliente', FILTER_SANITIZE_SPECIAL_CHARS);
 $numeroCliente = filter_input(INPUT_POST, 'numero_cliente', FILTER_VALIDATE_INT);
 $enderecoCliente = filter_input(INPUT_POST, 'endereco_cliente', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -33,7 +34,7 @@ if($submit == 'Cadastrar' || $submit == 'Editar'){
             // }
             if($dados == true){
                 if($submit == 'Cadastrar'){
-                    echo '<p class="sucesso">Cliente cadastrado com sucesso!</p>';
+                    echo '<h4 class="sucesso"><img src="../../assets/imagens/sucesso.png" width="40px" style="padding:5px">Cliente <b>editado</b> com sucesso!</h4>';
                 }elseif($submit == 'Editar'){
                     echo '<p class="sucesso">Cliente editado com sucesso!</p>';
                 }

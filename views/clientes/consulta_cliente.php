@@ -1,19 +1,7 @@
 <?php
 require '../../views/partials/header/header_dt.php';
 ?>
-         <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../../assets/datatables/bootstrap/css/bootstrap.min.css">
-    <!-- CSS personalizado --> 
-    <link rel="stylesheet" href="../../assets/datatables/main.css">  
-      
-    <!--datables CSS básico-->
-    <link rel="stylesheet" type="text/css" href="../../assets/datatables/datatables.min.css"/>
-    <!--datables estilo bootstrap 4 CSS-->  
-    <link rel="stylesheet"  type="text/css" href="../../assets/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
-           
-    <!--font awesome con CDN-->  
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
-      
+
 
 <div class="container_cadastro">
 <div class="cabecalho_index">
@@ -23,6 +11,12 @@ require '../../views/partials/header/header_dt.php';
 <button class="botao_adicionar" onclick="location.href= 'cadastro_cliente.php' ">ADICIONAR CLIENTE</button>
 <hr>
 <div class="form_consulta">
+    <?php
+    if(isset($_SESSION['aviso_edicao'])){
+        echo $_SESSION['aviso_edicao'].'<br>';
+        unset($_SESSION['aviso_edicao']);
+    }
+    ?>
 <div class="container">
     <div class="row">
     <div class="col-lg-12">
@@ -50,13 +44,13 @@ foreach($dados as $dado){
         <tr>
             <td class="not-export-col">
                 <a href="edita_cliente.php?action=editar&id_cli=<?=$dado['id_cliente']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
-                <img src="../../assets/imagens/excluir.png" width="25px" title="Excluir">
+                <a href="../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_cliente']?>"><img src="../../assets/imagens/excluir.png" width="25px" title="Excluir"></a>
             </td>
             <td><?=$dado['nome_cliente']?></td>
             <td><?=$dado['numero_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['numero_cliente']?></td>
             <td><?=$dado['endereco_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['endereco_cliente']?></td>
             <td><?=$dado['cpf_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['cpf_cliente']?></td>
-            <td><?php echo date('d/m/Y', strtotime($dado['dta_ins_cli']))?></td>
+            <td><?php echo date('d/m/Y - H:i:s', strtotime($dado['dta_ins_cli']))?></td>
             <td><?=$dado['usr_cli_id']?></td>
         </tr>
 <?php
@@ -131,7 +125,8 @@ $(document).ready(function() {
                     columns: [1,2,3,4,5,6]
                 }
 			},
-		]	        
+		],
+        order: [[5, 'desc']],  
     });     
 });
 </script>

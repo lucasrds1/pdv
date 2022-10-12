@@ -49,3 +49,10 @@ function dropdown1(n){
 
     }
 }
+function checkinput(){
+    if(document.querySelector("#check").checked){
+        document.querySelector("#cpfCli").style.display = 'block';
+    }else{
+        document.querySelector("#cpfCli").style.display = 'none';
+    }
+}

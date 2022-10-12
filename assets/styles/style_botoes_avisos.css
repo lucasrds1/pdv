@@ -1,6 +1,13 @@
 .sucesso{
-    color: green;
+    background-color: rgb(3, 224, 3);
+    /* color: rgb(3, 224, 3); */
+    width: 40%;
+    color: white;
     text-align: center;
+    margin: auto;
+    padding: 5px;
+    box-shadow: 2px 2px 1px grey;
+    border-radius: 10px;
 }
 .erro{
     color: red;
@@ -15,16 +22,16 @@
 }
 .botao_adicionar{
     outline: 0;
-    border: 0;
+    border: 1px solid gray;
     cursor: pointer;
     padding: 10px;
-    background-color: rgb(32, 151, 32);
+    background-color: rgb(63, 184, 63);
     color: white;
     margin-left: 28px;
     font-size: 12px;
 }
 .botao_adicionar:hover{
-    background-color: green;
+    background-color: rgb(21, 131, 21);
 }
 .botao_voltar{
     outline: 0;
@@ -42,22 +49,22 @@
 .botao_consultar{
     outline: 0;
     border: 0;
-    box-shadow: 0px 0px 0px 1px;
+    border: 1px solid gray;
     cursor: pointer;
     padding: 10px;
-    background-color: rgb(119, 95, 250);
+    background-color: rgb(90, 61, 250);
     color: white;
     margin-left: 28px;
     font-size: 12px;
 }
 .botao_consultar:hover{
-    background-color: rgb(39, 39, 252);
+    background-color: rgb(60, 60, 187);
 }
 .botao_voltar:hover{
     background-color: rgb(248, 226, 26);
 }
 .botao_cadastrar{
-    border:0;
+    border: 1px solid gray;
     cursor:pointer;
     background-color: rgb(32, 151, 32);
     color: white;

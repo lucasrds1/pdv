@@ -19,6 +19,19 @@ date_default_timezone_set('America/Sao_Paulo');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Vendas</title>
+             <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../assets/datatables/bootstrap/css/bootstrap.min.css">
+    <!-- CSS personalizado --> 
+    <link rel="stylesheet" href="../../assets/datatables/main.css">  
+      
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../../assets/datatables/datatables.min.css"/>
+    <!--datables estilo bootstrap 4 CSS-->  
+    <link rel="stylesheet"  type="text/css" href="../../assets/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+           
+    <!--font awesome con CDN-->  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
+      
     <link href="../../assets/styles/style_header_footer/header.css" rel="stylesheet">
     <link href="../../assets/styles/style_header_footer/footer.css" rel="stylesheet">
     <link href="../../assets/styles/style_cadastro_produto/cadastro_produto.css" rel="stylesheet">
@@ -49,12 +62,8 @@ date_default_timezone_set('America/Sao_Paulo');
         <div class="menu_botoes">
             <ul>
                 <a href="../../index.php"><li>Inicio</li></a>
-                <li id="btn" onclick="dropdown1(1)">VENDAS<img src="../../assets/imagens/submenu2.png" style="width:25px;padding:5px;position: absolute;" id="img_dropdown1"></li>
-                <div class="dropdown" id="dropdown1">
-                        <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Cadastrar venda</li></a>
-                        <a href="../../controller/consulta_nota/consulta_nota.php"><li>Pesquisar venda</li></a>
-                </div>
-                </li>
+                <a href="../../views/clientes/consulta_cliente.php"><li style="background-color:green">VENDER</li></a>
+                 <li id="btn" onclick="dropdown(1)">REGISTRO DE VENDAS</li>
                 <a href="../../views/clientes/consulta_cliente.php"><li>CLIENTES</li></a>
                 </li>
                 <li id="btn" onclick="dropdown1(3)">PRODUTOS<img src="../../assets/imagens/submenu2.png" style="width:25px;padding:5px;position: absolute;" id="img_dropdown3"></li>

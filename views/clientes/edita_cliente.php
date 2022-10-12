@@ -34,17 +34,24 @@ require '../../controller/cliente/edita_cliente/permissoes_edita_clienteControll
         <input type="text" name="endereco_cliente" value="<?=$dado['endereco_cliente']?>">
         </p>
         <p>
-        <label><b>CPF</b></label>
-        <input type="text" maxlength="11" name="cpf_cliente" value="<?=$dado['cpf_cliente']?>">
-        </p><br>
+        <label style="font-size: 17px"><input type="checkbox" name="checkcpf" id="check" style="width:15px;" onclick="checkinput()">Editar CPF</label>
+        <div id="cpfCli" style="display:none">
+        <!-- <label style="font-size: 17px"><input type="checkbox" name="checkcpf" id="check" style="width:15px;" onclick="checkinput()">Editar CPF</label> -->
+            <label><b>CPF</b></label>
+        <input type="text" maxlength="11" id="cpf" name="cpf_cliente"  value="<?=$dado['cpf_cliente']?>" >
+        </p>
+        </div><br>
         <div style="text-align:center">
             <input type="submit" name="submit" class="botao_cadastrar" style="width:30%" value="Editar">
         </div>
     </form>
     <?php
     }}
-    require "../../controller/cliente/cadastro_cliente/cadastro_clienteController.php";
+    require "../../controller/cliente/cadastro_cliente/cadastro_edit_clienteController.php";
     ?>
     </div>
 </div>
 </div>
+<script>
+    
+</script>
