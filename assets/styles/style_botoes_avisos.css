@@ -6,12 +6,21 @@
     text-align: center;
     margin: auto;
     padding: 5px;
-    box-shadow: 2px 2px 1px grey;
     border-radius: 10px;
 }
 .erro{
-    color: red;
+    background-color: red;
+    color: white;
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px;
+    margin: auto;
     text-align: center;
+    /* background-image: url("../../assets/imagens/avisos/erro.png");
+    background-position: left;
+    background-size: 30px;
+    background-repeat: no-repeat, no-repeat;
+    background-origin: content-box; */
 }
 .desc_input{
     font-size: 10px;

@@ -1,8 +1,6 @@
 <?php
 require '../../views/partials/header/header_dt.php';
 ?>
-
-
 <div class="container_cadastro">
 <div class="cabecalho_index">
        <span>CLIENTES</span>
@@ -15,6 +13,10 @@ require '../../views/partials/header/header_dt.php';
     if(isset($_SESSION['aviso_edicao'])){
         echo $_SESSION['aviso_edicao'].'<br>';
         unset($_SESSION['aviso_edicao']);
+    }
+    if(isset($_SESSION['aviso'])){
+        echo $_SESSION['aviso'];
+        unset($_SESSION['aviso']);
     }
     ?>
 <div class="container">
@@ -44,7 +46,7 @@ foreach($dados as $dado){
         <tr>
             <td class="not-export-col">
                 <a href="edita_cliente.php?action=editar&id_cli=<?=$dado['id_cliente']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
-                <a href="../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_cliente']?>"><img src="../../assets/imagens/excluir.png" width="25px" title="Excluir"></a>
+                <img onclick="excluir('../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_cliente']?>')" src="../../assets/imagens/excluir.png" style="width: 22px;cursor:pointer" title="Excluir"></a>
             </td>
             <td><?=$dado['nome_cliente']?></td>
             <td><?=$dado['numero_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['numero_cliente']?></td>
@@ -60,12 +62,15 @@ foreach($dados as $dado){
 
 </table>
 </div></div></div></div></div>
-   
+    
+    <!-- sweetalert2 -->
+    <script src="../../assets/swalert/sweetalert2.js"></script>
+
     <!-- jQuery, Popper.js, Bootstrap JS -->
     <script src="../../assets/datatables/jquery/jquery-3.3.1.min.js"></script>
     <script src="../../assets/datatables/popper/popper.min.js"></script>
     <script src="../../assets/datatables/bootstrap/js/bootstrap.min.js"></script>
-      
+    <script src="../../assets/js/script.js"></script>
     <!-- datatables JS -->
     <script type="text/javascript" src="../../assets/datatables/datatables.min.js"></script>    
      
@@ -129,6 +134,7 @@ $(document).ready(function() {
         order: [[5, 'desc']],  
     });     
 });
+
 </script>
 
 

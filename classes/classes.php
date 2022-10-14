@@ -230,22 +230,23 @@ class Clientes{
             $sql->bindValue(':id', $id); 
             $submit == 'Editar' ? $sql->bindValue(':idCliente', $idCliente) : '';
             if($sql->execute()){
-            echo "<script>location.href= 'consulta_cliente.php'</script>";
-            $_SESSION['aviso_edicao'] = '<h4 class="sucesso"><img src="../../assets/imagens/sucesso.png" width="40px" style="padding:5px">Cliente <b>editado</b> com sucesso!</h4>';
-                //return true;
+                $acao = $submit == 'Cadastrar' ? 'cadastrado' : 'editado';
+            // echo "<script>location.href= 'consulta_cliente.php'</script>";
+            // $_SESSION['aviso_edicao'] = '<h4 class="sucesso"><img src="../../assets/imagens/avisos/sucesso.png" width="40px" style="padding:5px">Cliente <b>cadastrado</b> com sucesso!</h4>';
+            //     //return true;
+            echo avisoCadEdit($acao, "../../views/clientes/consulta_cliente.php");
             }else{
                 return false;
-        }
+            }
    // }
-    }
+    } 
     public function excluirCli($codEmpresa, $idCliente){
         $sql = "DELETE FROM clientes WHERE cod_empresa = :codEmpresa AND id_cliente = :idCliente";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':codEmpresa', $codEmpresa);
         $sql->bindValue(':idCliente', $idCliente);
         if($sql->execute()){
-            echo "<script>location.href= 'consulta_cliente.php'</script>";
-            $_SESSION['aviso_edicao'] = '<h4 class="sucesso"><img src="../../assets/imagens/sucesso.png" width="40px" style="padding:5px">Cliente <b>excluído</b> com sucesso!</h4>';
+            return true;
         }else{
             return false;
         }
@@ -302,4 +303,10 @@ class Clientes{
             
         }
     }
+}
+function avisoCadEdit($acao, $link){
+    return "<script src='../../assets/swalert/sweetalert2.js'></script><script>avisoCadEdit('".$acao."', '".$link."')</script>";
+}
+function excluirCliJS($link){
+    return "<script src='../../assets/swalert/sweetalert2.js'></script><script>excluir(".$link.")</script>";
 }

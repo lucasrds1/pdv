@@ -56,3 +56,40 @@ function checkinput(){
         document.querySelector("#cpfCli").style.display = 'none';
     }
 }
+function confirma(desc, link){
+    var con = confirm(desc);
+    if(con == true){
+        location.href = link;
+    }
+}
+geraAlert()
+function avisoCadEdit(acao, link){
+    Swal.fire({
+        icon: 'success',
+        title: 'Registro '+acao+' com sucesso!',
+        text: 'Redirecionando para a tela de consulta...',
+        showConfirmButton: true,
+    })
+    .then(e=>{
+        location.href=link;
+    })
+    .catch(e=>{
+        
+    })
+}
+function excluir(link){
+    Swal.fire({
+        title: 'Deseja excluir esse registro?',
+        text: "Você não será capaz de reverter isso!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+        location.href=link
+        }
+      })
+}

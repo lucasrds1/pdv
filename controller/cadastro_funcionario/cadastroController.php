@@ -16,17 +16,17 @@ if($submit == 'Cadastrar'){
             if(strlen($cpf) == 11 && is_numeric($cpf)){
                 $insert = true;
             }else{
-                echo '<p class="erro">O cpf deve ter pelo menos 11 caracteres</p>';
+                echo '<p class="erro">O cpf deve ter pelo menos 11 caracteres!</p>';
                 $insert = false;
             }
             if(strlen($senha) < 8){
-                echo '<p class="erro">A senha deve ter pelo menos mais de 8 caracteres</p>';
+                echo '<p class="erro">A senha deve ter pelo menos mais de 8 caracteres!</p>';
                 $insert = false;
             }else{
                 $insert = true;
             }
             if(strlen($numero) !== 11 && is_numeric($numero)){
-                echo '<p class="erro">O número deve possuir DDD e ter 11 caracteres</p>';
+                echo '<p class="erro">O número deve possuir DDD e ter 11 caracteres!</p>';
                 $insert = false;
             }else{
                 $insert = true;

@@ -27,16 +27,19 @@ require '../../views/partials/header/header.php';
         </p>
         <p>
         <label><b>CPF</b></label>
-        <input type="text" maxlength="11" name="cpf_cliente"  placeholder="Digite o cpf sem espaços ou caracteres especiais...">
-        </p><br>
+        <input type="text" maxlength="11" minlength="11" name="cpf_cliente"  placeholder="Digite o cpf sem espaços ou caracteres especiais...">
+        </p>
+        <?php
+        require "../../controller/cliente/cadastro_cliente/cadastro_edit_clienteController.php";
+        ?>
+        <br>
         <div style="text-align:center">
             <input type="submit" name="submit" class="botao_cadastrar" style="width:30%" value="Cadastrar">
         </div>
     </form>
-    <?php
-    require "../../controller/cliente/cadastro_cliente/cadastro_edit_clienteController.php";
-    ?>
+    
     </div>
 </div>
 </div>
-
+<!-- sweetalert2 -->
+<script src="../../assets/swalert/sweetalert2.js"></script>
