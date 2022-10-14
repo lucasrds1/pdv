@@ -62,7 +62,6 @@ function confirma(desc, link){
         location.href = link;
     }
 }
-geraAlert()
 function avisoCadEdit(acao, link){
     Swal.fire({
         icon: 'success',
