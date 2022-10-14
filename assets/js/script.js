@@ -70,7 +70,11 @@ function avisoCadEdit(acao, link){
         showConfirmButton: true,
     })
     .then(e=>{
+        if(acao == 'excluído'){
+
+        }else{
         location.href=link;
+        }
     })
     .catch(e=>{
         
