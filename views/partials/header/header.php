@@ -54,12 +54,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 <li id="btn" onclick="dropdown(1)">REGISTRO DE VENDAS</li>
                 
                 <a href="../../views/clientes/consulta_cliente.php"><li>CLIENTES</li></a>
-                <li id="btn" onclick="dropdown(3)">PRODUTOS<img src="../../assets/imagens/submenu2.png" style="width:15px;padding:5px;position: absolute;" id="img_dropdown3"></li>
-                <div class="dropdown" id="dropdown3">
-                        <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Cadastrar produto</li></a>
-                        <a href="../../controller/consulta_nota/consulta_nota.php"><li>Pesquisar produtos</li></a>
-                </div>
-                </li>
+                <a href="../../views/estoque/estoque.php"><li>ESTOQUE</li></a>
                 <li id="btn" onclick="dropdown(4)">FORNECEDORES<img src="../../assets/imagens/submenu2.png" style="width:15px;padding:5px;position: absolute;" id="img_dropdown4"></li>
                 <div class="dropdown" id="dropdown4">
                         <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Cadastrar fornecededor</li></a>

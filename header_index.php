@@ -52,8 +52,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 </li>
                 <a href="../../views/clientes/consulta_cliente.php"><li>CLIENTES</li></a>
                 </li>
-                <li>Estoque</li>
-                </li>
+                <a href="../../views/estoque/estoque.php"><li>ESTOQUE</li></a>
                 <li id="btn" onclick="dropdown(4)">FORNECEDORES<img src="../../assets/imagens/submenu2.png" class="img_dropdown" id="img_dropdown4"></li>
                 <div class="dropdown" id="dropdown4">
                         <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Cadastrar fornecededor</li></a>
