@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.30, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: crud-vendas
 -- ------------------------------------------------------
--- Server version	8.0.30-0ubuntu0.22.04.1
+-- Server version	5.7.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,8 +23,8 @@ DROP TABLE IF EXISTS `clientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clientes` (
-  `id_cliente` int NOT NULL AUTO_INCREMENT,
-  `cod_empresa` int NOT NULL,
+  `id_cliente` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_empresa` int(11) NOT NULL,
   `nome_cliente` varchar(100) NOT NULL,
   `numero_cliente` varchar(13) DEFAULT NULL,
   `endereco_cliente` varchar(100) DEFAULT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `clientes` (
   `dta_ins_cli` datetime DEFAULT NULL,
   `usr_cli_id` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_cliente`,`cod_empresa`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,111111,'lucas','85987734479','ave central','08912089331','2022-09-26 22:48:22','19'),(2,867164,'Isabelle Penha Rodrigues',NULL,NULL,NULL,'2022-09-27 21:13:37','19'),(5,867164,'luciano sera','85988905422','Av Central Leste, 170, araturi, caucaia, ce','','2022-09-28 22:00:51','19'),(6,111111,'lucas','85987734479','avenida','08912089331','2022-09-28 22:37:12','Lucas Penha Rodrigues'),(7,867164,'larisse guedes','85987734479','Av Central Leste, 170, araturi, caucaia, ce','','2022-09-28 22:39:20','Lucas Penha Rodrigues');
+INSERT INTO `clientes` VALUES (1,111111,'lucas','85987734479','ave central','08912089331','2022-09-26 22:48:22','19'),(2,867164,'Isabelle Penha Rodrigues',NULL,NULL,NULL,'2022-09-27 21:13:37','19'),(5,867164,'Luciano Sera','85988905422','Av Central Leste, 170, Araturi, Caucaia, Ce',NULL,'2022-10-14 23:14:02','Lucas Penha Rodrigues'),(6,111111,'lucas','85987734479','avenida','08912089331','2022-09-28 22:37:12','Lucas Penha Rodrigues'),(7,867164,'Larisse Guedes','85987734479','Av Central Leste, 170, Araturi, Caucaia, Ce',NULL,'2022-10-14 22:59:27','Lucas Penha Rodrigues');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,14 +53,20 @@ DROP TABLE IF EXISTS `empresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `empresa` (
-  `id_empresa` int NOT NULL AUTO_INCREMENT,
-  `cod_empresa` int NOT NULL,
+  `id_empresa` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_empresa` int(11) NOT NULL,
   `email_empresa` varchar(50) NOT NULL,
   `nome_empresa` varchar(100) NOT NULL,
   `numero_empresa` varchar(13) DEFAULT NULL,
-  `cnpj` varchar(14) DEFAULT NULL,
+  `cnpj_cpf` varchar(14) DEFAULT NULL,
+  `tipo_cadastro` char(1) DEFAULT NULL COMMENT 'Se o cadastro é com 1-CNPJ ou 2-CPF',
+  `plano_pagamento` char(2) DEFAULT NULL COMMENT 'Tipo de plano de Pgto - Pegar da tabela TAB_PLANOS_PGTO',
+  `dt_cadastro` date DEFAULT NULL COMMENT 'Data de Inicio da Assinatura',
+  `qtd_lojas` int(11) DEFAULT '1' COMMENT 'Quantidade de Lojas liberadas para o uso do sistema',
+  `dias_carencia` int(11) DEFAULT NULL COMMENT 'Dias de carencia para o inicio da cobrança',
+  `status` varchar(1) DEFAULT NULL COMMENT 'Status da Empresa: 1-CARENCIA / 2-ATIVA / 3-INADIMPLENTE / 4-SUSPENÇA / 5-ENCERRADA -> Tabela TAB_STATUS',
   PRIMARY KEY (`id_empresa`,`cod_empresa`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +75,7 @@ CREATE TABLE `empresa` (
 
 LOCK TABLES `empresa` WRITE;
 /*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
-INSERT INTO `empresa` VALUES (1,123456,'empresa@gmail.com','empresa',NULL,'12345678901234'),(13,112966,'emrer@gfgf.com','empresa',NULL,NULL),(33,867164,'lpsolution@outlook.com','LPSolution','85987734479',NULL),(26,627840,'polishop@outlook.com','polishop',NULL,'12345678901222'),(27,400399,'lucas@dsds.com.br','lucas enterprise',NULL,NULL),(28,855239,'empresa1@dfdf.cdd','empresa1',NULL,NULL),(29,497506,'isa@hotmail.com','isabelle empresa',NULL,NULL),(32,124246,'empresa2@dfd.com','empresa2',NULL,NULL);
+INSERT INTO `empresa` VALUES (1,123456,'empresa@gmail.com','empresa',NULL,'12345678901234',NULL,NULL,NULL,NULL,NULL,NULL),(13,112966,'emrer@gfgf.com','empresa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(33,867164,'lpsolution@outlook.com','LPSolution','85987734479',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(26,627840,'polishop@outlook.com','polishop',NULL,'12345678901222',NULL,NULL,NULL,NULL,NULL,NULL),(27,400399,'lucas@dsds.com.br','lucas enterprise',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(28,855239,'empresa1@dfdf.cdd','empresa1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(29,497506,'isa@hotmail.com','isabelle empresa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(32,124246,'empresa2@dfd.com','empresa2',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(35,667417,'luciano.serra@hotmail.com.br','lucas penha',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,14 +87,14 @@ DROP TABLE IF EXISTS `itens_nota`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `itens_nota` (
-  `eNota` int NOT NULL,
-  `item` int NOT NULL AUTO_INCREMENT,
+  `eNota` int(11) NOT NULL,
+  `item` int(11) NOT NULL AUTO_INCREMENT,
   `cod_empresa` varchar(6) NOT NULL,
   `quantidade` decimal(6,0) NOT NULL,
   `descricao` varchar(30) NOT NULL,
   `vr_unit` decimal(10,2) NOT NULL,
   PRIMARY KEY (`eNota`,`item`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,14 +115,14 @@ DROP TABLE IF EXISTS `nota`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nota` (
-  `eNota` int NOT NULL,
+  `eNota` int(11) NOT NULL,
   `cod_empresa` varchar(6) NOT NULL,
   `dataVenda` date NOT NULL,
   `formaPagamento` varchar(20) NOT NULL,
   `observacao` varchar(100) DEFAULT NULL,
-  `qntd_produtos` int NOT NULL,
+  `qntd_produtos` int(11) NOT NULL,
   PRIMARY KEY (`eNota`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,17 +143,17 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cod_empresa` varchar(6) NOT NULL,
   `cpf` varchar(11) NOT NULL,
-  `nome` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `nome` varchar(50) CHARACTER SET latin1 NOT NULL,
   `data_nascimento` date NOT NULL,
   `numero_celular` varchar(13) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
-  `senha` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `senha` varchar(100) CHARACTER SET latin1 NOT NULL,
   `permissoes` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,4 +179,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-01 18:03:03
+-- Dump completed on 2022-10-16 11:28:36

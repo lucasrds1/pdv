@@ -105,7 +105,7 @@ $(document).ready(function() {
         buttons:[ 
 			{
 				extend:    'excelHtml5',
-				text:      '<i class="fas fa-file-excel">&nbsp;Excel</i> ',
+				text:      '<i class="fas fa-file-excel">&nbsp;</i> ',
 				titleAttr: 'Exportar para Excel',
 				className: 'btn btn-success',
                 exportOptions: {
@@ -114,7 +114,7 @@ $(document).ready(function() {
 			},
 			{
 				extend:    'pdfHtml5',
-				text:      '<i class="fas fa-file-pdf">&nbsp;PDF</i> ',
+				text:      '<i class="fas fa-file-pdf">&nbsp;</i> ',
 				titleAttr: 'Exportar para PDF',
 				className: 'btn btn-danger',
                 exportOptions: {
@@ -123,7 +123,7 @@ $(document).ready(function() {
 			},
 			{
 				extend:    'print',
-				text:      '<i class="fa fa-print">&nbsp;Imprimir</i> ',
+				text:      '<i class="fa fa-print">&nbsp;</i> ',
 				titleAttr: 'Imprimir',
 				className: 'btn btn-info',
                 exportOptions: {
