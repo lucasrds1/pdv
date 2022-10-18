@@ -1,8 +1,8 @@
 <?php
 require 'classes/classes.php';
 require 'classes/login.class.php';
-$logar = new Login();
-$produtos = new Produtos();
+$logar = new Login($pdo);
+$produtos = new Produtos($pdo);
 
 if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
     $id = $_SESSION['id'];
@@ -21,43 +21,47 @@ if(isset($_SESSION['msg_cad_empresa'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - Tela de Vendas</title>
-    <link href="../../assets/styles/style_login_cadastro/style_login_cadastro.css" rel="stylesheet">
+    <title>Tela de Vendas</title>
+    <link href="../../assets/styles/style_cadastro_funcionario/cadastro_funcionario.css" rel="stylesheet">
     <link href="../../assets/styles/style_botoes_avisos.css" rel="stylesheet">
-</head>
-<body style="">
-    <div class="nome_sistema">
-        <img width="50" src="assets/imagens/logo_sistema/lrlogo.jpg" title="LRSolution - Desenvolvimento de sistemas">
-    </div>
-    <br><br>
-    <div class="container">
-        <div class="container_form">
-            <div class="cabecalho_form">
-                <h1>Cadastro da empresa</h1><hr width="60%">
-            </div><br>
-            <div class="form">
-                <span class="desc_input">Campo obrigatório * </span>
-                <form method="POST" onSubmit='return valida()'>
-                    <input type="hidden" name="cod_empresa" value="<?=$cod_empresa?>">
-                    <label>
-                        Nome*
-                    </label>
-                    <input type="text" class="input" name="nomeEmpresa" placeholder="Digite o nome da empresa..." ><br>
-                    <label>
-                        Email*
-                    </label>
-                    <input type="email" class="input" name="emailEmpresa" placeholder="Digite o email da empresa..." ><br>
-                    <label>
-                        CNPJ
-                    </label>
-                    <input type="number" class="input" name="cnpjEmpresa" id="cnpj" placeholder="Digite o CNPJ da empresa..." ><br>
-                    <label>
-                        Número
-                    </label>
-                    <input type="number" class="input" name="numeroEmpresa" id="numeroEmpresa" placeholder="85 98888 1111" ><br>
-                    <input type="submit" name="submit" value="Cadastrar" class="submit">
-                </form>
+<body>
+<div class="container">
+    <div class="formulario">
+        <h1 align="center">CADASTRO DE EMPRESA</h1><br>
+        <form method="POST">
+            <input type="hidden" name="codEmpresa" value="">
+            <p>
+            <label><b>Nome da empresa</b></label>
+            <input type="text" name="nome_usuario" placeholder="Digite o nome da empresa...">
+            </p>
+            <p>
+            <label><b>CPF ou CNPJ:</b></label>
+            <input type="number" name="cpf_usuario" placeholder="Digite o CPF ou CNPJ...">
+            </p>
+            <p>
+            <label><b>Email da empresa:</b></label>
+            <input type="email" name="email_usuario" placeholder="Digite seu email...">   
+            </p>
+            <p>
+            <label><b>Número de contato da empresa:</b></label>
+            <input type="number" name="numero_usuario" placeholder="Digite o número de contato da empresa...">   
+            </p>
+            <p>
+            <label><b>Quantidade de lojas da empresa:</b></label>
+            <input type="number" name="numero_usuario" placeholder="Digite quantas lojas possuirá o sistema...">   
+            </p>
+            <br>
+            <div style="text-align:center">
+            <input type="submit" name="submit" style="border:0;cursor:pointer; background-color: green;color: white; width:30%;" value="Cadastrar">
             </div>
+        </form>
+        <span><a href="login.php">Fazer Login</a></span>
+    </div>
+    
+</div>
+<div style="color:gray;font-size:11px;margin-right: 10px;bottom:0;right:0;position:fixed">Criado por L2Solution - Desenvolvimento de sistemas</div>
+</body>
+</html>
             <?php
             $codEmpresa = filter_input(INPUT_POST, 'cod_empresa', FILTER_VALIDATE_INT);
             $nome = filter_input(INPUT_POST, 'nomeEmpresa', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -108,14 +112,4 @@ if(isset($_SESSION['msg_cad_empresa'])){
                 echo '<p class="erro">Preencha todos os campos!</p>';
             }
         }
-            ?><br>
-            <span><a href="login.php">Fazer Login</a></span>
-        </div>
-    </div>
-
-    <div style="color:gray;font-size:11px;margin-right: 10px;bottom:0;right:0;position:absolute">Criado por LPSolution - Desenvolvimento de sistemas</div>
-</body>
-</html>
-<script>
-
-</script>
+            ?>

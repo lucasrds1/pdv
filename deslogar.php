@@ -1,6 +1,6 @@
 <?php
 require 'classes/login.class.php';
-$logar = new Login();
+$logar = new Login($pdo);
 
 session_start();
 if($_SESSION['id']){

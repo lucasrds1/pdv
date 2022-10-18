@@ -1,8 +1,9 @@
 <?php
 require 'classes/classes.php';
 require 'classes/login.class.php';
-$logar = new Login();
-$produtos = new Produtos();
+$logar = new Login($pdo);
+$produtos = new Produtos($pdo);
+
 echo isset($_SESSION['msgCadUser']) ? $_SESSION['msgCadUser'] : '';
 if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
     $id = $_SESSION['id'];
@@ -18,7 +19,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
     <title>Login - Tela de Vendas</title>
     <link href="../../assets/styles/style_login_cadastro/style_login_cadastro.css" rel="stylesheet">
 </head>
-<body style="">
+<body>
     <div class="container">
         <div class="container_form">
             <div class="cabecalho_form">

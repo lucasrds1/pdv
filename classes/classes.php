@@ -2,18 +2,8 @@
 require "server.php";
 class Produtos{
     private $pdo;
-    public function __construct(){
-        $dbname = "crud-vendas";
-        $host = "localhost";
-        $user = "root";
-        $password = "";
-        try {
-            $this->pdo = new PDO("mysql:dbname=$dbname;host=$host", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-            return true;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            header("Location: error.php");
-        }
+    public function __construct($driver){
+        $this->pdo = $driver;
     }
     public function getAll(){
         $sql = "SELECT * FROM nota NATURAL JOIN itens_nota";
@@ -165,18 +155,8 @@ class Produtos{
 }
 class Clientes{
     private $pdo;
-    public function __construct(){
-        $dbname = "crud-vendas";
-        $host = "localhost";
-        $user = "root";
-        $password = "";
-        try {
-            $this->pdo = new PDO("mysql:dbname=$dbname;host=$host", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-            return true;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            header("Location: error.php");
-        }
+    public function __construct($driver){
+        $this->pdo = $driver;
     }
     public function cadEditCliente($codEmpresa, $submit, $idCliente, $nomeCliente, $numeroCliente, $enderecoCliente, $cpfCliente, $id){
         if($numeroCliente == ''){

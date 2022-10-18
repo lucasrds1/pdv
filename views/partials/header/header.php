@@ -1,8 +1,9 @@
 <?php
+require '../../classes/server.php';
 require '../../classes/classes.php';
 require '../../classes/login.class.php';
-$logar = new Login();
-$produtos = new Produtos();
+$logar = new Login($pdo);
+$produtos = new Produtos($pdo);
 
 $sessao = $_SESSION['id'];
 $logar->verificar($_SESSION['id']);

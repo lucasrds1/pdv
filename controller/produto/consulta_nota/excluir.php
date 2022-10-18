@@ -1,8 +1,8 @@
 <?php
 require '../../classes/classes.php';
 require '../../classes/login.class.php';
-$logar = new Login();
-$produtos = new Produtos();
+$logar = new Login($pdo);
+$produtos = new Produtos($pdo);
 
 if(isset($_SESSION['id'])){
     $id = $_SESSION['id'];

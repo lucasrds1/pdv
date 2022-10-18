@@ -1,19 +1,10 @@
 <?php
 session_start();
+
 class Login{
     private $pdo;
-    public function __construct(){
-        $dbname = "crud-vendas";
-        $host = "localhost";
-        $user = "root";
-        $password = "";
-        try {
-            $this->pdo = new PDO("mysql:dbname=$dbname;host=$host", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-            return true;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            header("Location: error.php");
-        }
+    public function __construct($driver){
+        $this->pdo = $driver;
     }
     public function verificar($sessao){
         if(isset($sessao)){
@@ -21,7 +12,7 @@ class Login{
         }else{
             header("Location: ../../login.php");
         }
-        return $id;
+        return $sessao;
     }
     public function entrar($nome, $senha){
         //$senha = password_hash($senha, PASSWORD_DEFAULT);

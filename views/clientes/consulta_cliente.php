@@ -37,7 +37,7 @@ require '../../views/partials/header/header_dt.php';
     </thead>
     <tbody>
 <?php
-$clientes = new Clientes();
+$clientes = new Clientes($pdo);
 $dados = $clientes->getAllCli($_SESSION['codEmpresa']);
 if($dados > 0){
 foreach($dados as $dado){

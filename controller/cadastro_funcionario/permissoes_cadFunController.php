@@ -1,8 +1,8 @@
 <?php
 require '../../classes/classes.php';
 require '../../classes/login.class.php';
-$logar = new Login();
-$produtos = new Produtos();
+$logar = new Login($pdo);
+$produtos = new Produtos($pdo);
 $cadAdmin = isset($_SESSION['msg_cad_empresa']);
 print '<Br>';
 if($cadAdmin == 1){echo isset($_SESSION['msg_cad_empresa']) ? $_SESSION['msg_cad_empresa'] : '';}
