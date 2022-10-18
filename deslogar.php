@@ -1,5 +1,5 @@
 <?php
-require 'classes/login.class.php';
+require 'classes/Login.php';
 $logar = new Login($pdo);
 
 session_start();

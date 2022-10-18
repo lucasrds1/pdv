@@ -1,6 +1,6 @@
 <?php
-require '../../../classes/classes.php';
-require '../../../classes/login.class.php';
+require '../../../classes/Classes.php';
+require '../../../classes/Login.php';
 if(isset($_GET['action']) && $_GET['action'] == 'Excluir' && isset($_GET['id_cli'])){
 
 }else{

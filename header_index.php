@@ -1,6 +1,6 @@
 <?php
-require 'classes/login.class.php';
-require 'classes/classes.php';
+require 'classes/Login.php';
+require 'classes/Classes.php';
 $produtos = new Produtos($pdo);
 $logar = new Login($pdo);
 

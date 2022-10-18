@@ -31,11 +31,7 @@ require 'header_index.php';
     ?>
     </h2>
     </h2>
-    <?php
-    $status = $produtos->__construct();
-    echo ($status == true) ? '<h3 style="color: green;margin-left: 30px">Pronto para operar<h3>' : '<h3 style="color: red;margin-left: 30px">Indisponível para operar<h3>';
-    ?>
-    <br><hr width="50%" style="float: left; margin-left: 20px"><br>
+    <hr width="50%" style="float: left; margin-left: 20px"><br>
     <div class="registros_vendas">
         <h1 style="font-size: 20px; margin-left: 30px; color:gray">VENDAS DE HOJE REGISTRADAS:</h1>
     <div class="limite">
