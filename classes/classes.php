@@ -1,5 +1,5 @@
 <?php
-require "server.php";
+require "Server.php";
 class Produtos{
     private $pdo;
     public function __construct($driver){
