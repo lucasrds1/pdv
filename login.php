@@ -3,7 +3,6 @@ require 'classes/Classes.php';
 require 'classes/Login.php';
 $logar = new Login($pdo);
 $produtos = new Produtos($pdo);
-
 echo isset($_SESSION['msgCadUser']) ? $_SESSION['msgCadUser'] : '';
 if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
     $id = $_SESSION['id'];

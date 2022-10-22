@@ -13,7 +13,7 @@ require '../../controller/cliente/edita_cliente/permissoes_edita_clienteControll
     <form method="POST">
 
     <?php
-    $clientes = new Clientes();
+    $clientes = new Clientes($pdo);
     $dados = $clientes->getAllEdtCli($_SESSION['codEmpresa'], $_GET['id_cli']);
     if($dados > 0){
     foreach($dados as $dado){

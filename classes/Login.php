@@ -62,32 +62,39 @@ class Login{
             return false;
         }
     }
-    public function cadastrarEmp($codEmpresa, $nome, $email, $cnpj, $numeroemp){
-        if($codEmpresa && $nome && $email){
-            
-            if($cnpj == ''){
-                $cnpj = null;
-            }
-            if($numeroemp == ''){
-                $numeroemp = null;
-            }
+    public function cadastrarEmp($codEmpresa, $nomeEmp, $emailEmp, $tipoCad, $cadastroFJ, $numeroEmp, $lojasEmp){
+        if($codEmpresa !== ''){
            // $valCod = valCodEmpresa($cod_empresa);
             if($this->valCodEmpresa($codEmpresa) == false){ 
-                if($this->valEmailEmpresa($email) == false && $this->valCnpj($cnpj) == false){
-                $sql = "INSERT INTO empresa (cod_empresa, email_empresa, nome_empresa, cnpj, numero_empresa) VALUES (:cod_empresa, :email_empresa , :nome_empresa, :cnpj, :numeroemp)";
-                $sql = $this->pdo->prepare($sql);
-                $sql->bindValue(':cod_empresa', $codEmpresa);
-                $sql->bindValue(':nome_empresa', $nome);
-                $sql->bindValue(':email_empresa', $email);
-                $sql->bindValue(':cnpj', $cnpj); 
-                $sql->bindValue(':numeroemp', $numeroemp); 
-                if($sql->execute()){
-                    return true;
+                if($this->valEmailEmpresa($emailEmp) == false){
+                    if($this->valCnpj($cadastroFJ) == false){
+                    $sql = "INSERT INTO cad_empresas
+                            (id_empresa, email_empresa, nome_empresa, numero_empresa, cnpj_cpf, tipo_cadastro, qtd_lojas, dt_cadastro) 
+                            VALUES
+                            (:cod_empresa, :email_empresa , :nome_empresa, :numero_empresa, :cnpj_cpf, :tipo_cadastro, :qtd_lojas, CURRENT_TIMESTAMP)";
+                    $sql = $this->pdo->prepare($sql);
+                    $sql->bindValue(':cod_empresa', $codEmpresa);
+                    $sql->bindValue(':nome_empresa', $nomeEmp);
+                    $sql->bindValue(':email_empresa', $emailEmp);
+                    $sql->bindValue(':tipo_cadastro', $tipoCad); 
+                    $sql->bindValue(':cnpj_cpf', $cadastroFJ); 
+                    $sql->bindValue(':numero_empresa', $numeroEmp); 
+                    $sql->bindValue(':qtd_lojas', $lojasEmp); 
 
+                    if($sql->execute()){
+                        return true;
+
+                    }else{
+                        echo '<p class="erro">Ocorreu um erro ao cadastrar!</p>';
+                        return false;
+                    } 
+                    }else{
+                        echo '<p class="erro">CPF ou CNPJ já existentes no sistema!</p>';
+                        return false;
+                    }
                 }else{
-                    echo '<p class="erro">Ocorreu um erro ao cadastrar!</p>';
+                    echo '<p class="erro">Email já existente no sistema!</p>';
                     return false;
-                }  
                 }
             }else{
                 echo '<p class="erro">Código empresa já existe, tente novamente ou contate o administrador!</p>';
@@ -96,7 +103,7 @@ class Login{
         }
     }
     public function valCodEmpresa($cod_empresa){
-        $sql = "SELECT * FROM empresa WHERE cod_empresa = :cod_empresa";
+        $sql = "SELECT * FROM cad_empresas WHERE id_empresa = :cod_empresa";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':cod_empresa', $cod_empresa);
         $sql->execute();
@@ -107,7 +114,7 @@ class Login{
         }
     }
     public function valEmailEmpresa($email){
-        $sql = "SELECT * FROM empresa WHERE email_empresa = :email";
+        $sql = "SELECT * FROM cad_empresas WHERE email_empresa = :email";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':email', $email);
         $sql->execute();
@@ -117,20 +124,16 @@ class Login{
             return false;
         }
     }
-    public function valCnpj($cnpj){
-        if($cnpj == null){
-            return false;
-        }else{
-            $sql = "SELECT * FROM empresa WHERE cnpj = :cnpj";
+    public function valCnpj($cadastroFJ){
+            $sql = "SELECT * FROM cad_empresas WHERE cnpj_cpf = :cadastroFJ";
             $sql = $this->pdo->prepare($sql);
-            $sql->bindValue(':cnpj', $cnpj);
+            $sql->bindValue(':cadastroFJ', $cadastroFJ);
             $sql->execute();
             if($sql->rowCount() > 0){
                 return true;
             }else{
                 return false;
             }
-        }
     }
     public function cadUsuario($codEmpresa, $nome, $email, $senha, $dataNasc, $cpf, $numero, $permissao){
         $nome = valCadNome($nome);

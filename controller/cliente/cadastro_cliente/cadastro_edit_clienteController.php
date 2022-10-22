@@ -30,7 +30,7 @@ if($submit == 'Cadastrar' || $submit == 'Editar'){
         }
 
         if($insert == true && isset($_SESSION['codEmpresa']) && isset($_SESSION['id'])){
-            $cadCliente = new Clientes();
+            $cadCliente = new Clientes($pdo);
             $dados = $cadCliente->cadEditCliente($_SESSION['codEmpresa'], $submit, $idCliente, $nomeCliente, $numeroCliente, $enderecoCliente, $cpfCliente, $_SESSION['id']);
             // }elseif($submit == 'Editar'){
             //     $dados = $cadCliente->cadEditCliente($_SESSION['codEmpresa'], $submit, $nomeCliente, $numeroCliente, $enderecoCliente, $cpfCliente, $_SESSION['id']);

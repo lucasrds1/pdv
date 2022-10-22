@@ -24,6 +24,14 @@ body{
     outline: 0;
     border: 1px solid rgb(161, 191, 250);
 }
+.selectCad{
+    border: 1px solid rgb(187, 187, 187);
+    outline: 0;
+    padding: 10px
+}
+#cpfEmpresa{display:none}
+#cnpjEmpresa{display:none}
+
 
 /* .formulario form input .submit{
     background-color: red;
