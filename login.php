@@ -16,47 +16,59 @@ if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Tela de Vendas</title>
-    <link href="../../assets/styles/style_login_cadastro/style_login_cadastro.css" rel="stylesheet">
+    <link href="../../assets/styles/style_botoes_avisos.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <div class="container_form">
-            <div class="cabecalho_form">
-                <h1>Login - Tela de Vendas</h1><hr width="60%">
-            </div><br>
-            <div class="form">
-                <form method="POST">
-                    <label>
-                        Nome
-                    </label>
-                    <input type="text" class="input" name="nome" placeholder="Digite um nome de usuário..." required><br>
-                    <label>
-                        Senha
-                    </label>
-                    <input type="password" class="input" name="senha" placeholder="Digite uma senha..." required><br>
-                    <input type="submit" class="submit">
-                </form>
-            </div>
-            <?php
-            $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-            $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_SPECIAL_CHARS);
+<body><Br>
+<link href="../../assets/styles/style_cadastro_funcionario/cadastro_funcionario.css" rel="stylesheet">
 
-            if($nome != ''  && $senha !== ''){
-                $dados = $logar->entrar($nome, $senha);
+<div class="container">
+    <div class="formulario" style="width:50%">
+        <h1 align="center">Login Usuário</h1>
+        <hr>
+        <form method="POST" style="width:95%">
+            <p>
+            <label><b>Email de Usuário:</b></label>
+            <input type="email" name="email" placeholder="Digite seu email de usuário...">
+            </p>
+            
+            <p>
+            <label><b>Senha de Usuário:</b></label>
+            <input type="password" name="senha" placeholder="Digite sua senha de usuário...">   
+            </p>
+            
+            <br>
+            <div style="text-align:center">
+            <input type="submit" name="submit" style="border:0;cursor:pointer; background-color: green;color: white; width:30%;" value="Entrar">
+            </div>
+        </form><br>
+        <?php
+            $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+            $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_SPECIAL_CHARS);
+            $submit = filter_input(INPUT_POST, 'submit');
+            if($submit == 'Entrar'){
+            if($email != ''  && $senha !== ''){
+                $dados = $logar->entrar($email, $senha);
                 if($dados !== false){
                     $_SESSION['id'] = $dados['id'];
                     $_SESSION['codEmpresa'] = $dados['cod_empresa'];
+                    $logar->entraLog($_SESSION['id'], $_SESSION['codEmpresa']);
+                    echo 'deu';
                     setcookie("login", 'login', time()+86400);
                     echo 'Logado com sucesso!';
                     header("Location: index.php");
                 }else{
                     echo '<span style="color:red;margin-left: 65px">nenhum resultado encontrado!</span>';
                 }
+            }else{
+                echo '<p class="erro">Preencha todos os campos</p>';
+            }
             }
             ?><br>
-            <span><a href="cadastro_empresa.php">Cadastre-se</a></span>
-        </div>
+        <a href="esqueceuSenha.php">Esqueceu a senha?</a>
     </div>
-    <div style="color:gray;font-size:11px;margin-right: 10px;bottom:0;right:0;position:absolute">Criado por Lucas Penha Rodrigues</div>
+</div>
+<div style="color:gray;font-size:11px;margin-right: 10px;bottom:0;right:0;position:fixed">Criado por L2Solution - Desenvolvimento de sistemas</div>
 </body>
 </html>
+<script src="assets/js/script.js"></script>
+

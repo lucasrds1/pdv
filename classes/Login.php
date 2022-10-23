@@ -12,14 +12,13 @@ class Login{
         }else{
             header("Location: ../../login.php");
         }
-        return $sessao;
     }
-    public function entrar($nome, $senha){
+    public function entrar($email, $senha){
         //$senha = password_hash($senha, PASSWORD_DEFAULT);
         $senha = md5($senha);
-        $sql = "SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha"; 
+        $sql = "SELECT * FROM usuarios WHERE email = :email AND senha = :senha"; 
         $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(':nome', $nome);
+        $sql->bindValue(':email', $email);
         $sql->bindValue(':senha', $senha);
         $sql->execute();
         if($sql->rowCount() > 0){
@@ -28,6 +27,13 @@ class Login{
         }else{
             return false;
         }
+    }
+    public function entraLog($id, $codEmpresa){
+        $sql = "INSERT INTO tab_logs_login 
+                (id_empresa, user_logs, hora_log)
+                VALUES
+                ($codEmpresa, (select nome from cad_usuarios where id_empresa = $codEmpresa and id_usuario = $id), SYSDATE())";
+                $sql = $this->pdo->query($sql);
     }
     public function getNomeById($id){
         $sql = "SELECT nome FROM usuarios WHERE id = :id";
@@ -41,7 +47,7 @@ class Login{
         }
     }
     public function getNomeEmpresabycod($codEmpresa){
-        $sql = "SELECT nome_empresa FROM empresa WHERE cod_empresa = :codEmpresa";
+        $sql = "SELECT nome_empresa FROM cad_empresas WHERE id_empresa = :codEmpresa";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':codEmpresa', $codEmpresa);
         $sql->execute();
@@ -146,8 +152,8 @@ class Login{
         if($this->valCodEmpresa($codEmpresa) == true){
             if($this->valEmailUsuario($email) == false){ 
             if($this->valCpf($cpf) == false){
-                $sql = "INSERT INTO usuarios 
-                        (cod_empresa, cpf, nome, data_nascimento, numero_celular, email, senha, permissoes)
+                $sql = "INSERT INTO cad_usuarios 
+                        (id_empresa, cpf, nome, data_nascimento, numero_celular, email, senha, permissoes)
                         VALUES (:codEmpresa, :cpf, :nome, :dataNasc, :numero, :email, :senha, :permissoes)";
                 $sql = $this->pdo->prepare($sql);
                 $sql->bindValue(':codEmpresa', $codEmpresa);

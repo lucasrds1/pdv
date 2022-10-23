@@ -3,7 +3,6 @@ require 'classes/Login.php';
 require 'classes/Classes.php';
 $produtos = new Produtos($pdo);
 $logar = new Login($pdo);
-
 $logar->verificar($_SESSION['id']);
 $id = $_SESSION['id'];
 
