@@ -181,21 +181,21 @@ class Clientes{
                 if($this->valCpfCliente($codEmpresa, $cpfCliente, $submit) == false){
                     $sql = "INSERT INTO clientes
                     (cod_empresa, nome_cliente, numero_cliente, endereco_cliente, cpf_cliente, dta_ins_cli, usr_cli_id) 
-                    VALUES (:codEmpresa, :nomeCliente, :numeroCliente, :enderecoCliente, :cpfCliente, CURRENT_TIMESTAMP, (SELECT nome FROM usuarios WHERE id = :id))";     
+                    VALUES (:codEmpresa, :nomeCliente, :numeroCliente, :enderecoCliente, :cpfCliente, CURRENT_TIMESTAMP, (SELECT nome FROM cad_usuarios WHERE id = :id))";     
                 }else{
                     echo '<p class="erro">Cpf já existe no sistema!</p>';
                     return false;
                 }
                  }elseif($submit == 'Editar' && $idCliente !== ''){
-                    if($this->valCpfCliente($codEmpresa, $cpfCliente, $submit, $idCliente) == false){ 
-                $sql = "UPDATE clientes SET 
-                        nome_cliente = :nomeCliente,
-                        numero_cliente = :numeroCliente, 
-                        endereco_cliente = :enderecoCliente, 
-                        cpf_cliente = :cpfCliente,
-                        dta_ins_cli = CURRENT_TIMESTAMP, 
-                        usr_cli_id = (SELECT nome FROM usuarios WHERE id = :id) 
-                        WHERE cod_empresa = :codEmpresa AND id_cliente = :idCliente";
+                if($this->valCpfCliente($codEmpresa, $cpfCliente, $submit, $idCliente) == false){ 
+                    $sql = "UPDATE clientes SET 
+                            nome_cliente = :nomeCliente,
+                            numero_cliente = :numeroCliente, 
+                            endereco_cliente = :enderecoCliente, 
+                            cpf_cliente = :cpfCliente,
+                            dta_ins_cli = CURRENT_TIMESTAMP, 
+                            usr_cli_id = (SELECT nome FROM cad_usuarios WHERE id = :id) 
+                            WHERE cod_empresa = :codEmpresa AND id_cliente = :idCliente";
             }else{
                 echo '<p class="erro">Cpf já existe no sistema!</p>';
                 return false;
@@ -214,7 +214,7 @@ class Clientes{
             // echo "<script>location.href= 'consulta_cliente.php'</script>";
             // $_SESSION['aviso_edicao'] = '<h4 class="sucesso"><img src="../../assets/imagens/avisos/sucesso.png" width="40px" style="padding:5px">Cliente <b>cadastrado</b> com sucesso!</h4>';
             //     //return true;
-            echo avisoCadEdit($acao, "../../views/clientes/consulta_cliente.php");
+            echo avisoCadEdit($acao, "../../views/clientes/consulta_cliente.php?dt=1", 'consulta');
             }else{
                 return false;
             }
@@ -284,9 +284,12 @@ class Clientes{
         }
     }
 }
-function avisoCadEdit($acao, $link){
-    return "<script src='../../assets/swalert/sweetalert2.js'></script><script>avisoCadEdit('".$acao."', '".$link."')</script>";
+function avisoCadEdit($acao, $link, $tela){
+    return "<script src='../../assets/swalert/sweetalert2.js'></script><script>avisoCadEdit('".$acao."', '".$link."', '".$tela."')</script>";
 }
 function excluirCliJS($link){
     return "<script src='../../assets/swalert/sweetalert2.js'></script><script>excluir(".$link.")</script>";
+}
+function avisoPermissao(){
+    return "<script src='../../assets/swalert/sweetalert2.js'></script><script>avisoPermissao()</script>";
 }

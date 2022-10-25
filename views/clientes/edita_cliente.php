@@ -1,13 +1,14 @@
 <?php
-require '../../views/partials/header/header.php';
+require '../../header.php';
 require '../../controller/cliente/edita_cliente/permissoes_edita_clienteController.php';
+
 ?>
 <div class="container_cadastro">
 <div class="cabecalho_index">
        <span>EDITAR CLIENTE</span>
 </div>
 <br>
-<button class="botao_consultar" onclick="location.href= 'consulta_cliente.php' ">CONSULTAR CLIENTE</button>
+<button class="botao_consultar" onclick="location.href= 'consulta_cliente.php?dt=1' ">CONSULTAR CLIENTE</button>
 <div>
     <div class="formulario">
     <form method="POST">

@@ -1,12 +1,17 @@
 <?php
-require '../../views/partials/header/header.php';
+require '../../header.php';
+if(in_array('19', $acesso) || in_array('1', $acesso)){
+}else{
+    echo "<script>javascript:history.back()</script>";
+    $_SESSION['aviso'] = avisoPermissao();
+}
 ?>
 <div class="container_cadastro">
 <div class="cabecalho_index">
        <span>CADASTRO DE CLIENTES</span>
 </div>
 <br>
-<button class="botao_consultar" onclick="location.href= 'consulta_cliente.php' ">CONSULTAR CLIENTE</button>
+<button class="botao_consultar" onclick="location.href= 'consulta_cliente.php?dt=1' ">CONSULTAR CLIENTE</button>
 
 <div>
     <div class="formulario">

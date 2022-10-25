@@ -1,17 +1,15 @@
 <?php
-require 'header_index.php';
+require 'header.php';
 //<input type='reset'  class='dt-button btn_yellow' value='".TRANS('voltar')."' name='cancelar' onClick=\"redirect('".$_SERVER['PHP_SELF']."')\"></span>";
 //<input type='reset'  class='dt-button btn_yellow' value='".TRANS('voltar')."' name='cancelar' onClick=\"javascript:history.back()\"></TD>
 ?>
-<div class="container_consulta"> 
-    <div class="cabecalho_index">
+<div class="cabecalho_index">
        <span>INÍCIO</span>
     </div>
     <?php
        if(isset($id) && isset($_SESSION['codEmpresa'])){
             $dados = $logar->getNomeById($id);
             $nomeEmpresaCod = $logar->getNomeEmpresabycod($_SESSION['codEmpresa']);
-            $permissao = $logar->getPermissaoById($id);
             if($dados !== false && $nomeEmpresaCod !== false){
                 $nome = $dados['nome'];
                 $nomeEmpresa = $nomeEmpresaCod['nome_empresa'];
@@ -19,13 +17,14 @@ require 'header_index.php';
                 echo 'nome não encontrado';
             }
         }
+
     ?>
     <h2 style="margin-left: 20px;font-size:35px;text-decoration:underline"><?php echo $nomeEmpresa?>
 
     <h2 style="margin-left: 30px">SEJA BEM-VINDO VENDEDOR: <?php echo $nome?>.
     <h2 style="margin-left: 30px; color: red">
     <?php 
-    if($permissao['permissoes'] == 'ADMIN'){
+    if($acesso == '1'){
         echo 'ADMINISTRADOR';
     }
     ?>
@@ -78,7 +77,5 @@ require 'header_index.php';
     ?>
     </table>
     </div>
-
-</div>
 </body>
 </html>

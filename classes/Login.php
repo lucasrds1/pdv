@@ -16,7 +16,7 @@ class Login{
     public function entrar($email, $senha){
         //$senha = password_hash($senha, PASSWORD_DEFAULT);
         $senha = md5($senha);
-        $sql = "SELECT * FROM usuarios WHERE email = :email AND senha = :senha"; 
+        $sql = "SELECT * FROM cad_usuarios WHERE email = :email AND senha = :senha"; 
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':email', $email);
         $sql->bindValue(':senha', $senha);
@@ -32,11 +32,11 @@ class Login{
         $sql = "INSERT INTO tab_logs_login 
                 (id_empresa, user_logs, hora_log)
                 VALUES
-                ($codEmpresa, (select nome from cad_usuarios where id_empresa = $codEmpresa and id_usuario = $id), SYSDATE())";
+                ($codEmpresa, (select nome from cad_usuarios where id_empresa = $codEmpresa and id = $id), SYSDATE())";
                 $sql = $this->pdo->query($sql);
     }
     public function getNomeById($id){
-        $sql = "SELECT nome FROM usuarios WHERE id = :id";
+        $sql = "SELECT nome FROM cad_usuarios WHERE id = :id";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':id', $id);
         $sql->execute();
@@ -57,13 +57,16 @@ class Login{
             return false;
         }
     }
-    public function getPermissaoById($id){
-        $sql = "SELECT permissoes FROM usuarios WHERE id = :id";
+    public function permissao($id){
+        $sql = "SELECT permissoes FROM cad_usuarios WHERE id = :id";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':id', $id);
         $sql->execute();
         if($sql->rowCount() > 0){
-            return $sql->fetch();
+            $row = $sql->fetch();
+            $res = explode('/', $row['permissoes']);
+            return $res;
+            
         }else{
             return false;
         }
@@ -165,7 +168,7 @@ class Login{
                 $sql->bindValue(':senha', $senha);
                 $sql->bindValue(':permissoes', $permissao);
                 if($sql->execute()){
-                    return true;
+                    echo avisoCadEdit('cadastrado', "../../login.php", 'Login');
                 }else{
                     //echo '<p class="erro">Ocorreu um erro ao cadastrar!</p>';
                     return false;
@@ -184,7 +187,7 @@ class Login{
     }
     }
     public function valEmailUsuario($email){
-        $sql = "SELECT * FROM usuarios WHERE email = :email";
+        $sql = "SELECT * FROM cad_usuarios WHERE email = :email";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':email', $email);
         $sql->execute();
@@ -195,7 +198,7 @@ class Login{
         }
     }
     public function valCpf($cpf){
-        $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
+        $sql = "SELECT * FROM cad_usuarios WHERE cpf = :cpf";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':cpf', $cpf);
         $sql->execute();
@@ -206,6 +209,9 @@ class Login{
         }
     }
 }
+// function testeAcesso($cod){
+    
+// }
 function valCadEmpresa($nome, $email, $cnpj, $numeroemp){
     $nome = addslashes(ucwords($nome));
     $email = addslashes(trim($email));

@@ -1,23 +1,38 @@
 <?php
-require '../../views/partials/header/header_dt.php';
+require '../../header.php';
+if(!isset($_GET['dt']) && $_GET['dt'] !== 1){
+    echo "<script>javascript:history.back()</script>";
+}
+if(in_array('1', $acesso) || in_array('16', $acesso)){
+
+}else{
+    echo "<script>javascript:history.back()</script>";
+}
 ?>
 <div class="container_cadastro">
 <div class="cabecalho_index">
        <span>CLIENTES</span>
 </div>
 <br>
+<?php
+    $acesso = $logar->permissao($_SESSION['id']);
+    if (in_array('19', $acesso) || in_array('1', $acesso)) {
+        ?>
 <button class="botao_adicionar" onclick="location.href= 'cadastro_cliente.php' ">ADICIONAR CLIENTE</button>
 <hr>
+<?php
+    }
+    ?>
 <div class="form_consulta">
     <?php
-    if(isset($_SESSION['aviso_edicao'])){
-        echo $_SESSION['aviso_edicao'].'<br>';
-        unset($_SESSION['aviso_edicao']);
-    }
-    if(isset($_SESSION['aviso'])){
-        echo $_SESSION['aviso'];
-        unset($_SESSION['aviso']);
-    }
+        if (isset($_SESSION['aviso_edicao'])) {
+            echo $_SESSION['aviso_edicao'].'<br>';
+            unset($_SESSION['aviso_edicao']);
+        }
+        if (isset($_SESSION['aviso'])) {
+            echo $_SESSION['aviso'];
+            unset($_SESSION['aviso']);
+        }
     ?>
 <div class="container">
     <div class="row">
@@ -38,10 +53,10 @@ require '../../views/partials/header/header_dt.php';
     <tbody>
 <?php
 $clientes = new Clientes($pdo);
-$dados = $clientes->getAllCli($_SESSION['codEmpresa']);
-if($dados > 0){
-foreach($dados as $dado){
-?>
+    $dados = $clientes->getAllCli($_SESSION['codEmpresa']);
+    if ($dados > 0) {
+        foreach ($dados as $dado) {
+            ?>
 
         <tr>
             <td class="not-export-col">
@@ -56,7 +71,8 @@ foreach($dados as $dado){
             <td><?=$dado['usr_cli_id']?></td>
         </tr>
 <?php
-}}
+        }
+    }
 ?>
     </tbody>
 
@@ -136,5 +152,4 @@ $(document).ready(function() {
 });
 
 </script>
-
 

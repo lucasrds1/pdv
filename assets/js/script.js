@@ -80,11 +80,15 @@ function confirma(desc, link){
         location.href = link;
     }
 }
-function avisoCadEdit(acao, link){
+function avisoCadEdit(acao, link, tela){
+    let text = 'Redirecionando para a tela de '+tela+'...';
+    if(acao == 'excluído'){
+        text = '';
+    }
     Swal.fire({
         icon: 'success',
         title: 'Registro '+acao+' com sucesso!',
-        text: 'Redirecionando para a tela de consulta...',
+        text: text,
         showConfirmButton: true,
     })
     .then(e=>{
@@ -97,6 +101,13 @@ function avisoCadEdit(acao, link){
     .catch(e=>{
         
     })
+}
+function aviso(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Você não tem permissão para acessar essa página',
+        footer: 'Fale com seu administrador'
+      })
 }
 function excluir(link){
     Swal.fire({

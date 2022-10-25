@@ -50,14 +50,14 @@ if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
                 $dados = $logar->entrar($email, $senha);
                 if($dados !== false){
                     $_SESSION['id'] = $dados['id'];
-                    $_SESSION['codEmpresa'] = $dados['cod_empresa'];
+                    $_SESSION['codEmpresa'] = $dados['id_empresa'];
                     $logar->entraLog($_SESSION['id'], $_SESSION['codEmpresa']);
                     echo 'deu';
                     setcookie("login", 'login', time()+86400);
                     echo 'Logado com sucesso!';
                     header("Location: index.php");
                 }else{
-                    echo '<span style="color:red;margin-left: 65px">nenhum resultado encontrado!</span>';
+                    echo '<p class="erro">nenhum resultado encontrado!</p>';
                 }
             }else{
                 echo '<p class="erro">Preencha todos os campos</p>';

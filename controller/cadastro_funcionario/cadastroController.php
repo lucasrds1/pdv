@@ -33,14 +33,12 @@ if($submit == 'Cadastrar'){
             }
             if($insert == true){
                 if($cadAdmin == 1){
-                    $permissao = 'ADMIN';
+                    $permissao = 1;
                 }
                 $dados = $logar->cadUsuario($codEmpresa, $nome, $email, $senha, $dataNasc, $cpf, $numero, $permissao);
                 if($dados == true){
                     if($cadAdmin == 1){
                         session_destroy();
-                        $_SESSION['msgCadUser'] = '<h1 class="sucesso">Usuário cadastrado com sucesso!</h1>';
-                        header("Location: ../../login.php");
                     }
                 }
             }
