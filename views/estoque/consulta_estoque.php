@@ -1,21 +1,21 @@
 <?php
-require '../../header.php';
+require $_SERVER["DOCUMENT_ROOT"]."/header.php";
+
 if(!isset($_GET['dt']) && $_GET['dt'] !== 1){
     echo "<script>javascript:history.back()</script>";
 }
-testeacesso('16', $acesso);
+testeacesso('4', $acesso);
 
 ?>
 <div class="container_cadastro">
 <div class="cabecalho_index">
-       <span>CLIENTES</span>
+    <span>PRODUTOS</span>
 </div>
 <br>
 <?php
-    $acesso = $logar->permissao($_SESSION['id']);
-    if (in_array('19', $acesso) || in_array('1', $acesso)) {
+    if (in_array('7', $acesso) || in_array('1', $acesso)) {
         ?>
-<button class="botao_adicionar" onclick="location.href= 'cadastro_cliente.php' ">ADICIONAR CLIENTE</button>
+<button class="botao_adicionar" onclick="location.href= 'cadastro_estoque.php' ">ADICIONAR PRODUTO</button>
 <hr>
 <?php
     }
@@ -149,4 +149,3 @@ $(document).ready(function() {
 });
 
 </script>
-

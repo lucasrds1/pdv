@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 class Login{
     private $pdo;
     public function __construct($driver){

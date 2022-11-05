@@ -97,3 +97,9 @@
     background-color: rgb(211, 211, 211);
     width: 10%;
 }
+.grupo{
+    display:flex;
+    justify-content: space-between;
+    text-align: center;
+}
+

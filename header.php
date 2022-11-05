@@ -1,14 +1,12 @@
 <?php
-require 'classes/Server.php';
-require 'classes/Classes.php';
-require 'classes/Login.php';
+require $_SERVER["DOCUMENT_ROOT"]."/server.php";
 $logar = new Login($pdo);
+$logar->verificar($_SESSION['id']);
+$acesso = $logar->permissao($_SESSION['id']);
 $produtos = new Produtos($pdo);
 
 $sessao = $_SESSION['id'];
-$logar->verificar($_SESSION['id']);
 $id = $_SESSION['id'];
-$acesso = $logar->permissao($id);
 $px = '15px';
 $onc = 'dropdown(5)';
 
@@ -23,16 +21,12 @@ date_default_timezone_set('America/Sao_Paulo');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Vendas</title>
-    <link href="../../assets/styles/style_header_footer/header.css" rel="stylesheet">
-    <link href="../../assets/styles/style_header_footer/footer.css" rel="stylesheet">
-    <link href="../../assets/styles/style_cadastro_produto/cadastro_produto.css" rel="stylesheet">
-    <link href="../../assets/styles/style_consulta_produto/consulta_produto.css" rel="stylesheet">
-    <link href="../../assets/styles/style_cadastro_cliente/cadastro_cliente.css" rel="stylesheet">
-    <link href="../../assets/styles/style_botoes_avisos.css" rel="stylesheet">
     <?php
+    $onc4 = 'dropdown(4)';
 if (isset($_GET['dt']) && $_GET['dt'] == 1) {
     $px = '25px';
     $onc = 'dropdown1(5)';
+    $onc4 = 'dropdown1(4)';
     ?>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../../assets/datatables/bootstrap/css/bootstrap.min.css">
@@ -49,6 +43,13 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
     <?php
     }
     ?>
+    <link href="../../../assets/styles/style_header_footer/header.css" rel="stylesheet">
+    <link href="../../../assets/styles/style_header_footer/footer.css" rel="stylesheet">
+    <link href="../../../assets/styles/style_cadastro_produto/cadastro_produto.css" rel="stylesheet">
+    <link href="../../../assets/styles/style_consulta_produto/consulta_produto.css" rel="stylesheet">
+    <link href="../../../assets/styles/style_cadastro_cliente/cadastro_cliente.css" rel="stylesheet">
+    <link href="../../../assets/styles/style_botoes_avisos.css" rel="stylesheet">
+   
 
 </head>
 <body style="font-family:arial">
@@ -71,20 +72,42 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
         </div>
         <div class="menu_botoes">
             <ul>
-                <a href="../../index.php"><li>Inicio</li></a>
+                <a href="../../index.php"><li>INÍCIO</li></a>
                 </li>
                 <a href="../../views/clientes/consulta_cliente.php"><li style="background-color:green">VENDER</li></a>
                 <li id="btn" onclick="dropdown(1)">REGISTRO DE VENDAS</li>
-                
+                <?php
+                if(in_array('16', $acesso) || in_array('1', $acesso)){
+                ?>
                 <a href="../../views/clientes/consulta_cliente.php?dt=1"><li>CLIENTES</li></a>
-                <a href="../../views/estoque/estoque.php"><li>ESTOQUE</li></a>
+                <?php
+                }
+                ?>
+                <?php
+                if(in_array('4', $acesso) || in_array('1', $acesso)){
+                ?>
+                <li id="btn" onclick="<?=$onc4?>">PRODUTOS<img src="../../assets/imagens/submenu2.png" style="width:<?=$px?>;padding:5px;position: absolute;" id="img_dropdown4"></li>
+                <div class="dropdown" id="dropdown4">
+                    <a href="../../views/estoque/consulta_estoque.php?dt=1"><li>Produtos</li></a>
+                <?php
+                if(in_array('11', $acesso) || in_array('1', $acesso)){
+                ?>
+                    <a href="../../views/estoque/consulta_grupos.php?dt=1"><li>Grupos</li></a>
+                    <a href="../../views/estoque/consulta_grupos.php"><li>Subgrupos</li></a>
+                    <a href="../../views/estoque/consulta_grupos.php"><li>Microgrupos</li></a>
+                </div>
+                </li>
+                <?php
+                }}
+                ?>
                 <li>FORNECEDORES</li>
                 <?php
-            if (in_array('1', $acesso)) {
+                if (in_array('1', $acesso)) {
                 ?>
                 <li id="btn" onclick="<?=$onc?>">EMPRESA<img src="../../assets/imagens/submenu2.png" style="width:<?=$px?>;padding:5px;position: absolute;" id="img_dropdown5"></li>
                 <div class="dropdown" id="dropdown5">
                         <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Sua empresa</li></a>
+                        <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Lojas</li></a>
                         <a href="../../controller/consulta_nota/consulta_nota.php"><li>FUNCIONÁRIOS</li></a>
                 </div>
                 </li>

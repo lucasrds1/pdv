@@ -1,10 +1,6 @@
 <?php
 require '../../header.php';
-if(in_array('19', $acesso) || in_array('1', $acesso)){
-}else{
-    echo "<script>javascript:history.back()</script>";
-    $_SESSION['aviso'] = avisoPermissao();
-}
+testeacesso('19', $acesso);
 ?>
 <div class="container_cadastro">
 <div class="cabecalho_index">

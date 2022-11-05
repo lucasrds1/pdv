@@ -1,6 +1,6 @@
 <?php
-require 'classes/Classes.php';
-require 'classes/Login.php';
+require $_SERVER["DOCUMENT_ROOT"]."/server.php";
+
 $logar = new Login($pdo);
 $produtos = new Produtos($pdo);
 echo isset($_SESSION['msgCadUser']) ? $_SESSION['msgCadUser'] : '';

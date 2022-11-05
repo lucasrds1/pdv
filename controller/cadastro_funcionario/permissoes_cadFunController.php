@@ -1,7 +1,8 @@
 <?php
-require '../../classes/Classes.php';
-require '../../classes/Login.php';
+require $_SERVER["DOCUMENT_ROOT"]."/server.php";
 $logar = new Login($pdo);
+$logar->verificar($_SESSION['id']);
+$acesso = $logar->permissao($_SESSION['id']);
 $produtos = new Produtos($pdo);
 $cadAdmin = isset($_SESSION['msg_cad_empresa']);
 print '<Br>';

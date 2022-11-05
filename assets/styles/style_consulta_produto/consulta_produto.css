@@ -153,3 +153,62 @@ input{
     background-color: rgb(103, 11, 11);
 }
 
+/* grupos */
+.container_menu_grupos{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 50px;
+}
+.container_menu_grupos span b{
+    font-size: 20px;
+}
+.container_menu_grupos a{
+    text-decoration: none;   
+}
+.div_consulta_grupos{
+    width: 50%;
+    height: 100;
+    background-color: rgb(64, 64, 248);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.5s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.div_consulta_grupos:hover{
+    background-color: rgb(113, 113, 255);
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+.div_consulta_subgrupos{
+    width: 90%;
+    height: 100;
+    background-color: rgb(64, 64, 248);
+    color: yellow;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.5s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.div_consulta_subgrupos:hover{
+    background-color: rgb(113, 113, 255);
+    -webkit-transform: scale(1.1);
+    transform: scale(0.9);
+}
+.div_consulta_microgrupos{
+    width: 90%;
+    height: 100;
+    background-color: rgb(64, 64, 248);
+    color: pink;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.5s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.div_consulta_microgrupos:hover{
+    background-color: rgb(113, 113, 255);
+    -webkit-transform: scale(1.1);
+    transform: scale(0.9);
+}

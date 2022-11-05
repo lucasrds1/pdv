@@ -2,6 +2,13 @@
 require '../../header.php';
 require '../../controller/cliente/edita_cliente/permissoes_edita_clienteController.php';
 
+if(in_array('1', $acesso) || in_array('17', $acesso)){
+
+}else{
+    $_SESSION['aviso'] = avisoPermissao();
+    echo "<script>javascript:history.back()</script>";
+}
+
 ?>
 <div class="container_cadastro">
 <div class="cabecalho_index">

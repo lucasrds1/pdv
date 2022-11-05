@@ -102,7 +102,7 @@ function avisoCadEdit(acao, link, tela){
         
     })
 }
-function aviso(){
+function avisoPermissao(){
     Swal.fire({
         icon: 'error',
         title: 'Você não tem permissão para acessar essa página',

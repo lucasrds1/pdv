@@ -2,6 +2,10 @@
 require 'header.php';
 //<input type='reset'  class='dt-button btn_yellow' value='".TRANS('voltar')."' name='cancelar' onClick=\"redirect('".$_SERVER['PHP_SELF']."')\"></span>";
 //<input type='reset'  class='dt-button btn_yellow' value='".TRANS('voltar')."' name='cancelar' onClick=\"javascript:history.back()\"></TD>
+if (isset($_SESSION['aviso'])) {
+    echo $_SESSION['aviso'];
+    unset($_SESSION['aviso']);
+}
 ?>
 <div class="cabecalho_index">
        <span>INÍCIO</span>
@@ -21,10 +25,10 @@ require 'header.php';
     ?>
     <h2 style="margin-left: 20px;font-size:35px;text-decoration:underline"><?php echo $nomeEmpresa?>
 
-    <h2 style="margin-left: 30px">SEJA BEM-VINDO VENDEDOR: <?php echo $nome?>.
+    <h2 style="margin-left: 30px">SEJA BEM-VINDO: <?php echo $nome?>.
     <h2 style="margin-left: 30px; color: red">
     <?php 
-    if($acesso == '1'){
+    if(in_array('1', $acesso)){
         echo 'ADMINISTRADOR';
     }
     ?>
