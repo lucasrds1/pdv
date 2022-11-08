@@ -102,6 +102,12 @@ function avisoCadEdit(acao, link, tela){
         
     })
 }
+function erroCadEdit(acao){
+    Swal.fire({
+        icon: 'error',
+        title: 'Não foi possível '+acao+' este registro!'
+      })
+}
 function avisoPermissao(){
     Swal.fire({
         icon: 'error',
@@ -109,6 +115,7 @@ function avisoPermissao(){
         footer: 'Fale com seu administrador'
       })
 }
+
 function excluir(link){
     Swal.fire({
         title: 'Deseja excluir esse registro?',
@@ -158,6 +165,6 @@ function getIp(callback)
         document.addEventListener('DOMContentLoaded', trigger);
     }
 }
-getIp(function (ip) {
-    console.log(ip);
-});
+// getIp(function (ip) {
+//     console.log(ip);
+// });

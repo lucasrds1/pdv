@@ -24,7 +24,8 @@ if (isset($_SESSION['aviso'])) {
 
     ?>
     <h2 style="margin-left: 20px;font-size:35px;text-decoration:underline"><?php echo $nomeEmpresa?>
-
+    <h4 style="margin-left: 30px">NENHUMA LOJA SELECINADA.</h4>
+    <hr width="50%" style="float: left; margin-left: 20px"><br>
     <h2 style="margin-left: 30px">SEJA BEM-VINDO: <?php echo $nome?>.
     <h2 style="margin-left: 30px; color: red">
     <?php 

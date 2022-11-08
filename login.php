@@ -51,10 +51,11 @@ if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
                 if($dados !== false){
                     $_SESSION['id'] = $dados['id'];
                     $_SESSION['codEmpresa'] = $dados['id_empresa'];
-                    $logar->entraLog($_SESSION['id'], $_SESSION['codEmpresa']);
-                    echo 'deu';
+                    $_SESSION['loja'] = $dados['id_loja'];
+
+                    $logar->entraLog($_SESSION['id'], $_SESSION['codEmpresa'], $_SESSION['loja']);
+                    
                     setcookie("login", 'login', time()+86400);
-                    echo 'Logado com sucesso!';
                     header("Location: index.php");
                 }else{
                     echo '<p class="erro">nenhum resultado encontrado!</p>';

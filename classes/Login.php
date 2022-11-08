@@ -26,11 +26,11 @@ class Login{
             return false;
         }
     }
-    public function entraLog($id, $codEmpresa){
+    public function entraLog($id, $codEmpresa, $loja){
         $sql = "INSERT INTO tab_logs_login 
-                (id_empresa, user_logs, hora_log)
+                (id_empresa, id_loja, user_logs, hora_log)
                 VALUES
-                ($codEmpresa, (select nome from cad_usuarios where id_empresa = $codEmpresa and id = $id), SYSDATE())";
+                ($codEmpresa, $loja, (select nome from cad_usuarios where id_empresa = $codEmpresa and id = $id), SYSDATE())";
                 $sql = $this->pdo->query($sql);
     }
     public function getNomeById($id){

@@ -152,6 +152,29 @@ class Produtos{
         }
     }
 }
-class Estoque{
-    
+class Grupos{
+    private $pdo;
+    public function __construct($driver){
+        $this->pdo = $driver;
+    }
+    public function cadGrupo($nomeGrupo, $descGrupo = '', $situGrupo, $proxGrupo, $codEmpresa, $id){
+        $sql = "INSERT INTO tab_grupo 
+        (id_empresa, id_gp_empresa, nome_grupo, desc_grupo, id_situ, usr_ins_grupo, dta_ins_grupo)
+        VALUES
+        (:codEmpresa, :proxGrupo, :nomeGrupo, :descGrupo, :situGrupo,
+        (SELECT nome FROM cad_usuarios WHERE id_empresa = :codEmpresa AND id = :id),
+        CURRENT_TIMESTAMP)";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':codEmpresa', $codEmpresa);
+        $sql->bindValue(':proxGrupo', $proxGrupo);
+        $sql->bindValue(':nomeGrupo', $nomeGrupo);
+        $sql->bindValue(':descGrupo', $descGrupo); 
+        $sql->bindValue(':situGrupo', $situGrupo); 
+        $sql->bindValue(':id', $id); 
+        if($sql->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

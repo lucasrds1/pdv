@@ -8,6 +8,9 @@ function excluirCliJS($link){
 function avisoPermissao(){
     return "<script src='../../assets/swalert/sweetalert2.js'></script><script>avisoPermissao()</script>";
 }
+function erroCadEdit($acao){
+    return "<script src='../../assets/swalert/sweetalert2.js'></script><script>erroCadEdit(".$acao.")</script>";
+}
 function testeacesso($n, $acesso){
     if(in_array('1', $acesso) || in_array($n, $acesso)){
         return true;
