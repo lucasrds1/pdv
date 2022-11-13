@@ -152,6 +152,21 @@ class Produtos{
         }
     }
 }
+class Estoque{
+    private $pdo;
+    private $idEmpresa;
+    public function __construct($driver, $codEmpresa){
+        $this->pdo = $driver;
+        $this->idEmpresa = $codEmpresa;
+    }
+    public function getAllProdutos(){;
+        $sql = "SELECT * FROM cad_produtos WHERE id_empresa = ".$this->idEmpresa;
+        $sql = $this->pdo->query($sql);
+        if($sql->rowCount() > 0){
+            return $sql->fetchAll();
+        }
+    }
+}
 class Grupos{
     private $pdo;
     public function __construct($driver){

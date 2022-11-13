@@ -39,33 +39,50 @@ testeacesso('4', $acesso);
     <thead>
         <tr>
             <th class="not-export-col">Ações</th>
-            <th>Nome</th>
-            <th>Numero</th>    
-            <th>Endereço</th>
-            <th>CPF</th>  
-            <th>Data da última alteração</th>
-            <th>Última alteração</th>
+            <th>Loja</th>
+            <th>Descrição/Nome</th>
+            <th>Cód. Grupo</th>    
+            <th>Cód. Subgrupo</th>
+            <th>Cód. Microgrupo</th>  
+            <th>Descrição resumida</th>
+            <th>Unidade de entrada</th>
+            <th>Qntd. Embalagem de entrada</th>
+            <th>Unidade de saída</th>
+            <th>Qntd. Unid. Saída</th>
+            <th>Peso Liquído</th>
+            <th>Peso Bruto</th>
+            <th>Data alteração</th>
+            <th>User. Alteração</th>
         </tr>
     </thead>
     <tbody>
 <?php
-$clientes = new Clientes($pdo);
-    $dados = $clientes->getAllCli($_SESSION['codEmpresa']);
-    if ($dados > 0) {
-        foreach ($dados as $dado) {
+    $clientes = new Estoque($pdo, $_SESSION['codEmpresa']);
+    $estoque = $clientes->getAllProdutos();
+    if ($estoque > 0) {
+        foreach ($estoque as $dado) {
             ?>
 
         <tr>
             <td class="not-export-col">
-                <a href="edita_cliente.php?action=editar&id_cli=<?=$dado['id_cliente']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
-                <img onclick="excluir('../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_cliente']?>')" src="../../assets/imagens/excluir.png" style="width: 22px;cursor:pointer" title="Excluir"></a>
+                <a href="edita_cliente.php?action=editar&id_cli=<?=$dado['id_produto']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
+                <img onclick="excluir('../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_produto']?>')" src="../../assets/imagens/excluir.png" style="width: 22px;cursor:pointer" title="Excluir"></a>
             </td>
-            <td><?=$dado['nome_cliente']?></td>
-            <td><?=$dado['numero_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['numero_cliente']?></td>
-            <td><?=$dado['endereco_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['endereco_cliente']?></td>
-            <td><?=$dado['cpf_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['cpf_cliente']?></td>
-            <td><?php echo date('d/m/Y - H:i:s', strtotime($dado['dta_ins_cli']))?></td>
-            <td><?=$dado['usr_cli_id']?></td>
+            <td><?=$dado['loja'] == 0 ? '<span class="vazioTabela">Nenhuma</span>' : strtoupper($dado['loja'])?></td>
+            <td><?=$dado['descricao']?></td>
+            <td><?=$dado['cod_grupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['cod_grupo']?></td>
+            <td><?=$dado['cod_subgrupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['cod_subgrupo']?></td>
+            <td><?=$dado['cod_microgrupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['cod_microgrupo']?></td>
+            <td><?=$dado['descr_resumida'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['descr_resumida']?></td>
+            <td><?=$dado['unidade_entrada'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['unidade_entrada']?></td>
+            <td><?=$dado['qt_emb_entrada'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['qt_emb_entrada']?></td>
+            <td><?=$dado['unidade_saida'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['unidade_saida']?></td>
+            <td><?=$dado['qt_unid_saida'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['qt_unid_saida']?></td>
+            <td><?=$dado['peso_liquido'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['peso_liquido']?></td>
+            <td><?=$dado['peso_bruto'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['peso_bruto']?></td>
+            <td><?=$dado['descricao']?></td>
+            <td><?php echo date('d/m/Y - H:i:s', strtotime($dado['dta_ins_produto']))?></td>
+            <td><?=$dado['usr_ins_produto']?></td>
         </tr>
 <?php
         }

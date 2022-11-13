@@ -66,8 +66,8 @@ testeacesso('7', $acesso);
         <label><b>Peso Bruto:</b></label>
         <input type="text" name="peso_bruto" placeholder="Digite o peso bruto do produto...">
         </p>
-
         <?php
+        require '../../controller/selectLoja.php';
         require "../../controller/cliente/cadastro_cliente/cadastro_edit_clienteController.php";
         ?>
         <br>
