@@ -39,6 +39,7 @@ testeacesso('16', $acesso);
     <thead>
         <tr>
             <th class="not-export-col">Ações</th>
+            <th>Loja</th>
             <th>Nome</th>
             <th>Numero</th>    
             <th>Endereço</th>
@@ -60,6 +61,7 @@ $clientes = new Clientes($pdo);
                 <a href="edita_cliente.php?action=editar&id_cli=<?=$dado['id_cliente']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
                 <img onclick="excluir('../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_cliente']?>')" src="../../assets/imagens/excluir.png" style="width: 22px;cursor:pointer" title="Excluir"></a>
             </td>
+            <td><?=$dado['loja'] == 0 ? '<span class="vazioTabela">Nenhuma</span>' : strtoupper($dado['loja'])?></td>
             <td><?=$dado['nome_cliente']?></td>
             <td><?=$dado['numero_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['numero_cliente']?></td>
             <td><?=$dado['endereco_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['endereco_cliente']?></td>

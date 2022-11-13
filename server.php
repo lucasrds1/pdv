@@ -3,6 +3,7 @@ session_start();
 require 'classes/Produtos.php';
 require 'classes/Login.php';
 require 'classes/Clientes.php';
+require 'classes/Lojas.php';
 require 'funcoes.php';
 
 ini_set('error_reporting', E_ALL); // mesmo resultado de: error_reporting(E_ALL);

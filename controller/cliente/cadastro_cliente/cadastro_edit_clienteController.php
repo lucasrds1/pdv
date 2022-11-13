@@ -5,6 +5,7 @@ $nomeCliente = filter_input(INPUT_POST, 'nome_cliente', FILTER_SANITIZE_SPECIAL_
 $numeroCliente = filter_input(INPUT_POST, 'numero_cliente');
 $enderecoCliente = filter_input(INPUT_POST, 'endereco_cliente', FILTER_SANITIZE_SPECIAL_CHARS);
 $cpfCliente = filter_input(INPUT_POST, 'cpf_cliente');
+$lojaCliente = filter_input(INPUT_POST, 'loja_cliente');
 $submit = filter_input(INPUT_POST, 'submit');
 $insert = false;
 if($submit == 'Cadastrar' || $submit == 'Editar'){
@@ -31,7 +32,7 @@ if($submit == 'Cadastrar' || $submit == 'Editar'){
 
         if($insert == true && isset($_SESSION['codEmpresa']) && isset($_SESSION['id'])){
             $cadCliente = new Clientes($pdo);
-            $dados = $cadCliente->cadEditCliente($_SESSION['codEmpresa'], $submit, $idCliente, $nomeCliente, $numeroCliente, $enderecoCliente, $cpfCliente, $_SESSION['id']);
+            $dados = $cadCliente->cadEditCliente($_SESSION['codEmpresa'],$lojaCliente, $submit, $idCliente, $nomeCliente, $numeroCliente, $enderecoCliente, $cpfCliente, $_SESSION['id']);
             // }elseif($submit == 'Editar'){
             //     $dados = $cadCliente->cadEditCliente($_SESSION['codEmpresa'], $submit, $nomeCliente, $numeroCliente, $enderecoCliente, $cpfCliente, $_SESSION['id']);
             // }

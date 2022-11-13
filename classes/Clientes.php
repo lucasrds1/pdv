@@ -4,7 +4,7 @@ class Clientes{
     public function __construct($driver){
         $this->pdo = $driver;
     }
-    public function cadEditCliente($codEmpresa, $submit, $idCliente, $nomeCliente, $numeroCliente, $enderecoCliente, $cpfCliente, $id){
+    public function cadEditCliente($codEmpresa, $idLoja, $submit, $idCliente, $nomeCliente, $numeroCliente, $enderecoCliente, $cpfCliente, $id){
         if($numeroCliente == ''){
             $numeroCliente = null;
         }else{
@@ -26,8 +26,10 @@ class Clientes{
             if($submit == 'Cadastrar'){
                 if($this->valCpfCliente($codEmpresa, $cpfCliente, $submit) == false){
                     $sql = "INSERT INTO clientes
-                    (cod_empresa, nome_cliente, numero_cliente, endereco_cliente, cpf_cliente, dta_ins_cli, usr_cli_id) 
-                    VALUES (:codEmpresa, :nomeCliente, :numeroCliente, :enderecoCliente, :cpfCliente, CURRENT_TIMESTAMP, (SELECT nome FROM cad_usuarios WHERE id = :id))";     
+                    (cod_empresa, loja, nome_cliente, numero_cliente,
+                    endereco_cliente, cpf_cliente, dta_ins_cli, usr_cli_id) 
+                    VALUES (:codEmpresa, (SELECT nome_loja FROM cad_lojas WHERE id_empresa = :codEmpresa AND id_loja = :idLoja), :nomeCliente, :numeroCliente,
+                    :enderecoCliente, :cpfCliente, CURRENT_TIMESTAMP, (SELECT nome FROM cad_usuarios WHERE id = :id))";     
                 }else{
                     echo '<p class="erro">Cpf já existe no sistema!</p>';
                     return false;
@@ -49,6 +51,7 @@ class Clientes{
         }
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(':codEmpresa', $codEmpresa);
+            $sql->bindValue(':idLoja', $idLoja);
             $sql->bindValue(':nomeCliente', $nomeCliente);
             $sql->bindValue(':numeroCliente', $numeroCliente);
             $sql->bindValue(':enderecoCliente', $enderecoCliente); 

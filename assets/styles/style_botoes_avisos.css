@@ -81,3 +81,11 @@
 .botao_cadastrar:hover{
     background-color: green;
 }
+.padrao_select{
+    width: 50%;
+    height: 29px;
+    font-size: 15px;
+    text-align: center;
+    border: 1px solid rgb(161, 191, 250);
+    outline: none;
+}
