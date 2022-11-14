@@ -23,7 +23,7 @@ foreach ($dados as $dado) {
         <span class="desc_input">Campos obrigatórios* </span>
         <p>
         <label><b>Cod. Grupo*:</b></label>
-        <input type="text" name="id_grupo" value="<?=$dado['id_gp_empresa']?>" disabled>
+        <input type="text" name="id_grupo" style="width:20%; font-weight: bold" value="<?=$dado['id_gp_empresa']?>" disabled>
         </p>
         <p>
         <label><b>Nome do grupo*:</b></label>

@@ -64,7 +64,7 @@ testeacesso('11', $acesso);
             <td><?=$dado['id_gp_empresa']?></td>
             <td><?=$dado['nome_grupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['nome_grupo']?></td>
             <td><?=$dado['desc_grupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['desc_grupo']?></td>
-            <td><?=$dado['id_situ'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['id_situ']?></td>
+            <td><?=$dado['id_situ'] == 1 ? 'Ativo' : 'Inativo'?></td>
             <td><?php echo date('d/m/Y - H:i:s', strtotime($dado['dta_ins_grupo']))?></td>
             <td><?=$dado['usr_ins_grupo']?></td>
         </tr>
