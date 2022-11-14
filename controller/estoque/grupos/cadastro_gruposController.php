@@ -8,13 +8,16 @@ $acao = 'Cadastrado';
 if($submit == 'Cadastrar'){
    if($nomeGrupo){
 
-        $qry = $pdo->query("SELECT id_grupo FROM tab_grupo WHERE id_empresa = ".$_SESSION['codEmpresa']." ORDER BY id_grupo DESC limit 1");
+        $qry = $pdo->query("SELECT id_gp_empresa FROM tab_grupo WHERE id_empresa = ".$_SESSION['codEmpresa']." ORDER BY id_gp_empresa DESC limit 1");
         $res = $qry->fetch();
         if(count($res) > 0){
-            $ultGrupo = $res['id_grupo'];
+            $ultGrupo = $res['id_gp_empresa'];
+            if($ultGrupo == 0){
+                $ultGrupo = 1100;
+            }
             $proxGrupo = $ultGrupo + 1;
-            $grupos = new Grupos($pdo);
-            $dados = $grupos->cadGrupo($nomeGrupo, $descGrupo, $situGrupo, $proxGrupo, $_SESSION['codEmpresa'], $_SESSION['id']);
+            $grupos = new Grupos($pdo, $_SESSION['codEmpresa']);
+            $dados = $grupos->cadGrupo($nomeGrupo, $descGrupo, $situGrupo, $proxGrupo, $_SESSION['id']);
             if($dados == true){
                 echo avisoCadEdit($acao, "../../views/estoque/consulta_grupos.php?dt=1", 'consulta');
             }else{

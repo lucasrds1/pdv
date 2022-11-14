@@ -169,18 +169,27 @@ class Estoque{
 }
 class Grupos{
     private $pdo;
-    public function __construct($driver){
+    private $idEmpresa;
+    public function __construct($driver, $codEmpresa){
         $this->pdo = $driver;
+        $this->idEmpresa = $codEmpresa;
     }
-    public function cadGrupo($nomeGrupo, $descGrupo = '', $situGrupo, $proxGrupo, $codEmpresa, $id){
+    public function getAllGrupo(){
+        $sql = "SELECT * FROM tab_grupo WHERE id_empresa = ".$this->idEmpresa;
+        $sql = $this->pdo->query($sql);
+        if($sql->rowCount()){
+            return $sql->fetchAll();
+        }
+    }
+    public function cadGrupo($nomeGrupo, $descGrupo = '', $situGrupo, $proxGrupo, $id){
         $sql = "INSERT INTO tab_grupo 
         (id_empresa, id_gp_empresa, nome_grupo, desc_grupo, id_situ, usr_ins_grupo, dta_ins_grupo)
         VALUES
         (:codEmpresa, :proxGrupo, :nomeGrupo, :descGrupo, :situGrupo,
-        (SELECT nome FROM cad_usuarios WHERE id_empresa = :codEmpresa AND id = :id),
+        (SELECT nome FROM cad_usuarios WHERE id_empresa = ".$this->idEmpresa." AND id = :id),
         CURRENT_TIMESTAMP)";
         $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(':codEmpresa', $codEmpresa);
+        $sql->bindValue(':codEmpresa', $this->idEmpresa);
         $sql->bindValue(':proxGrupo', $proxGrupo);
         $sql->bindValue(':nomeGrupo', $nomeGrupo);
         $sql->bindValue(':descGrupo', $descGrupo); 
@@ -190,6 +199,15 @@ class Grupos{
             return true;
         }else{
             return false;
+        }
+    }
+    public function getAllEdtGrupos($idGrupo){
+        $sql = "SELECT *  FROM tab_grupo WHERE id_empresa = ".$this->idEmpresa." AND id_grupo = :idGrupo";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':idGrupo', $idGrupo); 
+        $sql->execute();
+        if($sql->rowCount()){
+            return $sql->fetchAll();
         }
     }
 }
