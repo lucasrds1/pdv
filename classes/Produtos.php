@@ -181,7 +181,7 @@ class Grupos{
             return $sql->fetchAll();
         }
     }
-    public function cadGrupo($nomeGrupo, $descGrupo = '', $situGrupo, $proxGrupo, $id){
+    public function cadGrupo($nomeGrupo, $descGrupo, $situGrupo, $proxGrupo, $id){
         $sql = "INSERT INTO tab_grupo 
         (id_empresa, id_gp_empresa, nome_grupo, desc_grupo, id_situ, usr_ins_grupo, dta_ins_grupo)
         VALUES
@@ -208,6 +208,36 @@ class Grupos{
         $sql->execute();
         if($sql->rowCount()){
             return $sql->fetchAll();
+        }
+    }
+    public function editaGrupo($codGrupo, $nomeGrupo, $descGrupo, $situGrupo, $id){
+        $sql = "UPDATE tab_grupo SET
+                nome_grupo = :nomeGrupo,
+                desc_grupo = :descGrupo,
+                id_situ = :situGrupo,
+                usr_ins_grupo = (SELECT nome FROM cad_usuarios WHERE id_empresa = ".$this->idEmpresa." AND id = :id),
+                dta_ins_grupo = CURRENT_TIMESTAMP
+                WHERE id_empresa = ".$this->idEmpresa." AND id_grupo = :codGrupo";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':codGrupo', $codGrupo);
+        $sql->bindValue(':nomeGrupo', $nomeGrupo);
+        $sql->bindValue(':descGrupo', $descGrupo); 
+        $sql->bindValue(':situGrupo', $situGrupo); 
+        $sql->bindValue(':id', $id); 
+        if($sql->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function excluirGrupo($codGrupo){
+        $sql = "DELETE FROM tab_grupo WHERE id_empresa = ".$this->idEmpresa." AND id_grupo = :codGrupo";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':codGrupo', $codGrupo);
+        if($sql->execute()){
+            return true;
+        }else{
+            return false;
         }
     }
 }

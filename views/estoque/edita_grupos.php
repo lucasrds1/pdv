@@ -1,6 +1,6 @@
 <?php
 require $_SERVER["DOCUMENT_ROOT"]."/header.php";
-testeacesso('46', $acesso);
+testeacesso('8', $acesso);
 if($_GET['action'] !== 'editar' && $_GET['id_gp'] == ''){
     header("consulta_cliente.php?dt=1");
 }
@@ -23,7 +23,8 @@ foreach ($dados as $dado) {
         <span class="desc_input">Campos obrigatórios* </span>
         <p>
         <label><b>Cod. Grupo*:</b></label>
-        <input type="text" name="id_grupo" style="width:20%; font-weight: bold" value="<?=$dado['id_gp_empresa']?>" disabled>
+        <span class="disabled"><?=$dado['id_gp_empresa']?></span>
+        <input type="hidden" name="cod_grupo" value="<?=$dado['id_grupo']?>">
         </p>
         <p>
         <label><b>Nome do grupo*:</b></label>
@@ -33,23 +34,15 @@ foreach ($dados as $dado) {
         <label><b>Descrição do grupo:</b></label>
         <input type="text" name="desc_grupo" value="<?=$dado['desc_grupo']?>" placeholder="Digite a descrição do grupo">
         </p> 
-
-        <?php
-        if($dado['id_situ'] == 1){
-            $situ = 'checked';
-        }else{
-            $situ = '';
-        }
-        ?>
         <label><b>Situação*:</b></label>
 <div class="grupo" style="display:inline-flex">
         <p>  
         <label style="font-size:12px"><b>Ativo</b></label>
-        <input type="radio" name="situ_grupo" value="1" <?=$situ?>>
+        <input type="radio" name="situ_grupo" <?=$dado['id_situ'] == 1 ? 'checked' : ''?> value="1" >
         </p>&nbsp;&nbsp;&nbsp;&nbsp;
         <p>  
         <label style="font-size:12px"><b>Inativo</b></label>
-        <input type="radio" name="situ_grupo" value="0" <?=$situ?>>
+        <input type="radio" name="situ_grupo" <?=$dado['id_situ'] == 1 ? '' : 'checked'?> value="0" >
         </p>
 </div>
         <br>
@@ -58,8 +51,9 @@ foreach ($dados as $dado) {
         </div>
         <?php
 }}
-   //     require '../../controller/estoque/grupos/cadastro_gruposController.php';
+        require '../../controller/estoque/grupos/edita_gruposController.php';
         ?>
     </form>
     </div>
 </div>
+

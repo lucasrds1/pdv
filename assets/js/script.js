@@ -74,6 +74,14 @@ function tipoCad(valor){
         document.querySelector("#cpfEmpresa").value = '';
     }
 }
+function aviso(desc){
+    Swal.fire({
+        icon: 'warning',
+        title: 'AVISO:',
+        text: desc,
+        showConfirmButton: true
+    })
+}
 function confirma(desc, link){
     var con = confirm(desc);
     if(con == true){

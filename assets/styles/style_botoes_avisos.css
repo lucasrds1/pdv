@@ -89,3 +89,6 @@
     border: 1px solid rgb(161, 191, 250);
     outline: none;
 }
+.disabled{
+    color: gray;
+}
