@@ -7,15 +7,14 @@ if(!isset($_GET['dt']) && $_GET['dt'] !== 1){
 testeacesso('4', $acesso);
 
 ?>
-<div class="container_cadastro">
 <div class="cabecalho_index">
-    <span>PRODUTOS</span>
+    <span>PRODUTOS INICIAIS</span>
 </div>
 <br>
 <?php
     if (in_array('7', $acesso) || in_array('1', $acesso)) {
         ?>
-<button class="botao_adicionar" onclick="location.href= 'cadastro_estoque.php' ">ADICIONAR PRODUTO</button>
+<button class="botao_adicionar" onclick="location.href= 'cadastro_estoque.php' ">ADICIONAR PRODUTO INICIAL</button>
 <hr>
 <?php
     }

@@ -67,7 +67,7 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
     <div class="container_menu">
         <!-- <a href="../../index.php"><h1>MENU</h1></a> -->
         <div class="menu_header">
-            <div class="oi_login"><span><?=$nome?></span><br>
+            <div class="oi_login"><img src="../../assets/imagens/perfil.png" width="25">&nbsp;<span><?=$nome?></span><br>
                 <a href="../../deslogar.php" class="des">Deslogar</a>
         </div>
         <div class="menu_botoes">
@@ -88,17 +88,22 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
                 ?>
                 <li id="btn" onclick="<?=$onc4?>">PRODUTOS<img src="../../assets/imagens/submenu2.png" style="width:<?=$px?>;padding:5px;position: absolute;" id="img_dropdown4"></li>
                 <div class="dropdown" id="dropdown4">
-                    <a href="../../views/estoque/consulta_estoque.php?dt=1"><li>Produtos</li></a>
+                    <a href="../../views/estoque/consulta_estoque.php?dt=1"><li>Produto Inicial</li></a>
+                    <a href="../../views/estoque/consulta_estoqueFinal.php?dt=1"><li>Produto Final</li></a>
                 <?php
                 if(in_array('11', $acesso) || in_array('1', $acesso)){
                 ?>
                     <a href="../../views/estoque/consulta_grupos.php?dt=1"><li>Grupos</li></a>
                     <a href="../../views/estoque/consulta_grupos.php"><li>Subgrupos</li></a>
                     <a href="../../views/estoque/consulta_grupos.php"><li>Microgrupos</li></a>
+                <?php
+                }
+                ?>        
+                <a href="../../views/estoque/consulta_grupos.php"><li>Unidades</li></a>
                 </div>
                 </li>
                 <?php
-                }}
+                }
                 ?>
                 <li>FORNECEDORES</li>
                 <?php

@@ -7,39 +7,37 @@ testeacesso('7', $acesso);
 
 <div class="container_cadastro">
 <div class="cabecalho_index">
-       <span>CADASTRO DE PRODUTOS</span>
+       <span>CADASTRO DE PRODUTO INICIAL</span>
 </div>
 <br>
 <button class="botao_consultar" onclick="location.href= 'consulta_estoque.php?dt=1' ">CONSULTAR ESTOQUE</button>
 
 <div>
     <div class="formulario">
-    <form method="POST">
+    <form method="POST" style="width:100%">
         <h1 align="center">Formulário de Cadastro</h1>
         <span class="desc_input">Campos obrigatórios* </span>
         <p>
         <label><b>Descrição / Nome:*</b></label>
         <input type="text" name="nome_produto" placeholder="Digite a descrição ou o nome do produto...">
         </p>
+<p>
 <div class='grupo'>
         <p>
-        <label><b>Código do grupo:</b></label>
+        <label><b>Grupo:</b></label>
         <input type="text" name="cod_grupo_produto" style="width:40px;text-align:center" maxlength="11">
         </p>
         <p>
-        <label><b>Código do subgrupo 1:</b></label>
+        <label><b>Subgrupo 1:</b></label>
         <input type="text" name="cod_subg_produto" style="width:40px;text-align:center">
         </p>
         <p>
-        <label><b>Código do subgrupo 2:</b></label>
+        <label><b>Microgupo:</b></label>
         <input type="text" name="cod_subg2_produto"  style="width:40px;text-align:center">
         </p>
 </div>
-        <p>
-        <label><b>Descrição reduzida:</b></label>
-        <input type="text" name="desc_redu_produto" placeholder="Digite a descrição reduzida do produto...">
-        </p>
-
+</p>
+<p>
 <div class='grupo'>
         <p>
         <label><b>Unid. Entrada*:</b></label>
@@ -49,6 +47,10 @@ testeacesso('7', $acesso);
         <label><b>Qntd. Embalagem Entrada:</b></label>
         <input type="text" name="qnt_emb_ent" style="width:40px;text-align:center">
         </p>
+</div>
+</p>
+<p>
+<div class='grupo'>
         <p>
         <label><b>Unid. Saída:</b></label>
         <input type="text" name="unid_saida_produto"  style="width:40px;text-align:center">
@@ -58,6 +60,11 @@ testeacesso('7', $acesso);
         <input type="text" name="qnt_unid_saida"  style="width:40px;text-align:center">
         </p>
 </div>
+</p>
+        <p>
+        <label><b>Descrição reduzida:</b></label>
+        <input type="text" name="desc_redu_produto" placeholder="Digite a descrição reduzida do produto...">
+        </p>
         <p>
         <label><b>Peso Liquído:</b></label>
         <input type="text" name="peso_liquido" placeholder="Digite o peso liquído do produto...">

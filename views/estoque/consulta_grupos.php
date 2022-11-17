@@ -29,6 +29,7 @@ testeacesso('11', $acesso);
             echo $_SESSION['aviso'];
             unset($_SESSION['aviso']);
         }
+        $image = '../../assets/imagens/duvida.png';
     ?>
 <div class="container">
     <div class="row">
@@ -38,7 +39,7 @@ testeacesso('11', $acesso);
     <thead>
         <tr>
             <th class="not-export-col">Ações</th>
-            <th>Loja</th>
+            <th>Loja <img src="<?=$image?>" style="width: 15px;cursor:pointer;float: right" onclick="aviso('O sistema de grupos é para todas as lojas da empresa')" title="O sistema de grupos é para todas as lojas da empresa"></th>
             <th>Cód. Grupo</th>
             <th>Nome grupo</th>    
             <th>Descrição</th>
@@ -49,7 +50,7 @@ testeacesso('11', $acesso);
     </thead>
     <tbody>
 <?php
-    $image = '../../assets/imagens/duvida.png';
+    
     $grupos = new Grupos($pdo, $_SESSION['codEmpresa']);
     $grupos = $grupos->getAllGrupo();
     if ($grupos > 0) {
@@ -61,7 +62,7 @@ testeacesso('11', $acesso);
                 <a href="edita_grupos.php?action=editar&id_gp=<?=$dado['id_grupo']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
                 <img onclick="excluir('../../controller/estoque/grupos/excluir_gruposController.php?action=excluir&id_gp=<?=$dado['id_grupo']?>')" src="../../assets/imagens/excluir.png" style="width: 22px;cursor:pointer" title="Excluir"></a>
             </td>
-            <td><span class="vazioTabela">TODAS &nbsp;&nbsp;<img src="<?=$image?>" style="width: 15px;cursor:pointer" onclick="aviso('O sistema de grupos é para todas as lojas da empresa')" title="O sistema de grupos é para todas as lojas da empresa"></td>
+            <td><span class="vazioTabela">TODAS</td>
             <td><?=$dado['id_gp_empresa']?></td>
             <td><?=$dado['nome_grupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['nome_grupo']?></td>
             <td><?=$dado['desc_grupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['desc_grupo']?></td>
