@@ -9,13 +9,13 @@ if($submit == 'Cadastrar'){
    if($nomeGrupo){
 
         $qry = $pdo->query("SELECT id_gp_empresa FROM tab_grupo WHERE id_empresa = ".$_SESSION['codEmpresa']." ORDER BY id_gp_empresa DESC limit 1");
-        $res = $qry->fetch();
-        if(count($res) > 0){
+        if ($qry->rowCount() > 0) {
+            $res = $qry->fetch();
             $ultGrupo = $res['id_gp_empresa'];
-            if($ultGrupo == 0){
-                $ultGrupo = 1100;
-            }
             $proxGrupo = $ultGrupo + 1;
+        }else{
+            $proxGrupo = 1100;
+        }
             $grupos = new Grupos($pdo, $_SESSION['codEmpresa']);
             $dados = $grupos->cadGrupo($nomeGrupo, $descGrupo, $situGrupo, $proxGrupo, $_SESSION['id']);
             if($dados == true){
@@ -23,10 +23,6 @@ if($submit == 'Cadastrar'){
             }else{
                 echo erroCadEdit($acao);
             }
-        }else{
-            $ultGrupo = 0;
-        }
-        
     }else{
         echo '<br><p class="erro">O nome do grupo deve ser preenchido!</p>';
         $insert = false;

@@ -98,7 +98,6 @@
     width: 10%;
 }
 .grupo{
-    border: 1px solid gray;
     display:flex;
     justify-content: space-evenly;
     text-align: center;
