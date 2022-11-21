@@ -67,7 +67,7 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
     <div class="container_menu">
         <!-- <a href="../../index.php"><h1>MENU</h1></a> -->
         <div class="menu_header">
-            <div class="oi_login"><img src="../../assets/imagens/perfil.png" width="25">&nbsp;<span><?=$nome?></span><br>
+            <div class="oi_login"><img src="../../assets/imagens/perfil.png" width="25" style="vertical-align: middle;">&nbsp;<span><?=$nome?></span><br>
                 <a href="../../deslogar.php" class="des">Deslogar</a>
         </div>
         <div class="menu_botoes">

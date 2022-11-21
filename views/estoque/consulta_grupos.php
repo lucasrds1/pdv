@@ -39,7 +39,7 @@ testeacesso('11', $acesso);
     <thead>
         <tr>
             <th class="not-export-col">Ações</th>
-            <th>Loja <img src="<?=$image?>" style="width: 15px;cursor:pointer;float: right" onclick="aviso('O sistema de grupos é para todas as lojas da empresa')" title="O sistema de grupos é para todas as lojas da empresa"></th>
+            <th>Loja <img src="<?=$image?>" style="width: 12px;cursor:pointer;float: right;vertical-align: middle;" onclick="aviso('O sistema de grupos é para todas as lojas da empresa')" title="O sistema de grupos é para todas as lojas da empresa"></th>
             <th>Cód. Grupo</th>
             <th>Nome grupo</th>    
             <th>Descrição</th>
