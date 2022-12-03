@@ -135,10 +135,11 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
     <br>
     
 </aside>
-<div class="menuicone" id="menuicone" onclick="menuOpen()">
-<div class="container_consulta" id="container_all">
 
+<div class="container_consulta" id="container_all" onclick="menuClose()">
+<div class="menuicone" id="icone" onclick="menuOpen()">
         <img src="../../assets/imagens/menuicone.png" style="width:<?=$pxicone?>">
     </div>
 <script src="../../assets/js/script.js"></script>
+<script src="../../assets/datatables/jquery/jquery-3.3.1.min.js"></script>
 <?php

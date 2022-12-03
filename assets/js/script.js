@@ -175,23 +175,28 @@ function getIp(callback)
 }
 //header
 var menu = document.querySelector(".container_menu");
-var iconeMenu = document.querySelector("#menuicone");
+var iconeMenu = document.querySelector("#icone");
 function menuOpen(){
     if(menu.offsetWidth == '250'){
-        menu.style.width = '0px';
-        if(window.innerWidth < 768){
-            $('#menuicone').animate({'margin-left': '0'}, 'fast');
-        }
-        document.querySelector("#container_all").style.width = "100%";
+        menuClose();
     }else{
         menu.style.width = '250px';
+        
         if(window.innerWidth < 768){
-            $('#menuicone').animate({'margin-left': '150'}, 'fast');
+            $('#icone').animate({'margin-left': '150'}, 'fast');
         }
         document.querySelector("#container_all").style.width = "82%";
     }
 }
-
+function menuClose(){
+    if(menu.offsetWidth == '250'){
+        menu.style.width = '0px';
+        if(window.innerWidth < 768){
+            $('#icone').animate({'margin-left': '0'}, 'fast');
+        }
+        document.querySelector("#container_all").style.width = "100%";
+    }
+}
 function verificaTela(){
     if(window.innerWidth < 768){
         document.querySelector("#container_all").style.width = "100%";
