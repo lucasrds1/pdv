@@ -39,11 +39,7 @@ aside {
 .menu_header{
     line-height: 25px;
 }
-@media all and (max-width: 768px) {
-    .menuicone img{
-        
-    }
-}
+
 .menu_header .des{
     background-color: white;
     text-decoration: none;

@@ -22,7 +22,7 @@ if(in_array('1', $acesso) || in_array('17', $acesso)){
 
     <?php
     $clientes = new Clientes($pdo);
-    $dados = $clientes->getAllEdtCli($_SESSION['codEmpresa'], $_GET['id_cli']);
+    $dados = $clientes->getAllEdtCli($_SESSION['codEmpresa'], $_GET['id_cli'], $_SESSION['loja']);
     if($dados > 0){
     foreach($dados as $dado){
     ?>
@@ -48,7 +48,11 @@ if(in_array('1', $acesso) || in_array('17', $acesso)){
             <label><b>CPF</b></label>
         <input type="text" maxlength="11" id="cpf" name="cpf_cliente"  value="<?=$dado['cpf_cliente']?>" >
         </p>
-        </div><br>
+        </div>
+        <?php
+        require '../../controller/selectLoja.php'; 
+        ?>
+        <br>
         <div style="text-align:center">
             <input type="submit" name="submit" class="botao_cadastrar" style="width:30%" value="Editar">
         </div>

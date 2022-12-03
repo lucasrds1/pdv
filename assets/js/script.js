@@ -178,12 +178,16 @@ var menu = document.querySelector(".container_menu");
 var iconeMenu = document.querySelector("#icone");
 function menuOpen(){
     if(menu.offsetWidth == '250'){
-        menuClose();
+        menu.style.width = '0px';
+        if(window.innerWidth < 768){
+            $('#icone').animate({'margin-left': '0'}, 'fast');
+        }
+        document.querySelector("#container_all").style.width = "100%";
     }else{
         menu.style.width = '250px';
         
         if(window.innerWidth < 768){
-            $('#icone').animate({'margin-left': '150'}, 'fast');
+            $('#icone').animate({'margin-left': '155'}, 'fast');
         }
         document.querySelector("#container_all").style.width = "82%";
     }

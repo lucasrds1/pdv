@@ -12,7 +12,7 @@
       //  $access = testeacesso('45', $acesso);
         if(in_array('45', $acesso) || in_array('1', $acesso)):
         ?>
-            <option>Todas</option>
+            <option value="0">Todas</option>
         </p>
         <?php
         $lojas = new Loja($pdo);
@@ -27,7 +27,11 @@
             $qry = "SELECT UPPER(nome_loja) nome_loja FROM cad_lojas WHERE id_empresa = ".$_SESSION['codEmpresa']." AND id_loja = ".$_SESSION['loja'];
             $res = $pdo->query($qry);
             $row = $res->fetchAll();
-            echo '<option selected value="'.$_SESSION['loja'].'">'.$row[0]['nome_loja'].'</option>';
+            if($_SESSION['loja'] !== 0){
+                echo '<option selected value="'.$_SESSION['loja'].'">'.$row[0]['nome_loja'].'</option>';
+            }else{
+                echo '<option value="0">Todas</option>';
+            }
         endif;
         ?>
         </select>

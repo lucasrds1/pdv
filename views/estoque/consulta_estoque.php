@@ -61,7 +61,7 @@ testeacesso('4', $acesso);
     
     if ($estoque > 0) {
         foreach ($estoque as $dado) {
-            $idlojas = "SELECT nome_loja FROM cad_lojas WHERE id_loja = ".$dado['id_loja'];
+            $idlojas = "SELECT nome_loja FROM cad_lojas WHERE id_empresa = ".$_SESSION['codEmpresa']." AND id_loja = ".$dado['id_loja'];
             $res = $pdo->query($idlojas);
             $row = $res->fetch();
             $nomeLoja = $row['nome_loja'];

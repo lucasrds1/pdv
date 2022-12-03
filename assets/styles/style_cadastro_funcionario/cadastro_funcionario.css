@@ -6,6 +6,32 @@ body{
     width: 60%;
     margin: auto;
 }
+.formulario_login{
+    width: 50%;
+    margin: auto;
+    border: 1px solid rgb(173, 173, 173);
+    padding: 40px;
+    background-color: white;
+}
+.formulario_login form label{
+    font-size: 16px;
+    display: flex;
+    margin-bottom: 8px;
+}
+.formulario_login form input{
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid rgb(161, 191, 250);
+}
+@media all and (max-width: 766px) {
+    .container{
+        width:100%;
+    }
+    .formulario_login{
+        width: 80%;
+    }
+}
 .formulario{
     width: 70%;
     margin: auto;

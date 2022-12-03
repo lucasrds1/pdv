@@ -23,7 +23,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
 <link href="../../assets/styles/style_cadastro_funcionario/cadastro_funcionario.css" rel="stylesheet">
 
 <div class="container">
-    <div class="formulario" style="width:50%">
+    <div class="formulario_login">
         <h1 align="center">Login Usuário</h1>
         <hr>
         <form method="POST" style="width:95%">

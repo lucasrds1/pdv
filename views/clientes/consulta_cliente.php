@@ -51,9 +51,14 @@ testeacesso('16', $acesso);
     <tbody>
 <?php
 $clientes = new Clientes($pdo);
-    $dados = $clientes->getAllCli($_SESSION['codEmpresa']);
+    $dados = $clientes->getAllCli($_SESSION['codEmpresa'], $_SESSION['loja']);
     if ($dados > 0) {
         foreach ($dados as $dado) {
+            $dado['id_loja'] = $dado['id_loja'] == null ? 0 : $dado['id_loja'];
+            $qry = "SELECT nome_loja FROM cad_lojas WHERE id_empresa = ".$_SESSION['codEmpresa']." AND id_loja = ".isset($dado['id_loja']);
+            $res = $pdo->query($qry);
+            $row = $res->fetch();
+            $nomeLoja = $row['nome_loja'];
             ?>
 
         <tr>
@@ -61,7 +66,7 @@ $clientes = new Clientes($pdo);
                 <a href="edita_cliente.php?action=editar&id_cli=<?=$dado['id_cliente']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
                 <img onclick="excluir('../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_cliente']?>')" src="../../assets/imagens/excluir.png" style="width: 22px;cursor:pointer" title="Excluir"></a>
             </td>
-            <td><?=$dado['loja'] == 0 ? '<span class="vazioTabela">Nenhuma</span>' : strtoupper($dado['loja'])?></td>
+            <td><?=$dado['id_loja'] == 0 ? '<span class="vazioTabela">Todas</span>' : strtoupper($row['nome_loja'])?></td>
             <td><?=$dado['nome_cliente']?></td>
             <td><?=$dado['numero_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['numero_cliente']?></td>
             <td><?=$dado['endereco_cliente'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['endereco_cliente']?></td>

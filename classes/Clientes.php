@@ -21,12 +21,17 @@ class Clientes{
             $cpfCliente = addslashes(trim($cpfCliente));
         }
         $nomeCliente = addslashes(trim(ucwords($nomeCliente)));
-        
+        if($idLoja == false){
+            $idLoja = 0;
+        }
+        if($idLoja = null){
+            $idLoja = 0;
+        }
     //if($submit == 'Cadastrar'){
             if($submit == 'Cadastrar'){
                 if($this->valCpfCliente($codEmpresa, $cpfCliente, $submit) == false){
                     $sql = "INSERT INTO clientes
-                    (cod_empresa, loja, nome_cliente, numero_cliente,
+                    (cod_empresa, id_loja, nome_cliente, numero_cliente,
                     endereco_cliente, cpf_cliente, dta_ins_cli, usr_cli_id) 
                     VALUES (:codEmpresa, (SELECT nome_loja FROM cad_lojas WHERE id_empresa = :codEmpresa AND id_loja = :idLoja), :nomeCliente, :numeroCliente,
                     :enderecoCliente, :cpfCliente, CURRENT_TIMESTAMP, (SELECT nome FROM cad_usuarios WHERE id = :id))";     
@@ -80,10 +85,11 @@ class Clientes{
             return false;
         }
     }
-    public function getAllCli($codEmpresa){
+    public function getAllCli($codEmpresa, $loja){
         if(isset($codEmpresa)){
             $sql = "SELECT * FROM clientes
             WHERE cod_empresa = :codEmpresa";
+            $sql .= $loja == 0 ? "" : " AND id_loja IN (0, $loja)";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(':codEmpresa', $codEmpresa);
             if($sql->execute()){
@@ -91,8 +97,10 @@ class Clientes{
             }
         }
     }
-    public function getAllEdtCli($codEmpresa, $idCliente){
-        $sql = "SELECT * FROM clientes WHERE cod_empresa = :codEmpresa AND id_cliente = :idCliente";
+    public function getAllEdtCli($codEmpresa, $idCliente, $loja){
+        $sql = "SELECT * FROM clientes WHERE cod_empresa = :codEmpresa";
+        $sql .= $loja == 0 ? "" : " AND id_loja = $loja";
+        $sql .= " AND id_cliente = :idCliente";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':codEmpresa', $codEmpresa);
         $sql->bindValue(':idCliente', $idCliente);
