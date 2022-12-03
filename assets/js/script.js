@@ -173,6 +173,31 @@ function getIp(callback)
         document.addEventListener('DOMContentLoaded', trigger);
     }
 }
+//header
+var menu = document.querySelector(".container_menu");
+var iconeMenu = document.querySelector("#menuicone");
+function menuOpen(){
+    if(menu.offsetWidth == '250'){
+        menu.style.width = '0px';
+        if(window.innerWidth < 768){
+            $('#menuicone').animate({'margin-left': '0'}, 'fast');
+        }
+        document.querySelector("#container_all").style.width = "100%";
+    }else{
+        menu.style.width = '250px';
+        if(window.innerWidth < 768){
+            $('#menuicone').animate({'margin-left': '150'}, 'fast');
+        }
+        document.querySelector("#container_all").style.width = "82%";
+    }
+}
+
+function verificaTela(){
+    if(window.innerWidth < 768){
+        document.querySelector("#container_all").style.width = "100%";
+    }
+}
+verificaTela();
 // getIp(function (ip) {
 //     console.log(ip);
 // });
