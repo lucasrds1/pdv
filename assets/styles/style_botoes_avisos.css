@@ -63,7 +63,7 @@
     background-color: rgb(74, 74, 185);
     color: white;
     margin-left: 28px;
-    font-size: 12px;    position: absolute;
+    font-size: 12px;  
 
 }
 .botao_consultar:hover{
@@ -82,7 +82,7 @@
     background-color: green;
 }
 .padrao_select{
-    width: 50%;
+    width: 80px;
     height: 29px;
     font-size: 15px;
     text-align: center;

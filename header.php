@@ -1,6 +1,9 @@
 <?php
 require $_SERVER["DOCUMENT_ROOT"]."/server.php";
 $logar = new Login($pdo);
+if(!isset($_SESSION['id'])){
+    header("Location: login.php");
+}
 $logar->verificar($_SESSION['id']);
 $acesso = $logar->permissao($_SESSION['id']);
 $produtos = new Produtos($pdo);
@@ -8,6 +11,7 @@ $produtos = new Produtos($pdo);
 $sessao = $_SESSION['id'];
 $id = $_SESSION['id'];
 $px = '15px';
+$pxicone = '40px';
 $onc = 'dropdown(5)';
 
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -25,6 +29,7 @@ date_default_timezone_set('America/Sao_Paulo');
     $onc4 = 'dropdown(4)';
 if (isset($_GET['dt']) && $_GET['dt'] == 1) {
     $px = '25px';
+    $pxicone = '60px';
     $onc = 'dropdown1(5)';
     $onc4 = 'dropdown1(4)';
     ?>
@@ -113,7 +118,7 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
                 <div class="dropdown" id="dropdown5">
                         <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Sua empresa</li></a>
                         <a href="../../controller/cadastrar_nota/cadastrar_nota.php"><li>Lojas</li></a>
-                        <a href="../../controller/consulta_nota/consulta_nota.php"><li>FUNCIONÁRIOS</li></a>
+                        <a href="../../controller/consulta_nota/consulta_nota.php"><li>Funcionários</li></a>
                 </div>
                 </li>
                 <li>Suporte whatsapp</li>
@@ -128,7 +133,12 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
         </div>
     </div>
     <br>
+    
 </aside>
-<div class="container_consulta">
+<div class="menuicone" id="menuicone" onclick="menuOpen()">
+<div class="container_consulta" id="container_all">
+
+        <img src="../../assets/imagens/menuicone.png" style="width:<?=$pxicone?>">
+    </div>
 <script src="../../assets/js/script.js"></script>
 <?php

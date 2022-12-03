@@ -10,11 +10,12 @@ testeacesso('7', $acesso);
        <span>CADASTRO DE PRODUTO INICIAL</span>
 </div>
 <br>
-<button class="botao_consultar" onclick="location.href= 'consulta_estoque.php?dt=1' ">CONSULTAR ESTOQUE</button>
 
 <div>
+<button class="botao_consultar" onclick="location.href= 'consulta_estoque.php?dt=1' ">CONSULTAR ESTOQUE</button>
+<hr style="border-top: 1px solid rgba(0,0,0,.1)">
     <div class="formulario">
-    <form method="POST" style="width:100%">
+    <form method="POST">
         <h1 align="center">Formulário de Cadastro</h1>
         <span class="desc_input">Campos obrigatórios* </span>
         <p>
@@ -25,15 +26,57 @@ testeacesso('7', $acesso);
 <div class='grupo'>
         <p>
         <label><b>Grupo:</b></label>
-        <input type="text" name="cod_grupo_produto" style="width:40px;text-align:center" maxlength="11">
+        <?php
+        if(in_array('11', $acesso) || in_array('1', $acesso)){
+            
+        }else{
+            $disabeld = 'disabled';
+        }
+        ?>
+        <select name="cod_grupo_produto" class="padrao_select" <?=$disabeld?>>
+        <option>0000</option>
+
+        <?php
+        $qry = "SELECT id_grupo, id_gp_empresa, nome_grupo FROM tab_grupo WHERE id_empresa = ".$_SESSION['codEmpresa'];
+        $res = $pdo->query($qry);
+        $row = $res->fetchAll();
+        foreach($row as $dados){
+                echo "<option>".$dados['id_gp_empresa']."</option>";
+        }
+        ?>
+        </select>
+        
+        <!-- <input type="text" name="cod_grupo_produto" style="width:40px;text-align:center" maxlength="11"> -->
         </p>
         <p>
-        <label><b>Subgrupo 1:</b></label>
-        <input type="text" name="cod_subg_produto" style="width:40px;text-align:center">
+        <label><b>Subgrupo:</b></label>
+        <select name="cod_subg_produto" class="padrao_select">
+            <option>0000</option>
+
+        <?php
+        $qry = "SELECT id_subgrupo, id_sub_empresa, nome_subgrupo FROM tab_subgrupo WHERE id_empresa = ".$_SESSION['codEmpresa'];
+        $res = $pdo->query($qry);
+        $row = $res->fetchAll();
+        foreach($row as $dados){
+                echo "<option>".$dados['id_gp_empresa']."</option>";
+        }
+        ?>
+        </select>
         </p>
         <p>
         <label><b>Microgupo:</b></label>
-        <input type="text" name="cod_subg2_produto"  style="width:40px;text-align:center">
+        <select name="cod_microg_produto" class="padrao_select">
+            <option>0000</option>
+
+        <?php
+        $qry = "SELECT id_microgrupo, id_micro_empresa, nome_microgrupo FROM tab_microgrupo WHERE id_empresa = ".$_SESSION['codEmpresa'];
+        $res = $pdo->query($qry);
+        $row = $res->fetchAll();
+        foreach($row as $dados){
+            echo "<option>".$dados['id_gp_empresa']."</option>";
+        }
+        ?>
+        </select>
         </p>
 </div>
 </p>
@@ -73,9 +116,14 @@ testeacesso('7', $acesso);
         <label><b>Peso Bruto:</b></label>
         <input type="text" name="peso_bruto" placeholder="Digite o peso bruto do produto...">
         </p>
+        <label><b>Código de barras:</b></label>
+        <input type="text" name="cod_barra_produto" placeholder="Digite o código de barras do produto...">
+        </p>
         <?php
         require '../../controller/selectLoja.php';
-        require "../../controller/cliente/cadastro_cliente/cadastro_edit_clienteController.php";
+        ?>
+        <?php
+        require "../../controller/estoque/cadastro_estoque1Controller.php";
         ?>
         <br>
         <div style="text-align:center">

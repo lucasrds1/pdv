@@ -22,3 +22,14 @@
 .form_consulta{
     padding: 15px
 }
+@media all and (max-width: 768px) {
+    .grupo{
+        border: 0;
+    }
+    .formulario{
+        width: 90%;
+    }
+    form{
+        width: 100%;
+    }
+}

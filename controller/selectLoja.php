@@ -7,7 +7,7 @@
             $disabeld = 'disabled';
         }
         ?>
-        <select name="loja_cliente" class="padrao_select" <?=$disabeld?>>
+        <select name="loja_cliente" class="padrao_select" style="width:50%" <?=$disabeld?>>
         <?php
       //  $access = testeacesso('45', $acesso);
         if(in_array('45', $acesso) || in_array('1', $acesso)):

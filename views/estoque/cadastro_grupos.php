@@ -23,7 +23,7 @@ testeacesso('10', $acesso);
         <input type="text" name="desc_grupo" placeholder="Digite a descrição do grupo">
         </p> 
         <label><b>Situação*:</b></label>
-<div class="grupo" style="display:inline-flex">
+<div class="grupo_situ" style="display:inline-flex">
         <p>  
         <label style="font-size:12px"><b>Ativo</b></label>
         <input type="radio" name="situ_grupo" value="1" checked>

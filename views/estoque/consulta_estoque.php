@@ -7,7 +7,7 @@ if(!isset($_GET['dt']) && $_GET['dt'] !== 1){
 testeacesso('4', $acesso);
 
 ?>
-<div class="cabecalho_index">
+<div class="cabecalho_index"  style="padding:0px">
     <span>PRODUTOS INICIAIS</span>
 </div>
 <br>
@@ -56,18 +56,22 @@ testeacesso('4', $acesso);
     </thead>
     <tbody>
 <?php
-    $clientes = new Estoque($pdo, $_SESSION['codEmpresa']);
+    $clientes = new Estoque($pdo, $_SESSION['codEmpresa'], $_SESSION['id'], $_SESSION['loja']);
     $estoque = $clientes->getAllProdutos();
+    
     if ($estoque > 0) {
         foreach ($estoque as $dado) {
+            $idlojas = "SELECT nome_loja FROM cad_lojas WHERE id_loja = ".$dado['id_loja'];
+            $res = $pdo->query($idlojas);
+            $row = $res->fetch();
+            $nomeLoja = $row['nome_loja'];
             ?>
-
         <tr>
             <td class="not-export-col">
-                <a href="edita_cliente.php?action=editar&id_cli=<?=$dado['id_produto']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
+                <a href="edita_produtos.php?action=editar&id_cli=<?=$dado['id_produto']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
                 <img onclick="excluir('../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_produto']?>')" src="../../assets/imagens/excluir.png" style="width: 22px;cursor:pointer" title="Excluir"></a>
             </td>
-            <td><?=$dado['loja'] == 0 ? '<span class="vazioTabela">Nenhuma</span>' : strtoupper($dado['loja'])?></td>
+            <td><?=$dado['id_loja'] == 0 ? '<span class="vazioTabela">Todas</span>' : strtoupper($nomeLoja)?></td>
             <td><?=$dado['descricao']?></td>
             <td><?=$dado['cod_grupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['cod_grupo']?></td>
             <td><?=$dado['cod_subgrupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['cod_subgrupo']?></td>
@@ -79,7 +83,6 @@ testeacesso('4', $acesso);
             <td><?=$dado['qt_unid_saida'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['qt_unid_saida']?></td>
             <td><?=$dado['peso_liquido'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['peso_liquido']?></td>
             <td><?=$dado['peso_bruto'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['peso_bruto']?></td>
-            <td><?=$dado['descricao']?></td>
             <td><?php echo date('d/m/Y - H:i:s', strtotime($dado['dta_ins_produto']))?></td>
             <td><?=$dado['usr_ins_produto']?></td>
         </tr>

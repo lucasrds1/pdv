@@ -7,7 +7,7 @@ testeacesso('16', $acesso);
 
 ?>
 <div class="container_cadastro">
-<div class="cabecalho_index">
+<div class="cabecalho_index"  style="padding:0px">
        <span>CLIENTES</span>
 </div>
 <br>

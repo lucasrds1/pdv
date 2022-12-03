@@ -155,15 +155,66 @@ class Produtos{
 class Estoque{
     private $pdo;
     private $idEmpresa;
-    public function __construct($driver, $codEmpresa){
+    private $id;
+    private $loja;
+    public function __construct($driver, $codEmpresa, $id, $loja){
         $this->pdo = $driver;
         $this->idEmpresa = $codEmpresa;
+        $this->id = $id;
+        $this->loja = $loja;
     }
-    public function getAllProdutos(){;
+    public function getAllProdutos(){
         $sql = "SELECT * FROM cad_produtos WHERE id_empresa = ".$this->idEmpresa;
+        if($this->loja > 0){
+            $sql .= " AND id_loja = ".$this->loja;
+        }
         $sql = $this->pdo->query($sql);
         if($sql->rowCount() > 0){
             return $sql->fetchAll();
+        }
+    }
+    public function cadProdutoInicial(
+        $proxCod, $nomeProduto, $codGpProduto = '', 
+        $codSubProduto = '', $codMicroProduto = '', $undEntProduto = '', 
+        $qntEntEmbProduto = '', $undSaidaProduto = '', $qntUndSaidaProduto = '',
+        $descReduProduto = '', $pesoLiquido = '', $pesoBruto = '',
+        $codBarras = '', $loja = ''
+        ){
+        $sql = "INSERT INTO cad_produtos
+            (id_loja, id_emp_produto, cod_barras, 
+            descricao, cod_grupo, cod_subgrupo, 
+            cod_microgrupo, descr_resumida, unidade_entrada,
+            qt_emb_entrada, unidade_saida, qt_unid_saida,
+            peso_liquido, peso_bruto, id_empresa,
+            dta_ins_produto, usr_ins_produto)
+            VALUES
+            (:idLoja, :proxCod, :codBarra,
+            :descProduto, :codGrupo, :codSubg,
+            :codMicrog, :descResu, :unidEntrada,
+            :qtUnidEntrada, :unidSaida, :qntUnidSaida,
+            :pesoLiquido, :pesoBruto, :codEmpresa,
+            CURRENT_TIMESTAMP, (SELECT nome FROM cad_usuarios WHERE ". $this->idEmpresa." = :codEmpresa AND id = :id))";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':idLoja', $loja);
+        $sql->bindValue(':proxCod', $proxCod);
+        $sql->bindValue(':codBarra',$codBarras);
+        $sql->bindValue(':descProduto',  $nomeProduto);
+        $sql->bindValue(':codGrupo', $codGpProduto);
+        $sql->bindValue(':codSubg', $codSubProduto);
+        $sql->bindValue(':codMicrog', $codMicroProduto);
+        $sql->bindValue(':descResu', $descReduProduto);
+        $sql->bindValue(':unidEntrada',  $undEntProduto);
+        $sql->bindValue(':qtUnidEntrada',$qntEntEmbProduto);
+        $sql->bindValue(':unidSaida', $undSaidaProduto);
+        $sql->bindValue(':qntUnidSaida', $qntUndSaidaProduto);
+        $sql->bindValue(':pesoLiquido', $pesoLiquido);
+        $sql->bindValue(':pesoBruto', $pesoBruto);
+        $sql->bindValue(':codEmpresa', $this->idEmpresa);
+        $sql->bindValue(':id', $this->id);
+        if($sql->execute()){
+            return true;
+        }else{
+            return false;
         }
     }
 }

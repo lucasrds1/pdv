@@ -2,8 +2,9 @@ body{
     font-family: "arial";
 }
 .container_consulta{
-    width: 82%;
+    width: 100%;
     float: right;
+    transition: all ease .5s;
 }
 .cabecalho h1{
     padding: 11px;

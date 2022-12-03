@@ -47,7 +47,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
             $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_SPECIAL_CHARS);
             $submit = filter_input(INPUT_POST, 'submit');
             if($submit == 'Entrar'){
-            if($email != ''  && $senha !== ''){
+            if($email !== ''  && $senha !== ''){
                 $dados = $logar->entrar($email, $senha);
                 if($dados !== false){
                     $_SESSION['id'] = $dados['id'];
@@ -56,8 +56,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['codEmpresa'])){
 
                     $logar->entraLog($_SESSION['id'], $_SESSION['codEmpresa'], $_SESSION['loja']);
                     
-                    setcookie("login", 'login', time()+86400);
-                    header("Location: index.php");
+                    echo '<script> location.replace("/"); </script>';
                 }else{
                     echo '<p class="erro">nenhum resultado encontrado!</p>';
                 }
