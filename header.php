@@ -1,5 +1,5 @@
 <?php
-require "../../server.php";
+require $_SERVER["DOCUMENT_ROOT"]."/server.php";
 $logar = new Login($pdo);
 if(!isset($_SESSION['id'])){
     header("Location: login.php");

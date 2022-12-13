@@ -14,7 +14,7 @@ testeacesso('4', $acesso);
 <?php
     if (in_array('7', $acesso) || in_array('1', $acesso)) {
         ?>
-<button class="botao_adicionar" onclick="location.href= 'cadastro_estoque.php' ">ADICIONAR PRODUTO INICIAL</button>
+<button class="botao_adicionar" onclick="location.href= 'cadastro_produtos.php' ">ADICIONAR PRODUTO INICIAL</button>
 <hr>
 <?php
     }
