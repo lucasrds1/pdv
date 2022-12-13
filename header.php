@@ -54,6 +54,7 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
     <link href="../../../assets/styles/style_consulta_produto/consulta_produto.css" rel="stylesheet">
     <link href="../../../assets/styles/style_cadastro_cliente/cadastro_cliente.css" rel="stylesheet">
     <link href="../../../assets/styles/style_botoes_avisos.css" rel="stylesheet">
+    <link href="../../../assets/styles/index.css" rel="stylesheet">
    
 
 </head>

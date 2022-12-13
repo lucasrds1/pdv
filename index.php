@@ -48,7 +48,28 @@ $nomeEmpresa = '';
     <div class="registros_vendas">
         <h1 style="font-size: 20px; margin-left: 30px; color:gray">USUÁRIOS ONLINE:</h1>
     <div class="container-users">
-        
+        <div class = "lista-users">
+            <ul>
+                <li>Exemplo 1</li>
+                <li>Exemplo 2</li>
+                <li>Exemplo 3</li>
+            </ul>
+         </div>
+         <div class = "lista-users">
+            <ul>
+                <li>Exemplo 4</li>
+                <li>Exemplo 5</li>
+                <li>Exemplo 6</li>
+            </ul>
+         </div>
+         <div class = "lista-users">
+            <ul>
+                <li>Exemplo 7</li>
+                <li>Exemplo 8</li>
+                <li>Exemplo 9</li>
+            </ul>
+         </div>
+ 
     </div>
     
     </div>
