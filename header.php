@@ -93,8 +93,8 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
                 ?>
                 <li id="btn" onclick="<?=$onc4?>">PRODUTOS<img src="../../assets/imagens/submenu2.png" style="width:<?=$px?>;padding:5px;position: absolute;" id="img_dropdown4"></li>
                 <div class="dropdown" id="dropdown4">
-                    <a href="../../views/estoque/consulta_estoque.php?dt=1"><li>Produto Inicial</li></a>
-                    <a href="../../views/estoque/consulta_estoqueFinal.php?dt=1"><li>Produto Final</li></a>
+                    <a href="../../views/estoque/consulta_produtos.php?dt=1"><li>Produto Inicial</li></a>
+                    <a href="../../views/estoque/consulta_produtosFinal.php?dt=1"><li>Produto Final</li></a>
                 <?php
                 if(in_array('11', $acesso) || in_array('1', $acesso)){
                 ?>
@@ -132,14 +132,15 @@ if (isset($_GET['dt']) && $_GET['dt'] == 1) {
             </ul>
         </div>
     </div>
+    </div>
     <br>
-    
-</aside>
-
-<div class="container_consulta" id="container_all" onclick="menuClose()">
-<div class="menuicone" id="icone" onclick="menuOpen()">
+    <div class="menuicone" id="icone" onclick="menuOpen()">
         <img src="../../assets/imagens/menuicone.png" style="width:<?=$pxicone?>">
     </div>
+</aside>
+<div class="container-opaco">
+<div class="container_consulta" id="container_all" onclick="menuClose()">
+
 <script src="../../assets/js/script.js"></script>
 <script src="../../assets/datatables/jquery/jquery-3.3.1.min.js"></script>
 <?php

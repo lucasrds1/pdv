@@ -180,38 +180,51 @@ class Estoque{
         $descReduProduto = '', $pesoLiquido = '', $pesoBruto = '',
         $codBarras = '', $loja = ''
         ){
-        $sql = "INSERT INTO cad_produtos
-            (id_loja, id_emp_produto, cod_barras, 
-            descricao, cod_grupo, cod_subgrupo, 
-            cod_microgrupo, descr_resumida, unidade_entrada,
-            qt_emb_entrada, unidade_saida, qt_unid_saida,
-            peso_liquido, peso_bruto, id_empresa,
-            dta_ins_produto, usr_ins_produto)
-            VALUES
-            (:idLoja, :proxCod, :codBarra,
-            :descProduto, :codGrupo, :codSubg,
-            :codMicrog, :descResu, :unidEntrada,
-            :qtUnidEntrada, :unidSaida, :qntUnidSaida,
-            :pesoLiquido, :pesoBruto, :codEmpresa,
-            CURRENT_TIMESTAMP, (SELECT nome FROM cad_usuarios WHERE ". $this->idEmpresa." = :codEmpresa AND id = :id))";
-        $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(':idLoja', $loja);
-        $sql->bindValue(':proxCod', $proxCod);
-        $sql->bindValue(':codBarra',$codBarras);
-        $sql->bindValue(':descProduto',  $nomeProduto);
-        $sql->bindValue(':codGrupo', $codGpProduto);
-        $sql->bindValue(':codSubg', $codSubProduto);
-        $sql->bindValue(':codMicrog', $codMicroProduto);
-        $sql->bindValue(':descResu', $descReduProduto);
-        $sql->bindValue(':unidEntrada',  $undEntProduto);
-        $sql->bindValue(':qtUnidEntrada',$qntEntEmbProduto);
-        $sql->bindValue(':unidSaida', $undSaidaProduto);
-        $sql->bindValue(':qntUnidSaida', $qntUndSaidaProduto);
-        $sql->bindValue(':pesoLiquido', $pesoLiquido);
-        $sql->bindValue(':pesoBruto', $pesoBruto);
-        $sql->bindValue(':codEmpresa', $this->idEmpresa);
-        $sql->bindValue(':id', $this->id);
-        if($sql->execute()){
+        if ($this->valCodProduto($proxCod) == false) {
+            $sql = "INSERT INTO cad_produtos
+                    (id_loja, id_emp_produto, cod_barras, 
+                    descricao, cod_grupo, cod_subgrupo, 
+                    cod_microgrupo, descr_resumida, unidade_entrada,
+                    qt_emb_entrada, unidade_saida, qt_unid_saida,
+                    peso_liquido, peso_bruto, id_empresa,
+                    dta_ins_produto, usr_ins_produto)
+                    VALUES
+                    (:idLoja, :proxCod, :codBarra,
+                    :descProduto, :codGrupo, :codSubg,
+                    :codMicrog, :descResu, :unidEntrada,
+                    :qtUnidEntrada, :unidSaida, :qntUnidSaida,
+                    :pesoLiquido, :pesoBruto, :codEmpresa,
+                    CURRENT_TIMESTAMP, (SELECT nome FROM cad_usuarios WHERE ". $this->idEmpresa." = :codEmpresa AND id = :id))";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(':idLoja', $loja);
+            $sql->bindValue(':proxCod', $proxCod);
+            $sql->bindValue(':codBarra', $codBarras);
+            $sql->bindValue(':descProduto', $nomeProduto);
+            $sql->bindValue(':codGrupo', $codGpProduto);
+            $sql->bindValue(':codSubg', $codSubProduto);
+            $sql->bindValue(':codMicrog', $codMicroProduto);
+            $sql->bindValue(':descResu', $descReduProduto);
+            $sql->bindValue(':unidEntrada', $undEntProduto);
+            $sql->bindValue(':qtUnidEntrada', $qntEntEmbProduto);
+            $sql->bindValue(':unidSaida', $undSaidaProduto);
+            $sql->bindValue(':qntUnidSaida', $qntUndSaidaProduto);
+            $sql->bindValue(':pesoLiquido', $pesoLiquido);
+            $sql->bindValue(':pesoBruto', $pesoBruto);
+            $sql->bindValue(':codEmpresa', $this->idEmpresa);
+            $sql->bindValue(':id', $this->id);
+            if ($sql->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return erroCadEdit('error');
+        }
+    }
+    public function valCodProduto($cod){
+        $sql = "SELECT id_emp_produto FROM cad_produtos WHERE id_emp_produto = $cod";
+        $sql = $this->pdo->query($sql);
+        if($sql->rowCount() > 0){
             return true;
         }else{
             return false;

@@ -39,6 +39,7 @@ testeacesso('4', $acesso);
         <tr>
             <th class="not-export-col">Ações</th>
             <th>Loja</th>
+            <th>Código do produto</th>
             <th>Descrição/Nome</th>
             <th>Cód. Grupo</th>    
             <th>Cód. Subgrupo</th>
@@ -63,8 +64,11 @@ testeacesso('4', $acesso);
         foreach ($estoque as $dado) {
             $idlojas = "SELECT nome_loja FROM cad_lojas WHERE id_empresa = ".$_SESSION['codEmpresa']." AND id_loja = ".$dado['id_loja'];
             $res = $pdo->query($idlojas);
-            $row = $res->fetch();
-            $nomeLoja = $row['nome_loja'];
+            if($res->rowCount() > 0){
+                $row = $res->fetch();
+                $nomeLoja = $row['nome_loja'];
+            }
+            
             ?>
         <tr>
             <td class="not-export-col">
@@ -72,6 +76,7 @@ testeacesso('4', $acesso);
                 <img onclick="excluir('../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_produto']?>')" src="../../assets/imagens/excluir.png" style="width: 22px;cursor:pointer" title="Excluir"></a>
             </td>
             <td><?=$dado['id_loja'] == 0 ? '<span class="vazioTabela">Todas</span>' : strtoupper($nomeLoja)?></td>
+            <td><?=$dado['id_emp_produto']?></td>
             <td><?=$dado['descricao']?></td>
             <td><?=$dado['cod_grupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['cod_grupo']?></td>
             <td><?=$dado['cod_subgrupo'] == null ? '<span class="vazioTabela">Nenhum</span>' : $dado['cod_subgrupo']?></td>

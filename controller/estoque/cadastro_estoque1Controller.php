@@ -16,14 +16,18 @@ $submit = filter_input(INPUT_POST, 'submit');
 
 if($submit == 'Cadastrar'){
     if($nomeProduto !== ''){
-        $sql = "SELECT id_emp_produto FROM cad_produtos WHERE id_empresa = ".$_SESSION['codEmpresa']." AND id_loja = ".$_SESSION['loja'];
+        $sql = "SELECT id_emp_produto FROM cad_produtos WHERE id_empresa = ".$_SESSION['codEmpresa'];
+        if($_SESSION['loja'] > 0){
+            $sql .= " AND id_loja = ".$_SESSION['loja'];
+        }
         $qry = $pdo->query($sql);
+       // var_dump($qry);exit;
         if ($qry->rowCount() > 0) {
             $res = $qry->fetch();
             $ultCod = $res['id_emp_produto'];
-            $proxCod = $ultCod + 1;
+            $proxCod = '00'.$ultCod + 1;
         }else{
-            $proxCod = '0001';
+            $proxCod = '001';
         }
         if(isset($_POST)){
           ///  require $_SERVER["DOCUMENT_ROOT"]."/server.php";
@@ -34,7 +38,14 @@ if($submit == 'Cadastrar'){
                 $qntEntEmbProduto, $undSaidaProduto, $qntUndSaidaProduto,
                 $descReduProduto, $pesoLiquido, $pesoBruto,
                 $codBarras, $loja
-        );
+            );
+            if($dados == true){
+                $acao = 'cadastrado';
+                echo avisoCadEdit($acao, "../../views/estoque/consulta_produtos.php?dt=1", 'consulta');
+            }else{
+                $acao = 'cadastrar';
+                echo erroCadEdit($acao);
+            }
             
 
         }

@@ -178,18 +178,19 @@ var menu = document.querySelector(".container_menu");
 var iconeMenu = document.querySelector("#icone");
 function menuOpen(){
     if(menu.offsetWidth == '250'){
-        menu.style.width = '0px';
-        if(window.innerWidth < 768){
-            $('#icone').animate({'margin-left': '0'}, 'fast');
-        }
-        document.querySelector("#container_all").style.width = "100%";
+        menuClose();
+
+        // if(window.innerWidth < 768){
+        //     $('#icone').animate({'margin-left': '0'}, 'fast');
+        // }
+       // document.querySelector("#container_all").style.width = "100%";
     }else{
         menu.style.width = '250px';
-        
-        if(window.innerWidth < 768){
-            $('#icone').animate({'margin-left': '155'}, 'fast');
-        }
-        document.querySelector("#container_all").style.width = "82%";
+        document.querySelector(".container-opaco").style.opacity = '0.2'
+        // if(window.innerWidth < 768){
+        //     $('#icone').animate({'margin-left': '155'}, 'fast');
+        // }
+        //   document.querySelector("#container_all").style.width = "82%";
     }
 }
 function menuClose(){
@@ -199,6 +200,7 @@ function menuClose(){
             $('#icone').animate({'margin-left': '0'}, 'fast');
         }
         document.querySelector("#container_all").style.width = "100%";
+        document.querySelector(".container-opaco").style.opacity = '1'
     }
 }
 function verificaTela(){

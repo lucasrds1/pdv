@@ -12,7 +12,7 @@ testeacesso('7', $acesso);
 <br>
 
 <div>
-<button class="botao_consultar" onclick="location.href= 'consulta_estoque.php?dt=1' ">CONSULTAR ESTOQUE</button>
+<button class="botao_consultar" onclick="location.href= 'consulta_produtos.php?dt=1' ">CONSULTAR ESTOQUE</button>
 <hr style="border-top: 1px solid rgba(0,0,0,.1)">
     <div class="formulario">
     <form method="POST">
@@ -87,7 +87,7 @@ testeacesso('7', $acesso);
         <input type="text" name="unid_ent_produto" style="width:40px;text-align:center" maxlength="11">
         </p>
         <p>
-        <label><b>Qntd. Embalagem Entrada:</b></label>
+        <label><b>Qntd. Entrada:</b></label>
         <input type="text" name="qnt_emb_ent" style="width:40px;text-align:center">
         </p>
 </div>
@@ -99,7 +99,7 @@ testeacesso('7', $acesso);
         <input type="text" name="unid_saida_produto"  style="width:40px;text-align:center">
         </p>
         <p>
-        <label><b>Qntd. Unidade Saída:</b></label>
+        <label><b>Qntd. Saída:</b></label>
         <input type="text" name="qnt_unid_saida"  style="width:40px;text-align:center">
         </p>
 </div>

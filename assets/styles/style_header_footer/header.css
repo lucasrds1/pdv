@@ -117,8 +117,6 @@ aside {
 }
 .menuicone img{
     width:40px;
-    position:fixed;
-    left:auto;
     top:0px;
     padding:10px;
     cursor: pointer;

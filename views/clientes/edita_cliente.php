@@ -8,7 +8,6 @@ if(in_array('1', $acesso) || in_array('17', $acesso)){
     $_SESSION['aviso'] = avisoPermissao();
     echo "<script>javascript:history.back()</script>";
 }
-
 ?>
 <div class="container_cadastro">
 <div class="cabecalho_index">
@@ -50,7 +49,7 @@ if(in_array('1', $acesso) || in_array('17', $acesso)){
         </p>
         </div>
         <?php
-        require '../../controller/selectLoja.php'; 
+        require "../../controller/selectLojaEdit.php";
         ?>
         <br>
         <div style="text-align:center">
@@ -59,6 +58,7 @@ if(in_array('1', $acesso) || in_array('17', $acesso)){
     </form>
     <?php
     }}
+    
     require "../../controller/cliente/cadastro_cliente/cadastro_edit_clienteController.php";
     ?>
     </div>
