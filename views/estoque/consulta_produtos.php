@@ -72,7 +72,7 @@ testeacesso('4', $acesso);
             ?>
         <tr>
             <td class="not-export-col">
-                <a href="edita_produtos.php?action=editar&id_cli=<?=$dado['id_produto']?>"><img src="../../assets/imagens/editar.png" style="width: 22px" title="Editar"></a>
+                <a href="edita_produtos.php?action=editar&id_pro=<?=$dado['id_produto']?>"><img src="../../assets/imagens/editar.png" style="width: 22px;" title="Editar"></a>
                 <img onclick="excluir('../../controller/cliente/excluir_cliente/permissoes_excluirController.php?action=excluir&id_cli=<?=$dado['id_produto']?>')" src="../../assets/imagens/excluir.png" style="width: 22px;cursor:pointer" title="Excluir"></a>
             </td>
             <td><?=$dado['id_loja'] == 0 ? '<span class="vazioTabela">Todas</span>' : strtoupper($nomeLoja)?></td>

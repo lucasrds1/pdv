@@ -1,7 +1,7 @@
 <?php
 require $_SERVER["DOCUMENT_ROOT"]."/header.php";
 testeacesso('5', $acesso);
-if($_GET['action'] !== 'editar' && $_GET['id_cli'] == 12){
+if($_GET['action'] !== 'editar' && isset($_GET['id_pro']) && $_GET['id_pro'] !== ''){
     header("consulta_produtos.php?dt=1");
 }
 ?>
@@ -12,6 +12,14 @@ if($_GET['action'] !== 'editar' && $_GET['id_cli'] == 12){
 <button class="botao_consultar" onclick="location.href= 'consulta_produtos.php?dt=1' ">CONSULTAR PRODUTOS</button>
 <hr style="border-top: 1px solid rgba(0,0,0,.1)">
     <div class="formulario">
+
+    <?php
+    $estoque = new Estoque($pdo, $_SESSION['codEmpresa'], $_SESSION['id'], $_SESSION['loja']);
+    $dados = $estoque->getAllEdit($_GET['id_pro']);
+    print_r($dados);exit;
+    ?>
+
+
     <form method="POST">
         <h1 align="center">Formulário de Edição</h1>
         <span class="desc_input">Campos obrigatórios* </span>

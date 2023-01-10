@@ -230,6 +230,16 @@ class Estoque{
             return false;
         }
     }
+    public function getAllEdit($cod){
+        $sql = "SELECT * FROM cad_produtos WHERE id_empresa = ".$this->idEmpresa." AND id_produto = :cod";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(":cod", $cod);
+        if($sql->execute()){
+            return $sql->fetchAll();
+        }else{
+            return false;
+        }
+    }
 }
 class Grupos{
     private $pdo;
