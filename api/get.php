@@ -9,15 +9,13 @@ if($method == 'get'){
         $query = str_replace('-', ' ', $get);
         $sql = $pdo->query($query);
         if($sql){
-            $res = $sql->fetchAll();
+            $res = $sql->fetchAll(PDO::FETCH_ASSOC);
             //var_dump($res);
             $i = -1;
             foreach($res as $lin){
                 $i++;
                // echo $lin;
-                $arrayApi['result'][] = [
-                    'res'.$i => $lin
-                ];
+                $arrayApi[] = $lin;
             }
             
         }else{
