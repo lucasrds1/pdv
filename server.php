@@ -21,4 +21,7 @@ try {
     echo $e->getMessage();
     header("Location: error.php");
 }
-
+$arrayApi = [
+    'error' => '',
+    'result' => []
+];

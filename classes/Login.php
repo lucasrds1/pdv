@@ -11,6 +11,18 @@ class Login{
             header("Location: ../../login.php");
         }
     }
+    public function getAllUsers(){
+        $sql = "SELECT * FROM cad_usuarios"; 
+        $sql = $this->pdo->prepare($sql);
+       // $sql->bindValue(':codEmpresa', $codEmpresa);
+        $sql->execute();
+        if($sql->rowCount() > 0){
+            return $sql->fetchAll();
+            //pegar cod emrpessa
+        }else{
+            return false;
+        }
+    }
     public function entrar($email, $senha){
         //$senha = password_hash($senha, PASSWORD_DEFAULT);
         $senha = md5($senha);
